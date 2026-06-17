@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# Sensitive personal documents — never commit these
+*Passport*
+*passport*
+*.id
+id_*
+
+# Saved-webpage dumps (browser "Save As" output)
+*_files/
+
+# Logs / temp
+*.log
+.tmp/
