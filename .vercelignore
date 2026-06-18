@@ -1,0 +1,12 @@
+# Only the static site needs to ship: index.html, content.json, bev-portrait.jpg
+.git
+.gitignore
+.vercelignore
+.DS_Store
+
+# Docs / project notes (not part of the live site)
+*.md
+
+# Full-size original photos (the site serves the optimized bev-portrait.jpg)
+Bev.png
+cover.png
