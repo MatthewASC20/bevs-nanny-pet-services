@@ -119,6 +119,22 @@ set it to something like your name.
 
 ---
 
+## Showing children (without photos or names)
+
+The **Children** section works like Pets, but the cards show **no photos** — only
+non-identifying details. Each child is one `{ ... }` block in the `"children"`
+list:
+
+- `"label"` — a short, non-identifying line, e.g. `"Boy · Age 9"` or `"Girl · Newborn"`.
+- `"duties"` — the care you provided, e.g. `"After-school pickup, homework help, and park outings."`
+- `"icon"` — `"baby"` for infants or `"child"` for older kids (optional; defaults to `"child"`).
+
+Add or remove children the same way as any list (copy a block to add, delete to
+remove; commas between blocks, none after the last). Please keep these free of
+names, schools, or anything that could identify a child or family.
+
+---
+
 ## Showcasing the pets you've cared for
 
 The **Pets** section is a photo gallery. Each pet is one `{ ... }` block in the

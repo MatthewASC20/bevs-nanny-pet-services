@@ -211,6 +211,20 @@
   @media (max-width:900px){.svc-grid{grid-template-columns:repeat(2,1fr);}}
   @media (max-width:560px){.svc-grid{grid-template-columns:1fr;}}
 
+  /* ---------- CHILDREN ---------- */
+  .kids-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.2vw,24px);}
+  .kid-card{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:clamp(22px,2.6vw,30px);transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .kid-card:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:var(--line-strong);}
+  .kid-ico{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;margin-bottom:1rem;background:#E7F0E5;border:1px solid #D3E5Cf;color:var(--primary-deep);}
+  .kid-ico svg{width:28px;height:28px;stroke-width:1.8;}
+  .kid-label{font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:1.18rem;line-height:1.2;}
+  .kid-duties{margin:.4rem 0 0;font-size:.98rem;color:var(--body);}
+  @media (max-width:900px){.kids-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.kids-grid{grid-template-columns:1fr;}}
+
   /* ---------- PETS ---------- */
   .pets-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.2vw,24px);}
   .pet-card{
@@ -372,6 +386,7 @@
       <a href="#about">About</a>
       <a href="#services">Services</a>
       <a href="#experience">Experience</a>
+      <a href="#children">Children</a>
       <a href="#pets">Pets</a>
       <a href="#skills">Skills</a>
       <a href="#kind-words">Kind words</a>
@@ -408,6 +423,14 @@
   <div class="wrap">
     <div class="section-head center reveal" id="experienceHead"></div>
     <div class="timeline" id="timeline"></div>
+  </div>
+</section>
+
+<!-- ======================= CHILDREN ======================= -->
+<section class="section children" id="children">
+  <div class="wrap">
+    <div class="section-head center reveal" id="childrenHead"></div>
+    <div class="kids-grid" id="childrenGrid"></div>
   </div>
 </section>
 
@@ -600,6 +623,17 @@
     }).join(''));
   }
 
+  function renderChildren(c){
+    set('childrenHead', head(c));
+    set('childrenGrid', (c.items || []).map(function (it, i){
+      return '<article class="kid-card reveal' + delay(i) + '">' +
+        '<div class="kid-ico">' + icon(it.icon || 'child') + '</div>' +
+        '<div class="kid-label">' + esc(it.label) + '</div>' +
+        (it.duties ? '<p class="kid-duties">' + esc(it.duties) + '</p>' : '') +
+      '</article>';
+    }).join(''));
+  }
+
   function renderPets(p){
     set('petsHead', head(p));
     set('petsGrid', (p.items || []).map(function (it, i){
@@ -751,6 +785,7 @@
     renderAbout(content.about || {});
     renderServices(content.services || {});
     renderExperience(content.experience || {});
+    renderChildren(content.children || {});
     renderPets(content.pets || {});
     renderSkills(content.skills || {});
     renderTestimonial(content.testimonial || {});

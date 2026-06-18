@@ -98,6 +98,18 @@
     ]
   },
 
+  "children": {
+    "eyebrow": "Little ones",
+    "heading": "Children I’ve cared for",
+    "intro": "Shared without names or photos, out of respect for each family’s privacy — just the ages and the everyday care I provided.",
+    "items": [
+      { "icon": "baby",  "label": "Girl · Newborn", "duties": "Feeding, naps, soothing, and gentle daily routines through the newborn months." },
+      { "icon": "child", "label": "Boy · Age 2",    "duties": "Play-based learning, mealtimes, naps, and safe outdoor exploration." },
+      { "icon": "child", "label": "Boy · Age 9",    "duties": "After-school pickup, homework help, healthy meals, and afternoons at the park." },
+      { "icon": "child", "label": "Girl · Age 6",   "duties": "School runs, creative play, nutritious meals, and bedtime stories." }
+    ]
+  },
+
   "pets": {
     "eyebrow": "Furry friends",
     "heading": "Pets I’ve loved & looked after",
