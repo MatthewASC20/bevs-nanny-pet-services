@@ -6,27 +6,39 @@ newborn-to-toddler and pet care across NYC.
 
 ## What's here
 
-- **`index.html`** — the complete single-page website. Fully self-contained:
-  HTML, CSS, and JS inline, with inline SVG graphics and Google Fonts loaded via
-  `<link>`. No build step and no dependencies — open it in a browser to view.
+- **`content.json`** — **all of the site's editable content** (text, services,
+  experience, skills, reviews, contact info). This is the file to edit.
+- **`index.html`** — the page itself: HTML, CSS, and the small script that reads
+  `content.json` and builds the page from it. No build step, no dependencies.
+- **`EDITING.md`** — a plain-English guide to editing `content.json` (how to add
+  or remove items, the list of available icons). **Start here to make changes.**
 - **`CLAUDE.md`** — project context / hand-off brief (design system, brand
   details, decisions to preserve).
 
+## Editing the content
+
+Open **`content.json`** and change the words — the website updates to match.
+You don't need to touch `index.html`. See **`EDITING.md`** for the friendly
+step-by-step guide (adding/removing services, choosing icons, etc.).
+
 ## Viewing locally
 
-Just open `index.html` in any browser, or serve the folder:
+The page loads `content.json` over the network, which browsers **block for files
+opened directly** (`file://`). So serve the folder instead of double-clicking:
 
 ```sh
 python3 -m http.server 8000
 # then visit http://localhost:8000
 ```
 
+(When the site is hosted, this is a non-issue — it just works.)
+
 ## Hosting
 
-Because the site is a single static file, it can be published as-is on GitHub
-Pages, Netlify, Vercel, or any static host. For GitHub Pages: enable Pages in the
-repository settings and point it at the default branch root — `index.html` is
-served automatically.
+The site is plain static files, so it can be published as-is on GitHub Pages,
+Netlify, Vercel, or any static host. For GitHub Pages: enable Pages in the
+repository settings and point it at the default branch root — `index.html` and
+`content.json` are served together automatically.
 
 ## Brand quick reference
 

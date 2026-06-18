@@ -11,11 +11,20 @@ chat and is being continued here. This file is the hand-off brief.
 - Location: Bronx, NY — available across NYC (has also traveled, NY & London)
 - 30+ years of experience, CPR certified, newborn-to-toddler + pets
 
-## Files in this project
-- `Bev's Nanny and Pet Services.html` — the live single-page website (self-contained: HTML/CSS/JS, inline SVG, Google Fonts via <link>). **Primary deliverable.**
-- `Bev's logo concepts.html` — six logo options shown at multiple sizes (reference only).
-- `beverly_resume.tex` / `.pdf` — two-column LaTeX résumé, print-friendly light theme (compile with `pdflatex`, run twice).
-- `beverly_reference_letter.tex` / `.pdf` — formatted reference letter from the Venkatesan family.
+## Files in this repo
+- `index.html` — the single-page website (HTML/CSS, inline SVG, Google Fonts via <link>). **Primary deliverable.** The page is now **data-driven**: a small inline script reads `content.json` and renders every section from it.
+- `content.json` — **all editable content** (text, services, experience, skills, testimonial, contact). Edit this, not the HTML.
+- `EDITING.md` — plain-English guide for Beverly to add/remove items in `content.json` (incl. the icon-name list).
+- `README.md`, `.gitignore` — repo overview and ignore rules.
+
+Other assets from the original package (logo-concepts HTML, LaTeX résumé, reference letter, passport scans) are intentionally **not** in this repo — passports are private PII; the rest can be added later if wanted.
+
+## Content architecture (how the page is built)
+- `index.html` contains the full design (CSS) plus structural section shells with empty containers (`#heroGrid`, `#servicesGrid`, `#timeline`, `#skillsGrid`, `#testimonialWrap`, `#contactGrid`, `#footerTop`, `#brandText`, …). An IIFE at the bottom `fetch`es `content.json` and fills them.
+- **Icons** are a named registry in the script (`ICONS`), referenced by name from `content.json` (`"icon": "paw"`); unknown names fall back to a dot. To add an icon, add it to `ICONS` and list it in `EDITING.md`.
+- **Highlights**: `[[text]]` and `((text))` markers in the hero `headline` (→ `leaf-word` / `paw-word`) and testimonial `quote` (`[[text]]` → `hl`) become coloured spans. All other text is HTML-escaped (`esc()`), so apostrophes/`&` are safe to type plainly.
+- **`file://` caveat:** opening `index.html` directly won't load `content.json` (browser blocks `fetch` on `file://`); a friendly banner explains this. Serve over HTTP (`python3 -m http.server`) or host it — both work. If you ever need a no-server single file again, inline the JSON into a `<script type="application/json">` block.
+- If the design markup changes, keep the renderer's output in sync with the CSS (e.g. `.svc:nth-child(...)` icon tints rely on card order; service/contact icons get `stroke-width:1.8` via CSS while chips/timeline stay at `2`).
 
 ## Design system (keep consistent everywhere)
 - Colors: green `#3C7D5A`, deep green `#2C5E43`, honey `#F2B33D`, deep honey `#CF8E12`,

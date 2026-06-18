@@ -1,0 +1,163 @@
+{
+  "site": {
+    "businessName": "Bev's Nanny & Pet Services",
+    "title": "Bev's Nanny & Pet Services — Caring nanny & pet care in NYC",
+    "description": "Beverly de Jesus — 'Granny Bev' — offers warm, reliable nanny, newborn, and pet care across New York City, with over 30 years of experience and CPR certification.",
+    "themeColor": "#3C7D5A"
+  },
+
+  "brand": {
+    "name": "Bev's Nanny & Pet",
+    "tagline": "Care services · NYC"
+  },
+
+  "hero": {
+    "eyebrow": "Nanny & pet care · New York City",
+    "headline": "Warm, reliable care for your [[little ones]] & ((furry friends)).",
+    "lede": "I'm Beverly — “Granny Bev” to the families I look after. For more than 30 years I've cared for newborns, toddlers, and pets across the city, with a gentle, hands-on touch and a love for life's small moments.",
+    "buttons": [
+      { "text": "Get in touch", "href": "#contact", "style": "honey", "icon": "arrow" },
+      { "text": "See how I help", "href": "#services", "style": "ghost" }
+    ],
+    "chips": [
+      { "icon": "heart", "text": "30+ years of care" },
+      { "icon": "check", "text": "CPR certified" },
+      { "icon": "baby", "text": "Newborn to toddler" },
+      { "icon": "paw",   "text": "Cats & dogs welcome" }
+    ],
+    "portrait": { "initials": "Bev", "note": "add your photo here" },
+    "badges": [
+      { "icon": "pawfill",   "text": "Loves pets" },
+      { "icon": "heartfill", "text": "Treated like family" }
+    ]
+  },
+
+  "about": {
+    "quote": "She has a gift for making the smallest moments feel significant.",
+    "quoteCite": "— a family Bev has cared for",
+    "eyebrow": "Meet Granny Bev",
+    "heading": "Caregiving is my calling, not just my job.",
+    "lead": "For over three decades, families across New York City have trusted me with what matters most to them — their children and their pets.",
+    "paragraphs": [
+      "I bring a calm, nurturing presence to every home, whether I'm settling a newborn into gentle routines, helping a toddler discover the world, or making sure a beloved pet is walked, fed, and happy. I'm meticulous about a tidy home and a well-stocked kitchen, and I believe the little things — a Friday treat, a slow walk to smell the flowers, a thoughtful surprise — are what children remember most.",
+      "Families know me as “Granny Bev,” and I take that warmth seriously. I show up dependable, organized, and ready to love your family like my own."
+    ]
+  },
+
+  "services": {
+    "eyebrow": "How I can help",
+    "heading": "Caring hands for the whole household",
+    "intro": "From the newborn days to daily dog walks, here's the care I provide for families across the city.",
+    "items": [
+      { "icon": "child",  "title": "Nanny & childcare",        "description": "Attentive, nurturing day-to-day care that supports your child's routines, learning, and curiosity." },
+      { "icon": "bottle", "title": "Newborn & infant care",    "description": "Calm, confident support through the newborn phase — feeding, naps, and gentle daily rhythms." },
+      { "icon": "paw",    "title": "Pet care & walks",         "description": "Daily walks, feeding, and playtime — plus honest notes on how your pet is doing while you're away." },
+      { "icon": "house",  "title": "Housekeeping",             "description": "A tidy, organized home with light housekeeping — and special care kept in the kitchen." },
+      { "icon": "meal",   "title": "Home-cooked meals",        "description": "Fresh, nutritious meals thoughtfully planned and prepared for little ones and the whole family." },
+      { "icon": "bag",    "title": "Errands & household help", "description": "Food shopping, errands, and the everyday tasks that keep a busy home running smoothly." }
+    ]
+  },
+
+  "experience": {
+    "eyebrow": "A lifetime of care",
+    "heading": "Three decades with NYC families",
+    "intro": "A few of the wonderful families I've had the privilege to care for over the years.",
+    "items": [
+      {
+        "years": "2024 – 2026",
+        "role": "Travel Nanny",
+        "family": "The Venkatesan Family",
+        "location": "New York & London",
+        "current": true,
+        "description": "Cared for two children — a newborn and a toddler — including travel between homes, keeping routines steady and the days full of play and outdoor exploration."
+      },
+      {
+        "years": "2021 – 2023",
+        "role": "Family Nanny",
+        "family": "Mrs. Anmatee Ramadhim",
+        "description": "Built a positive, nurturing environment supporting children's social and emotional growth, with games, puzzles, books, and close family relationships."
+      },
+      {
+        "years": "2005 – 2020",
+        "role": "Family Assistant",
+        "family": "Mrs. Alexandra Carlin",
+        "description": "Prepared nutritious daily meals, ran the household, and provided pet care including walks, feeding, and daily behavior reports."
+      },
+      {
+        "years": "1999 – 2018",
+        "role": "Pet Care & Housekeeping",
+        "family": "Mrs. Deborah & Mr. Jim Mintz",
+        "description": "Maintained a pristine, organized home and cared for the family's pets and daily routines."
+      },
+      {
+        "years": "1995 – 1998",
+        "role": "Cook & Baby Sitter",
+        "family": "Mrs. Janny Scott & Mr. Bill Ritter",
+        "description": "Prepared family dinners and cared for young children in the late afternoons."
+      }
+    ]
+  },
+
+  "skills": {
+    "eyebrow": "What I bring",
+    "heading": "Skills & strengths",
+    "intro": "The everyday know-how that keeps children, pets, and homes happy and well looked after.",
+    "items": [
+      { "label": "CPR Certified", "icon": "check", "star": true },
+      { "label": "Menu Planning & Cooking" },
+      { "label": "Housekeeping" },
+      { "label": "Pet Care" },
+      { "label": "Organization" },
+      { "label": "Multitasking" },
+      { "label": "Food Shopping" }
+    ],
+    "educationHeading": "Education & training",
+    "education": [
+      { "school": "LaGuardia Community College", "detail": "Dietary Technician (Some College) · 1994–1997" },
+      { "school": "Trinidad & Tobago Hotel School", "detail": "1985–1986" }
+    ]
+  },
+
+  "testimonial": {
+    "eyebrow": "Kind words",
+    "stars": 5,
+    "quote": "Beverly has been an integral part of our family for over two years. She encouraged my girls to slow down to [[smell the flowers, lay in the grass, and simply enjoy the view]]. She is kind, reliable, and possesses a rare, nurturing spirit — she integrates into a family effortlessly and loves with her whole heart.",
+    "author": "Ashvitha & Raga",
+    "authorDetail": "The Venkatesan Family · New York & London",
+    "note": "Written references from past families are available on request."
+  },
+
+  "contact": {
+    "eyebrow": "Get in touch",
+    "heading": "Let's talk about your family",
+    "intro": "Looking for caring, dependable help with your children or pets? I'd love to hear what your family needs and how I can help. Based in the Bronx and available across New York City.",
+    "cards": [
+      { "icon": "phone", "label": "Call or text", "value": "+1 (917) 346-2847",            "href": "tel:+19173462847" },
+      { "icon": "mail",  "label": "Email",        "value": "bevdejesus@gmail.com",          "href": "mailto:bevdejesus@gmail.com" },
+      { "icon": "pin",   "label": "Based in",     "value": "Bronx, NY · serving all of NYC" }
+    ],
+    "form": {
+      "heading": "Send a quick message",
+      "subtext": "Tell me a little about your family and what you're looking for.",
+      "emailTo": "bevdejesus@gmail.com",
+      "nameLabel": "Your name",
+      "namePlaceholder": "e.g. The Carter family",
+      "contactLabel": "Email or phone",
+      "contactPlaceholder": "How can I reach you?",
+      "messageLabel": "What do you need help with?",
+      "messagePlaceholder": "Childcare, newborn care, pet walks, days and hours…",
+      "buttonText": "Send message",
+      "note": "This opens your email app, ready to send to Bev."
+    }
+  },
+
+  "footer": {
+    "tagline": "Warm, dependable nanny and pet care from a caregiver who treats your family like her own.",
+    "phone": "+1 (917) 346-2847",
+    "phoneHref": "tel:+19173462847",
+    "email": "bevdejesus@gmail.com",
+    "location": "Bronx, NY · serving all of New York City",
+    "copyrightName": "Beverly de Jesus — Bev's Nanny & Pet Services",
+    "madeWith": "Made with ♥ for happy homes"
+  }
+}

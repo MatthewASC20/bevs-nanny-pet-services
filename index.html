@@ -204,7 +204,7 @@
   }
   .svc:nth-child(3n+2) .ico{background:#E7F0E5;border-color:#D3E5Cf;}
   .svc:nth-child(3n) .ico{background:#FBE9E6;border-color:#F3D8D4;color:var(--blush);}
-  .svc .ico svg{width:28px;height:28px;}
+  .svc .ico svg{width:28px;height:28px;stroke-width:1.8;}
   .svc h3{font-size:1.22rem;margin-bottom:.4rem;}
   .svc p{font-size:.98rem;margin:0;color:var(--body);}
   @media (max-width:900px){.svc-grid{grid-template-columns:repeat(2,1fr);}}
@@ -266,7 +266,7 @@
   .ccard{display:flex;align-items:center;gap:1rem;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:1rem 1.15rem;transition:border-color .2s, transform .2s;box-shadow:var(--shadow-sm);}
   .ccard:hover{border-color:var(--primary);transform:translateX(3px);}
   .ccard .ico{flex:none;width:46px;height:46px;border-radius:12px;background:var(--surface-honey);color:var(--primary-deep);display:grid;place-items:center;border:1px solid #F0E4C8;}
-  .ccard .ico svg{width:22px;height:22px;}
+  .ccard .ico svg{width:22px;height:22px;stroke-width:1.8;}
   .ccard .lbl{display:block;font-size:.74rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700;margin-bottom:.12rem;}
   .ccard .val{display:block;font-family:var(--font-display);font-weight:600;color:var(--ink);font-size:1.05rem;line-height:1.2;}
   .form{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(24px,3vw,34px);box-shadow:var(--shadow);}
@@ -315,6 +315,19 @@
 </head>
 <body>
 
+<!-- Shown only if content.json fails to load (e.g. when opening this file
+     directly with file:// instead of through a web server). -->
+<div id="loadError" role="alert" style="display:none;position:fixed;left:16px;right:16px;bottom:16px;z-index:200;max-width:680px;margin-inline:auto;background:#fff;border:1px solid #E0E6D7;border-left:4px solid #CF8E12;border-radius:14px;padding:14px 16px;box-shadow:0 14px 36px -18px rgba(33,48,42,.4);font-family:'Nunito Sans',system-ui,sans-serif;color:#21302A;font-size:14px;line-height:1.5;">
+  <strong style="font-family:'Baloo 2',Trebuchet MS,sans-serif;">Content didn’t load</strong>
+  <div class="le-msg" style="margin-top:4px;color:#4C544C;"></div>
+</div>
+<noscript>
+  <div style="max-width:680px;margin:40px auto;padding:0 20px;font-family:system-ui,sans-serif;color:#21302A;">
+    This site needs JavaScript enabled to display its content. Please enable JavaScript, or contact
+    Beverly de Jesus directly at <a href="mailto:bevdejesus@gmail.com">bevdejesus@gmail.com</a> · +1 (917) 346-2847.
+  </div>
+</noscript>
+
 <!-- reusable SVG defs for the avatar blob -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
@@ -334,7 +347,7 @@
         <path d="M22 18V46M22 18H34a7 7 0 0 1 0 14H22M22 32H35a7 7 0 0 1 0 14H22" fill="none" stroke="#FBF4E4" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
         <g transform="translate(41,10) scale(0.32)" fill="#F2B33D"><path d="M16 29C16 29 3 20 3 11C3 6 7 3 11 3C14 3 16 6 16 7C16 6 18 3 21 3C25 3 29 6 29 11C29 20 16 29 16 29Z"/></g>
       </svg>
-      <span>Bev's Nanny &amp; Pet<small>Care services · NYC</small></span>
+      <span id="brandText"></span>
     </a>
     <nav class="nav-links" id="navlinks" aria-label="Primary">
       <a href="#about">About</a>
@@ -354,263 +367,43 @@
 
 <!-- ======================= HERO ======================= -->
 <section class="hero">
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <span class="eyebrow">Nanny &amp; pet care · New York City</span>
-      <h1>Warm, reliable care for your <span class="leaf-word">little ones</span> &amp; <span class="paw-word">furry friends</span>.</h1>
-      <p class="hero-lede">I'm Beverly — “Granny Bev” to the families I look after. For more than 30 years I've cared for newborns, toddlers, and pets across the city, with a gentle, hands-on touch and a love for life's small moments.</p>
-      <div class="hero-actions">
-        <a class="btn honey" href="#contact">Get in touch
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <a class="btn ghost" href="#services">See how I help</a>
-      </div>
-      <div class="hero-chips">
-        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.4-9.3-9A5 5 0 0 1 12 6a5 5 0 0 1 9.3 6c-2.3 4.6-9.3 9-9.3 9Z"/></svg>30+ years of care</span>
-        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>CPR certified</span>
-        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13c0-3 5-3 5 0M9 13a3 3 0 0 0 6 0M15 13c0-3 5-3 5 0M5 13c0 4 3 7 7 7s7-3 7-7"/></svg>Newborn to toddler</span>
-        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="9" r="1.6"/><circle cx="12" cy="7" r="1.6"/><circle cx="17" cy="9" r="1.6"/><path d="M12 11c-2.5 0-4.5 2-4.5 4.2 0 1.4 1 2.3 2.3 2.3.9 0 1.4-.5 2.2-.5s1.3.5 2.2.5c1.3 0 2.3-.9 2.3-2.3C16.5 13 14.5 11 12 11Z"/></svg>Cats &amp; dogs welcome</span>
-      </div>
-    </div>
-
-    <div class="hero-art" aria-hidden="true">
-      <svg class="blob" viewBox="0 0 480 480">
-        <path fill="url(#blobgrad)" d="M412 286c-20 56-58 104-114 130s-128 30-181-4-83-101-72-160 62-101 122-118 122-12 169 28 76 96 56 152Z"/>
-      </svg>
-      <svg class="deco d1 float-anim" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="24" cy="24" r="6"/><g><path d="M24 5v6M24 37v6M5 24h6M37 24h6M11 11l4 4M33 33l4 4M37 11l-4 4M15 33l-4 4"/></g>
-      </svg>
-      <svg class="deco d2 float-anim slow" viewBox="0 0 40 40" fill="currentColor"><path d="M20 4c2 6 6 8 12 8-6 2-8 6-8 12-2-6-6-8-12-8 6-2 8-6 8-12Z"/></svg>
-
-      <div class="portrait">
-        <span class="initials">Bev</span>
-        <span class="sub">add your photo here</span>
-      </div>
-      <div class="float-badge badge-paw float-anim">
-        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="7" cy="9" r="1.7"/><circle cx="12" cy="7" r="1.7"/><circle cx="17" cy="9" r="1.7"/><path d="M12 11.2c-2.6 0-4.7 2-4.7 4.3 0 1.5 1.1 2.4 2.4 2.4 1 0 1.5-.5 2.3-.5s1.3.5 2.3.5c1.3 0 2.4-.9 2.4-2.4 0-2.3-2.1-4.3-4.7-4.3Z"/></svg>
-        Loves pets
-      </div>
-      <div class="float-badge badge-heart float-anim slow">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.4-9.3-9A5 5 0 0 1 12 6a5 5 0 0 1 9.3 6c-2.3 4.6-9.3 9-9.3 9Z"/></svg>
-        Treated like family
-      </div>
-    </div>
-  </div>
+  <div class="wrap hero-grid" id="heroGrid"></div>
 </section>
 
 <!-- ======================= ABOUT ======================= -->
 <section class="section about" id="about">
-  <div class="wrap about-grid">
-    <div class="about-card reveal">
-      <div class="quote-mark">“</div>
-      <blockquote>She has a gift for making the smallest moments feel significant.</blockquote>
-      <cite>— a family Bev has cared for</cite>
-    </div>
-    <div class="about-body reveal d1">
-      <span class="eyebrow">Meet Granny Bev</span>
-      <h2>Caregiving is my calling, not just my job.</h2>
-      <p class="lead">For over three decades, families across New York City have trusted me with what matters most to them — their children and their pets.</p>
-      <p>I bring a calm, nurturing presence to every home, whether I'm settling a newborn into gentle routines, helping a toddler discover the world, or making sure a beloved pet is walked, fed, and happy. I'm meticulous about a tidy home and a well-stocked kitchen, and I believe the little things — a Friday treat, a slow walk to smell the flowers, a thoughtful surprise — are what children remember most.</p>
-      <p>Families know me as “Granny Bev,” and I take that warmth seriously. I show up dependable, organized, and ready to love your family like my own.</p>
-      <div class="leaf-strip" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 19c0-8 6-14 14-14 0 8-6 14-14 14Z"/><path d="M5 19c4-4 7-6 11-7" fill="none" stroke="#F1F4EC" stroke-width="1.5"/></svg>
-        <span></span>
-      </div>
-    </div>
-  </div>
+  <div class="wrap about-grid" id="aboutGrid"></div>
 </section>
 
 <!-- ======================= SERVICES ======================= -->
 <section class="section" id="services">
   <div class="wrap">
-    <div class="section-head center reveal">
-      <span class="eyebrow">How I can help</span>
-      <h2>Caring hands for the whole household</h2>
-      <p>From the newborn days to daily dog walks, here's the care I provide for families across the city.</p>
-    </div>
-    <div class="svc-grid">
-
-      <article class="svc reveal">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3.2"/><path d="M6.5 20c0-3.6 2.5-6 5.5-6s5.5 2.4 5.5 6"/><path d="M12 14v-1"/></svg></div>
-        <h3>Nanny &amp; childcare</h3>
-        <p>Attentive, nurturing day-to-day care that supports your child's routines, learning, and curiosity.</p>
-      </article>
-
-      <article class="svc reveal d1">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3h4M12 3v3M9 9h6a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3v-6a3 3 0 0 1 3-3Z"/><path d="M9 13h6M9 16h6"/></svg></div>
-        <h3>Newborn &amp; infant care</h3>
-        <p>Calm, confident support through the newborn phase — feeding, naps, and gentle daily rhythms.</p>
-      </article>
-
-      <article class="svc reveal d2">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="9" r="1.7"/><circle cx="12" cy="7" r="1.7"/><circle cx="17" cy="9" r="1.7"/><path d="M12 11.5c-2.7 0-4.8 2.1-4.8 4.4 0 1.6 1.1 2.5 2.5 2.5 1 0 1.5-.5 2.3-.5s1.3.5 2.3.5c1.4 0 2.5-.9 2.5-2.5 0-2.3-2.1-4.4-4.8-4.4Z"/></svg></div>
-        <h3>Pet care &amp; walks</h3>
-        <p>Daily walks, feeding, and playtime — plus honest notes on how your pet is doing while you're away.</p>
-      </article>
-
-      <article class="svc reveal">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21h16M6 21V10l6-5 6 5v11"/><path d="M10 21v-5h4v5"/></svg></div>
-        <h3>Housekeeping</h3>
-        <p>A tidy, organized home with light housekeeping — and special care kept in the kitchen.</p>
-      </article>
-
-      <article class="svc reveal d1">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16a8 8 0 0 1-8 8 8 8 0 0 1-8-8Z"/><path d="M4 12c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2M9 7c0-1 1-1 1-2M13 7c0-1 1-1 1-2"/></svg></div>
-        <h3>Home-cooked meals</h3>
-        <p>Fresh, nutritious meals thoughtfully planned and prepared for little ones and the whole family.</p>
-      </article>
-
-      <article class="svc reveal d2">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></div>
-        <h3>Errands &amp; household help</h3>
-        <p>Food shopping, errands, and the everyday tasks that keep a busy home running smoothly.</p>
-      </article>
-
-    </div>
+    <div class="section-head center reveal" id="servicesHead"></div>
+    <div class="svc-grid" id="servicesGrid"></div>
   </div>
 </section>
 
 <!-- ======================= EXPERIENCE ======================= -->
 <section class="section experience" id="experience">
   <div class="wrap">
-    <div class="section-head center reveal">
-      <span class="eyebrow">A lifetime of care</span>
-      <h2>Three decades with NYC families</h2>
-      <p>A few of the wonderful families I've had the privilege to care for over the years.</p>
-    </div>
-    <div class="timeline">
-
-      <div class="tl-item cur reveal">
-        <div class="tl-years">2024 – 2026</div>
-        <h3>Travel Nanny</h3>
-        <div><span class="tl-where">The Venkatesan Family</span><span class="tl-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>New York &amp; London</span></div>
-        <p>Cared for two children — a newborn and a toddler — including travel between homes, keeping routines steady and the days full of play and outdoor exploration.</p>
-      </div>
-
-      <div class="tl-item reveal">
-        <div class="tl-years">2021 – 2023</div>
-        <h3>Family Nanny</h3>
-        <div><span class="tl-where">Mrs. Anmatee Ramadhim</span></div>
-        <p>Built a positive, nurturing environment supporting children's social and emotional growth, with games, puzzles, books, and close family relationships.</p>
-      </div>
-
-      <div class="tl-item reveal">
-        <div class="tl-years">2005 – 2020</div>
-        <h3>Family Assistant</h3>
-        <div><span class="tl-where">Mrs. Alexandra Carlin</span></div>
-        <p>Prepared nutritious daily meals, ran the household, and provided pet care including walks, feeding, and daily behavior reports.</p>
-      </div>
-
-      <div class="tl-item reveal">
-        <div class="tl-years">1999 – 2018</div>
-        <h3>Pet Care &amp; Housekeeping</h3>
-        <div><span class="tl-where">Mrs. Deborah &amp; Mr. Jim Mintz</span></div>
-        <p>Maintained a pristine, organized home and cared for the family's pets and daily routines.</p>
-      </div>
-
-      <div class="tl-item reveal">
-        <div class="tl-years">1995 – 1998</div>
-        <h3>Cook &amp; Baby Sitter</h3>
-        <div><span class="tl-where">Mrs. Janny Scott &amp; Mr. Bill Ritter</span></div>
-        <p>Prepared family dinners and cared for young children in the late afternoons.</p>
-      </div>
-
-    </div>
+    <div class="section-head center reveal" id="experienceHead"></div>
+    <div class="timeline" id="timeline"></div>
   </div>
 </section>
 
 <!-- ======================= SKILLS ======================= -->
 <section class="section" id="skills">
-  <div class="wrap skills-grid">
-    <div class="reveal">
-      <span class="eyebrow">What I bring</span>
-      <h2>Skills &amp; strengths</h2>
-      <p>The everyday know-how that keeps children, pets, and homes happy and well looked after.</p>
-      <div class="pill-wrap">
-        <span class="pill star"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>CPR Certified</span>
-        <span class="pill"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg>Menu Planning &amp; Cooking</span>
-        <span class="pill"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg>Housekeeping</span>
-        <span class="pill"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg>Pet Care</span>
-        <span class="pill"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg>Organization</span>
-        <span class="pill"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg>Multitasking</span>
-        <span class="pill"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg>Food Shopping</span>
-      </div>
-    </div>
-    <div class="edu reveal d1">
-      <h3>Education &amp; training</h3>
-      <div class="edu-item">
-        <strong>LaGuardia Community College</strong>
-        <span>Dietary Technician (Some College) · 1994–1997</span>
-      </div>
-      <div class="edu-item">
-        <strong>Trinidad &amp; Tobago Hotel School</strong>
-        <span>1985–1986</span>
-      </div>
-    </div>
-  </div>
+  <div class="wrap skills-grid" id="skillsGrid"></div>
 </section>
 
 <!-- ======================= TESTIMONIAL ======================= -->
 <section class="section testimonial" id="kind-words">
-  <div class="wrap">
-    <span class="eyebrow">Kind words</span>
-    <div class="t-stars" aria-label="Five star reference">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9 6.8 19.2l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg>
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9 6.8 19.2l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg>
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9 6.8 19.2l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg>
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9 6.8 19.2l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg>
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9 6.8 19.2l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg>
-    </div>
-    <p class="t-quote full">“Beverly has been an integral part of our family for over two years. She encouraged my girls to slow down to <span class="hl">smell the flowers, lay in the grass, and simply enjoy the view</span>. She is kind, reliable, and possesses a rare, nurturing spirit — she integrates into a family effortlessly and loves with her whole heart.”</p>
-    <div class="t-author">Ashvitha &amp; Raga<span>The Venkatesan Family · New York &amp; London</span></div>
-    <p class="t-note">Written references from past families are available on request.</p>
-  </div>
+  <div class="wrap" id="testimonialWrap"></div>
 </section>
 
 <!-- ======================= CONTACT ======================= -->
 <section class="section" id="contact">
-  <div class="wrap contact-grid">
-    <div class="reveal">
-      <span class="eyebrow">Get in touch</span>
-      <h2>Let's talk about your family</h2>
-      <p>Looking for caring, dependable help with your children or pets? I'd love to hear what your family needs and how I can help. Based in the Bronx and available across New York City.</p>
-      <div class="contact-cards">
-        <a class="ccard" href="tel:+19173462847">
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 4h3l1.5 4-2 1.5a12 12 0 0 0 5 5l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A16 16 0 0 1 4.5 6.2 2 2 0 0 1 6.5 4Z"/></svg></span>
-          <span><span class="lbl">Call or text</span><span class="val">+1 (917) 346-2847</span></span>
-        </a>
-        <a class="ccard" href="mailto:bevdejesus@gmail.com">
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg></span>
-          <span><span class="lbl">Email</span><span class="val">bevdejesus@gmail.com</span></span>
-        </a>
-        <div class="ccard" style="cursor:default">
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg></span>
-          <span><span class="lbl">Based in</span><span class="val">Bronx, NY · serving all of NYC</span></span>
-        </div>
-      </div>
-    </div>
-
-    <form class="form reveal d1" id="contactForm">
-      <h3>Send a quick message</h3>
-      <p class="f-sub">Tell me a little about your family and what you're looking for.</p>
-      <div class="field">
-        <label for="cf-name">Your name</label>
-        <input id="cf-name" name="name" type="text" placeholder="e.g. The Carter family" required>
-      </div>
-      <div class="field">
-        <label for="cf-contact">Email or phone</label>
-        <input id="cf-contact" name="contact" type="text" placeholder="How can I reach you?" required>
-      </div>
-      <div class="field">
-        <label for="cf-msg">What do you need help with?</label>
-        <textarea id="cf-msg" name="message" placeholder="Childcare, newborn care, pet walks, days and hours…" required></textarea>
-      </div>
-      <button class="btn honey" type="submit">Send message
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </button>
-      <p class="form-note">This opens your email app, ready to send to Bev.</p>
-    </form>
-  </div>
+  <div class="wrap contact-grid" id="contactGrid"></div>
 </section>
 
 </main>
@@ -618,73 +411,319 @@
 <!-- ======================= FOOTER ======================= -->
 <footer class="footer">
   <div class="wrap">
-    <div class="footer-top">
-      <div>
-        <a class="brand" href="#top">
-          <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
-            <rect x="2" y="2" width="60" height="60" rx="17" fill="#3C7D5A"/>
-            <path d="M22 18V46M22 18H34a7 7 0 0 1 0 14H22M22 32H35a7 7 0 0 1 0 14H22" fill="none" stroke="#FBF4E4" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <g transform="translate(41,10) scale(0.32)" fill="#F2B33D"><path d="M16 29C16 29 3 20 3 11C3 6 7 3 11 3C14 3 16 6 16 7C16 6 18 3 21 3C25 3 29 6 29 11C29 20 16 29 16 29Z"/></g>
-          </svg>
-          <span>Bev's Nanny &amp; Pet<small>Care services · NYC</small></span>
-        </a>
-        <p class="footer-tag">Warm, dependable nanny and pet care from a caregiver who treats your family like her own.</p>
-      </div>
-      <div class="footer-contact">
-        <a href="tel:+19173462847">+1 (917) 346-2847</a>
-        <a href="mailto:bevdejesus@gmail.com">bevdejesus@gmail.com</a>
-        <span style="color:#A7B2A6">Bronx, NY · serving all of New York City</span>
-      </div>
-    </div>
+    <div class="footer-top" id="footerTop"></div>
     <div class="footer-bottom">
-      <span>© <span id="yr"></span> Beverly de Jesus — Bev's Nanny &amp; Pet Services</span>
-      <span>Made with <span class="heart">♥</span> for happy homes</span>
+      <span id="footerCopyright"></span>
+      <span id="footerMade"></span>
     </div>
   </div>
 </footer>
 
 <script>
-  // year
-  document.getElementById('yr').textContent = new Date().getFullYear();
+/* =========================================================================
+   This file renders itself from content.json — to edit the text, photos
+   labels, services, experience, etc., open content.json (NOT this file).
+   See EDITING.md for a friendly guide and the list of available icons.
+   ========================================================================= */
+(function () {
+  'use strict';
 
-  // mobile nav
-  const toggle = document.getElementById('navToggle');
-  const links = document.getElementById('navlinks');
-  toggle.addEventListener('click', () => {
-    const open = links.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open);
-    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-  });
-  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    links.classList.remove('open');
-    toggle.setAttribute('aria-expanded', 'false');
-  }));
+  /* ---------- icon set (referenced by name from content.json) ---------- */
+  var STROKE = 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
+  var FILL = 'fill="currentColor"';
+  function svg(attrs, inner){ return '<svg viewBox="0 0 24 24" ' + attrs + '>' + inner + '</svg>'; }
 
-  // nav shadow on scroll
-  const nav = document.getElementById('nav');
-  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
-  onScroll();
-  window.addEventListener('scroll', onScroll, {passive:true});
+  var ICONS = {
+    arrow:     svg('fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"', '<path d="M5 12h14M13 6l6 6-6 6"/>'),
+    heart:     svg(STROKE, '<path d="M12 21s-7-4.4-9.3-9A5 5 0 0 1 12 6a5 5 0 0 1 9.3 6c-2.3 4.6-9.3 9-9.3 9Z"/>'),
+    check:     svg(STROKE, '<path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/>'),
+    baby:      svg(STROKE, '<path d="M4 13c0-3 5-3 5 0M9 13a3 3 0 0 0 6 0M15 13c0-3 5-3 5 0M5 13c0 4 3 7 7 7s7-3 7-7"/>'),
+    paw:       svg(STROKE, '<circle cx="7" cy="9" r="1.7"/><circle cx="12" cy="7" r="1.7"/><circle cx="17" cy="9" r="1.7"/><path d="M12 11.5c-2.7 0-4.8 2.1-4.8 4.4 0 1.6 1.1 2.5 2.5 2.5 1 0 1.5-.5 2.3-.5s1.3.5 2.3.5c1.4 0 2.5-.9 2.5-2.5 0-2.3-2.1-4.4-4.8-4.4Z"/>'),
+    child:     svg(STROKE, '<circle cx="12" cy="7" r="3.2"/><path d="M6.5 20c0-3.6 2.5-6 5.5-6s5.5 2.4 5.5 6"/><path d="M12 14v-1"/>'),
+    bottle:    svg(STROKE, '<path d="M10 3h4M12 3v3M9 9h6a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3v-6a3 3 0 0 1 3-3Z"/><path d="M9 13h6M9 16h6"/>'),
+    house:     svg(STROKE, '<path d="M4 21h16M6 21V10l6-5 6 5v11"/><path d="M10 21v-5h4v5"/>'),
+    meal:      svg(STROKE, '<path d="M4 12h16a8 8 0 0 1-8 8 8 8 0 0 1-8-8Z"/><path d="M4 12c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2M9 7c0-1 1-1 1-2M13 7c0-1 1-1 1-2"/>'),
+    bag:       svg(STROKE, '<path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/>'),
+    pin:       svg(STROKE, '<path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/>'),
+    phone:     svg(STROKE, '<path d="M6.5 4h3l1.5 4-2 1.5a12 12 0 0 0 5 5l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A16 16 0 0 1 4.5 6.2 2 2 0 0 1 6.5 4Z"/>'),
+    mail:      svg(STROKE, '<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/>'),
+    dot:       svg(FILL, '<circle cx="12" cy="12" r="4"/>'),
+    star:      svg(FILL, '<path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9 6.8 19.2l1-5.8L3.5 9.2l5.9-.9L12 3Z"/>'),
+    pawfill:   svg(FILL, '<circle cx="7" cy="9" r="1.7"/><circle cx="12" cy="7" r="1.7"/><circle cx="17" cy="9" r="1.7"/><path d="M12 11.2c-2.6 0-4.7 2-4.7 4.3 0 1.5 1.1 2.4 2.4 2.4 1 0 1.5-.5 2.3-.5s1.3.5 2.3.5c1.3 0 2.4-.9 2.4-2.4 0-2.3-2.1-4.3-4.7-4.3Z"/>'),
+    heartfill: svg(FILL, '<path d="M12 21s-7-4.4-9.3-9A5 5 0 0 1 12 6a5 5 0 0 1 9.3 6c-2.3 4.6-9.3 9-9.3 9Z"/>'),
+    leaf:      svg(FILL, '<path d="M5 19c0-8 6-14 14-14 0 8-6 14-14 14Z"/><path d="M5 19c4-4 7-6 11-7" fill="none" stroke="#F1F4EC" stroke-width="1.5"/>')
+  };
+  function icon(name){ return ICONS[name] || ICONS.dot; }
 
-  // reveal on scroll
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  /* ---------- text helpers ---------- */
+  function esc(s){
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  // Escape, then turn [[..]] and ((..)) markers into coloured highlight spans.
+  function rich(s, primaryClass, accentClass){
+    var out = esc(s);
+    out = out.replace(/\[\[([\s\S]+?)\]\]/g, '<span class="' + (primaryClass || 'hl') + '">$1</span>');
+    if (accentClass) out = out.replace(/\(\(([\s\S]+?)\)\)/g, '<span class="' + accentClass + '">$1</span>');
+    return out;
+  }
+  function el(id){ return document.getElementById(id); }
+  function set(id, html){ var n = el(id); if (n) n.innerHTML = html; }
+  function delay(i){ return ['', ' d1', ' d2'][i % 3]; }
 
-  // contact form -> mailto
-  document.getElementById('contactForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const f = e.target;
-    const name = f.name.value.trim();
-    const contact = f.contact.value.trim();
-    const msg = f.message.value.trim();
-    const subject = encodeURIComponent('Nanny / pet care inquiry — ' + (name || 'New family'));
-    const body = encodeURIComponent(
-      'Hi Beverly,\n\n' + msg + '\n\n— ' + name + '\nReach me at: ' + contact
-    );
-    window.location.href = 'mailto:bevdejesus@gmail.com?subject=' + subject + '&body=' + body;
-  });
+  /* ---------- section renderers ---------- */
+  function renderMeta(s){
+    if (s.title) document.title = s.title;
+    var d = document.querySelector('meta[name="description"]');
+    if (d && s.description) d.setAttribute('content', s.description);
+    var t = document.querySelector('meta[name="theme-color"]');
+    if (t && s.themeColor) t.setAttribute('content', s.themeColor);
+  }
+
+  function brandSpan(b){
+    return esc(b.name) + '<small>' + esc(b.tagline) + '</small>';
+  }
+
+  function renderHero(h){
+    var b = h.badges || [];
+    var b0 = b[0] || { icon: 'pawfill', text: '' };
+    var b1 = b[1] || { icon: 'heartfill', text: '' };
+    var p = h.portrait || {};
+    var buttons = (h.buttons || []).map(function (bt){
+      var cls = 'btn' + (bt.style ? ' ' + esc(bt.style) : '');
+      return '<a class="' + cls + '" href="' + esc(bt.href) + '">' + esc(bt.text) + (bt.icon ? ' ' + icon(bt.icon) : '') + '</a>';
+    }).join('');
+    var chips = (h.chips || []).map(function (c){
+      return '<span class="chip">' + icon(c.icon) + esc(c.text) + '</span>';
+    }).join('');
+
+    var copy =
+      '<div class="hero-copy">' +
+        '<span class="eyebrow">' + esc(h.eyebrow) + '</span>' +
+        '<h1>' + rich(h.headline, 'leaf-word', 'paw-word') + '</h1>' +
+        '<p class="hero-lede">' + esc(h.lede) + '</p>' +
+        '<div class="hero-actions">' + buttons + '</div>' +
+        '<div class="hero-chips">' + chips + '</div>' +
+      '</div>';
+
+    var art =
+      '<div class="hero-art" aria-hidden="true">' +
+        '<svg class="blob" viewBox="0 0 480 480"><path fill="url(#blobgrad)" d="M412 286c-20 56-58 104-114 130s-128 30-181-4-83-101-72-160 62-101 122-118 122-12 169 28 76 96 56 152Z"/></svg>' +
+        '<svg class="deco d1 float-anim" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="6"/><g><path d="M24 5v6M24 37v6M5 24h6M37 24h6M11 11l4 4M33 33l4 4M37 11l-4 4M15 33l-4 4"/></g></svg>' +
+        '<svg class="deco d2 float-anim slow" viewBox="0 0 40 40" fill="currentColor"><path d="M20 4c2 6 6 8 12 8-6 2-8 6-8 12-2-6-6-8-12-8 6-2 8-6 8-12Z"/></svg>' +
+        '<div class="portrait"><span class="initials">' + esc(p.initials) + '</span>' + (p.note ? '<span class="sub">' + esc(p.note) + '</span>' : '') + '</div>' +
+        '<div class="float-badge badge-paw float-anim">' + icon(b0.icon) + ' ' + esc(b0.text) + '</div>' +
+        '<div class="float-badge badge-heart float-anim slow">' + icon(b1.icon) + ' ' + esc(b1.text) + '</div>' +
+      '</div>';
+
+    set('heroGrid', copy + art);
+  }
+
+  function renderAbout(a){
+    var paras = (a.paragraphs || []).map(function (p){ return '<p>' + esc(p) + '</p>'; }).join('');
+    var card =
+      '<div class="about-card reveal">' +
+        '<div class="quote-mark">“</div>' +
+        '<blockquote>' + esc(a.quote) + '</blockquote>' +
+        '<cite>' + esc(a.quoteCite) + '</cite>' +
+      '</div>';
+    var body =
+      '<div class="about-body reveal d1">' +
+        '<span class="eyebrow">' + esc(a.eyebrow) + '</span>' +
+        '<h2>' + esc(a.heading) + '</h2>' +
+        '<p class="lead">' + esc(a.lead) + '</p>' +
+        paras +
+        '<div class="leaf-strip" aria-hidden="true">' + ICONS.leaf + '<span></span></div>' +
+      '</div>';
+    set('aboutGrid', card + body);
+  }
+
+  function head(d){
+    return '<span class="eyebrow">' + esc(d.eyebrow) + '</span>' +
+           '<h2>' + esc(d.heading) + '</h2>' +
+           (d.intro ? '<p>' + esc(d.intro) + '</p>' : '');
+  }
+
+  function renderServices(s){
+    set('servicesHead', head(s));
+    set('servicesGrid', (s.items || []).map(function (it, i){
+      return '<article class="svc reveal' + delay(i) + '">' +
+        '<div class="ico">' + icon(it.icon) + '</div>' +
+        '<h3>' + esc(it.title) + '</h3>' +
+        '<p>' + esc(it.description) + '</p>' +
+      '</article>';
+    }).join(''));
+  }
+
+  function renderExperience(e){
+    set('experienceHead', head(e));
+    set('timeline', (e.items || []).map(function (it){
+      var loc = it.location ? '<span class="tl-loc">' + ICONS.pin + esc(it.location) + '</span>' : '';
+      return '<div class="tl-item' + (it.current ? ' cur' : '') + ' reveal">' +
+        '<div class="tl-years">' + esc(it.years) + '</div>' +
+        '<h3>' + esc(it.role) + '</h3>' +
+        '<div><span class="tl-where">' + esc(it.family) + '</span>' + loc + '</div>' +
+        (it.description ? '<p>' + esc(it.description) + '</p>' : '') +
+      '</div>';
+    }).join(''));
+  }
+
+  function renderSkills(s){
+    var pills = (s.items || []).map(function (it){
+      return '<span class="pill' + (it.star ? ' star' : '') + '">' + icon(it.icon || 'dot') + esc(it.label) + '</span>';
+    }).join('');
+    var edu = (s.education || []).map(function (ed){
+      return '<div class="edu-item"><strong>' + esc(ed.school) + '</strong><span>' + esc(ed.detail) + '</span></div>';
+    }).join('');
+    set('skillsGrid',
+      '<div class="reveal">' +
+        '<span class="eyebrow">' + esc(s.eyebrow) + '</span>' +
+        '<h2>' + esc(s.heading) + '</h2>' +
+        (s.intro ? '<p>' + esc(s.intro) + '</p>' : '') +
+        '<div class="pill-wrap">' + pills + '</div>' +
+      '</div>' +
+      '<div class="edu reveal d1">' +
+        '<h3>' + esc(s.educationHeading) + '</h3>' + edu +
+      '</div>');
+  }
+
+  function renderTestimonial(t){
+    var n = Math.max(0, parseInt(t.stars, 10) || 0);
+    var stars = '';
+    for (var i = 0; i < n; i++) stars += ICONS.star;
+    set('testimonialWrap',
+      '<span class="eyebrow">' + esc(t.eyebrow) + '</span>' +
+      '<div class="t-stars" aria-label="' + n + ' star reference">' + stars + '</div>' +
+      '<p class="t-quote full">“' + rich(t.quote, 'hl') + '”</p>' +
+      '<div class="t-author">' + esc(t.author) + '<span>' + esc(t.authorDetail) + '</span></div>' +
+      (t.note ? '<p class="t-note">' + esc(t.note) + '</p>' : ''));
+  }
+
+  function renderContact(c){
+    var cards = (c.cards || []).map(function (cd){
+      var inner = '<span class="ico">' + icon(cd.icon) + '</span>' +
+        '<span><span class="lbl">' + esc(cd.label) + '</span><span class="val">' + esc(cd.value) + '</span></span>';
+      return cd.href
+        ? '<a class="ccard" href="' + esc(cd.href) + '">' + inner + '</a>'
+        : '<div class="ccard" style="cursor:default">' + inner + '</div>';
+    }).join('');
+    var f = c.form || {};
+    var left =
+      '<div class="reveal">' +
+        '<span class="eyebrow">' + esc(c.eyebrow) + '</span>' +
+        '<h2>' + esc(c.heading) + '</h2>' +
+        (c.intro ? '<p>' + esc(c.intro) + '</p>' : '') +
+        '<div class="contact-cards">' + cards + '</div>' +
+      '</div>';
+    var form =
+      '<form class="form reveal d1" id="contactForm" data-email="' + esc(f.emailTo) + '">' +
+        '<h3>' + esc(f.heading) + '</h3>' +
+        '<p class="f-sub">' + esc(f.subtext) + '</p>' +
+        '<div class="field"><label for="cf-name">' + esc(f.nameLabel) + '</label>' +
+          '<input id="cf-name" name="name" type="text" placeholder="' + esc(f.namePlaceholder) + '" required></div>' +
+        '<div class="field"><label for="cf-contact">' + esc(f.contactLabel) + '</label>' +
+          '<input id="cf-contact" name="contact" type="text" placeholder="' + esc(f.contactPlaceholder) + '" required></div>' +
+        '<div class="field"><label for="cf-msg">' + esc(f.messageLabel) + '</label>' +
+          '<textarea id="cf-msg" name="message" placeholder="' + esc(f.messagePlaceholder) + '" required></textarea></div>' +
+        '<button class="btn honey" type="submit">' + esc(f.buttonText) + ' ' + ICONS.arrow + '</button>' +
+        (f.note ? '<p class="form-note">' + esc(f.note) + '</p>' : '') +
+      '</form>';
+    set('contactGrid', left + form);
+  }
+
+  function renderFooter(f, brand){
+    var mark = '<svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="17" fill="#3C7D5A"/><path d="M22 18V46M22 18H34a7 7 0 0 1 0 14H22M22 32H35a7 7 0 0 1 0 14H22" fill="none" stroke="#FBF4E4" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><g transform="translate(41,10) scale(0.32)" fill="#F2B33D"><path d="M16 29C16 29 3 20 3 11C3 6 7 3 11 3C14 3 16 6 16 7C16 6 18 3 21 3C25 3 29 6 29 11C29 20 16 29 16 29Z"/></g></svg>';
+    set('footerTop',
+      '<div>' +
+        '<a class="brand" href="#top">' + mark + '<span>' + brandSpan(brand) + '</span></a>' +
+        '<p class="footer-tag">' + esc(f.tagline) + '</p>' +
+      '</div>' +
+      '<div class="footer-contact">' +
+        '<a href="' + esc(f.phoneHref) + '">' + esc(f.phone) + '</a>' +
+        '<a href="mailto:' + esc(f.email) + '">' + esc(f.email) + '</a>' +
+        '<span style="color:#A7B2A6">' + esc(f.location) + '</span>' +
+      '</div>');
+    set('footerCopyright', '© ' + new Date().getFullYear() + ' ' + esc(f.copyrightName));
+    set('footerMade', esc(f.madeWith).replace('♥', '<span class="heart">♥</span>'));
+  }
+
+  /* ---------- interactions (run after content is in the DOM) ---------- */
+  function initInteractions(){
+    var toggle = el('navToggle');
+    var links = el('navlinks');
+    if (toggle && links){
+      toggle.addEventListener('click', function (){
+        var open = links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open);
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      });
+      links.querySelectorAll('a').forEach(function (a){
+        a.addEventListener('click', function (){
+          links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    var nav = el('nav');
+    if (nav){
+      var onScroll = function (){ nav.classList.toggle('scrolled', window.scrollY > 8); };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }
+
+    var io = new IntersectionObserver(function (entries){
+      entries.forEach(function (e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(function (n){ io.observe(n); });
+
+    var form = el('contactForm');
+    if (form){
+      form.addEventListener('submit', function (e){
+        e.preventDefault();
+        var to = form.getAttribute('data-email') || '';
+        var name = (form.elements['name'].value || '').trim();
+        var contact = (form.elements['contact'].value || '').trim();
+        var msg = (form.elements['message'].value || '').trim();
+        var subject = encodeURIComponent('Nanny / pet care inquiry — ' + (name || 'New family'));
+        var body = encodeURIComponent('Hi Beverly,\n\n' + msg + '\n\n— ' + name + '\nReach me at: ' + contact);
+        window.location.href = 'mailto:' + to + '?subject=' + subject + '&body=' + body;
+      });
+    }
+  }
+
+  function showError(msg){
+    var box = el('loadError');
+    if (box){ box.style.display = 'block'; box.querySelector('.le-msg').textContent = msg; }
+  }
+
+  function render(content){
+    renderMeta(content.site || {});
+    set('brandText', brandSpan(content.brand || {}));
+    renderHero(content.hero || {});
+    renderAbout(content.about || {});
+    renderServices(content.services || {});
+    renderExperience(content.experience || {});
+    renderSkills(content.skills || {});
+    renderTestimonial(content.testimonial || {});
+    renderContact(content.contact || {});
+    renderFooter(content.footer || {}, content.brand || {});
+    initInteractions();
+  }
+
+  fetch('content.json', { cache: 'no-cache' })
+    .then(function (r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function (content){
+      try { render(content); }
+      catch (err){ console.error('Render error:', err); showError('Something in content.json couldn’t be displayed: ' + err.message); }
+    })
+    .catch(function (err){
+      console.error('Could not load content.json:', err);
+      showError(location.protocol === 'file:'
+        ? 'This page reads its text from content.json, which browsers block when a file is opened directly. Run a local server (see README.md) or view the published site — both work fine.'
+        : 'Could not load content.json (' + err.message + '). Make sure the file is alongside index.html and contains valid JSON.');
+    });
+})();
 </script>
 </body>
 </html>
