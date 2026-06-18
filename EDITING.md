@@ -144,6 +144,11 @@ Example of one finished pet:
 
 Square photos look best, since each one is cropped to fit the card.
 
+There's also a `"note"` line in the `"pets"` block (just under `"intro"`) that
+shows as a caption beneath the whole gallery — that's where it's explained that
+children aren't pictured for privacy. Edit that sentence to change the wording, or
+set it to `""` to hide the caption entirely.
+
 ---
 
 ## Special symbols you'll see

@@ -224,6 +224,8 @@
   .pet-body{padding:clamp(14px,2vw,18px) clamp(16px,2.2vw,20px);}
   .pet-name{font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:1.12rem;line-height:1.2;}
   .pet-note{margin:.3rem 0 0;font-size:.95rem;color:var(--body);}
+  .pets-note{max-width:62ch;margin:clamp(28px,4vw,40px) auto 0;text-align:center;font-size:.95rem;color:var(--muted);}
+  .pets-note:empty{display:none;}
   @media (max-width:900px){.pets-grid{grid-template-columns:repeat(2,1fr);}}
   @media (max-width:560px){.pets-grid{grid-template-columns:1fr;}}
 
@@ -414,6 +416,7 @@
   <div class="wrap">
     <div class="section-head center reveal" id="petsHead"></div>
     <div class="pets-grid" id="petsGrid"></div>
+    <p class="pets-note reveal" id="petsNote"></p>
   </div>
 </section>
 
@@ -609,6 +612,7 @@
           (it.note ? '<p class="pet-note">' + esc(it.note) + '</p>' : '') +
         '</div></article>';
     }).join(''));
+    set('petsNote', p.note ? esc(p.note) : '');
   }
 
   function renderSkills(s){
