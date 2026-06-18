@@ -146,19 +146,22 @@ Each pet has:
 - `"name"` — the pet's name, shown under the photo.
 - `"note"` — an optional one-line description (breed, a favourite walk, a habit).
   Leave it as `""` to show just the name.
-- `"photo"` — the image file name, added the same way as your hero photo: drop the
-  file in this folder and put its name here, e.g. `"photo": "rex.jpg"`. Until you
-  add one, the card shows a paw icon.
-- `"photoAlt"` — a short description of the photo for screen readers (e.g. the
-  pet's name and breed).
+- `"photos"` — a **list** of image file names. Drop the photos in this folder and
+  list them here, e.g. `"photos": ["rex-1.jpg", "rex-2.jpg", "rex-3.jpg"]`. The
+  first one becomes the card's thumbnail, and **clicking the card opens a photo
+  carousel** of all of them (use the arrows, dots, or your arrow keys; press Esc to
+  close). Leave it empty — `"photos": []` — to show a paw icon and no carousel.
+- `"photoAlt"` — a short description of the pet for screen readers (e.g. the pet's
+  name and breed).
 
 Example of one finished pet:
 
 ```json
-{ "name": "Rex", "note": "Golden retriever — our daily park buddy.", "photo": "rex.jpg", "photoAlt": "Rex, a golden retriever" }
+{ "name": "Rex", "note": "Golden retriever — our daily park buddy.", "photoAlt": "Rex, a golden retriever", "photos": ["rex-1.jpg", "rex-2.jpg", "rex-3.jpg"] }
 ```
 
-Square photos look best, since each one is cropped to fit the card.
+Square photos look best for the card thumbnail (it's cropped to fit); inside the
+carousel each photo is shown in full.
 
 There's also a `"note"` line in the `"pets"` block (just under `"intro"`) that
 shows as a caption beneath the whole gallery — that's where it's explained that
