@@ -94,6 +94,31 @@ Everywhere else, just write normal text — no markers needed.
 
 ---
 
+## Adding your photo
+
+Right now the round photo spot shows the letters **“Bev”** as a placeholder. To
+use a real photo instead:
+
+1. Put your image file in **this same folder** (the one with `index.html`). A
+   **square** photo looks best — for example `bev.jpg` or `bev.png`.
+2. In `content.json`, find the `"portrait"` line and set `"photo"` to your file
+   name:
+
+   ```json
+   "portrait": { "initials": "Bev", "note": "add your photo here", "photo": "bev.jpg", "photoAlt": "Beverly de Jesus" }
+   ```
+
+3. Save and reload. The photo fills the circle automatically (it's cropped to a
+   circle, so a square image looks best).
+
+To switch back to the “Bev” placeholder, set `"photo"` back to empty:
+`"photo": ""`.
+
+The `"photoAlt"` text describes the photo for screen readers and search engines —
+set it to something like your name.
+
+---
+
 ## Special symbols you'll see
 
 These are fine to copy and reuse; they're just nicer-looking punctuation:
