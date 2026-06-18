@@ -25,7 +25,7 @@
       { "icon": "baby", "text": "Newborn to toddler" },
       { "icon": "paw",   "text": "Cats & dogs welcome" }
     ],
-    "portrait": { "initials": "Bev", "note": "add your photo here", "photo": "", "photoAlt": "Beverly de Jesus — Granny Bev" },
+    "portrait": { "initials": "Bev", "note": "add your photo here", "photo": "cover.png", "photoAlt": "Beverly de Jesus — Granny Bev" },
     "badges": [
       { "icon": "pawfill",   "text": "Loves pets" },
       { "icon": "heartfill", "text": "Treated like family" }
@@ -95,6 +95,17 @@
         "family": "Mrs. Janny Scott & Mr. Bill Ritter",
         "description": "Prepared family dinners and cared for young children in the late afternoons."
       }
+    ]
+  },
+
+  "pets": {
+    "eyebrow": "Furry friends",
+    "heading": "Pets I’ve loved & looked after",
+    "intro": "A few of the dogs and cats I’ve had the joy of walking, feeding, and spoiling over the years.",
+    "items": [
+      { "name": "Pet's name", "note": "A line about them — breed, a favourite walk, a funny habit.", "photo": "", "photoAlt": "" },
+      { "name": "Pet's name", "note": "A line about them.", "photo": "", "photoAlt": "" },
+      { "name": "Pet's name", "note": "A line about them.", "photo": "", "photoAlt": "" }
     ]
   },
 

@@ -119,6 +119,33 @@ set it to something like your name.
 
 ---
 
+## Showcasing the pets you've cared for
+
+The **Pets** section is a photo gallery. Each pet is one `{ ... }` block in the
+`"pets"` list — add or remove pets exactly like the other lists (copy a block to
+add, delete a block to remove; commas between blocks, none after the last).
+
+Each pet has:
+
+- `"name"` — the pet's name, shown under the photo.
+- `"note"` — an optional one-line description (breed, a favourite walk, a habit).
+  Leave it as `""` to show just the name.
+- `"photo"` — the image file name, added the same way as your hero photo: drop the
+  file in this folder and put its name here, e.g. `"photo": "rex.jpg"`. Until you
+  add one, the card shows a paw icon.
+- `"photoAlt"` — a short description of the photo for screen readers (e.g. the
+  pet's name and breed).
+
+Example of one finished pet:
+
+```json
+{ "name": "Rex", "note": "Golden retriever — our daily park buddy.", "photo": "rex.jpg", "photoAlt": "Rex, a golden retriever" }
+```
+
+Square photos look best, since each one is cropped to fit the card.
+
+---
+
 ## Special symbols you'll see
 
 These are fine to copy and reuse; they're just nicer-looking punctuation:

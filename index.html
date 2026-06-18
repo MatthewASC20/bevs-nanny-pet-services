@@ -211,6 +211,22 @@
   @media (max-width:900px){.svc-grid{grid-template-columns:repeat(2,1fr);}}
   @media (max-width:560px){.svc-grid{grid-template-columns:1fr;}}
 
+  /* ---------- PETS ---------- */
+  .pets-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.2vw,24px);}
+  .pet-card{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .pet-card:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:var(--line-strong);}
+  .pet-photo{aspect-ratio:4/3;width:100%;overflow:hidden;display:grid;place-items:center;background:linear-gradient(160deg,var(--bg-deep),var(--surface-honey));}
+  .pet-photo img{width:100%;height:100%;object-fit:cover;}
+  .pet-photo svg{width:52px;height:52px;color:var(--primary);opacity:.45;}
+  .pet-body{padding:clamp(14px,2vw,18px) clamp(16px,2.2vw,20px);}
+  .pet-name{font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:1.12rem;line-height:1.2;}
+  .pet-note{margin:.3rem 0 0;font-size:.95rem;color:var(--body);}
+  @media (max-width:900px){.pets-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.pets-grid{grid-template-columns:1fr;}}
+
   /* ---------- EXPERIENCE TIMELINE ---------- */
   .experience{background:var(--bg-deep);border-block:1px solid var(--line);}
   .timeline{position:relative;max-width:760px;margin-inline:auto;padding-left:30px;}
@@ -354,6 +370,7 @@
       <a href="#about">About</a>
       <a href="#services">Services</a>
       <a href="#experience">Experience</a>
+      <a href="#pets">Pets</a>
       <a href="#skills">Skills</a>
       <a href="#kind-words">Kind words</a>
       <a class="btn honey nav-cta" href="#contact">Get in touch</a>
@@ -389,6 +406,14 @@
   <div class="wrap">
     <div class="section-head center reveal" id="experienceHead"></div>
     <div class="timeline" id="timeline"></div>
+  </div>
+</section>
+
+<!-- ======================= PETS ======================= -->
+<section class="section pets" id="pets">
+  <div class="wrap">
+    <div class="section-head center reveal" id="petsHead"></div>
+    <div class="pets-grid" id="petsGrid"></div>
   </div>
 </section>
 
@@ -572,6 +597,20 @@
     }).join(''));
   }
 
+  function renderPets(p){
+    set('petsHead', head(p));
+    set('petsGrid', (p.items || []).map(function (it, i){
+      var media = it.photo
+        ? '<img src="' + esc(it.photo) + '" alt="' + esc(it.photoAlt || it.name) + '">'
+        : ICONS.pawfill;
+      return '<article class="pet-card reveal' + delay(i) + '">' +
+        '<div class="pet-photo">' + media + '</div>' +
+        '<div class="pet-body"><div class="pet-name">' + esc(it.name) + '</div>' +
+          (it.note ? '<p class="pet-note">' + esc(it.note) + '</p>' : '') +
+        '</div></article>';
+    }).join(''));
+  }
+
   function renderSkills(s){
     var pills = (s.items || []).map(function (it){
       return '<span class="pill' + (it.star ? ' star' : '') + '">' + icon(it.icon || 'dot') + esc(it.label) + '</span>';
@@ -708,6 +747,7 @@
     renderAbout(content.about || {});
     renderServices(content.services || {});
     renderExperience(content.experience || {});
+    renderPets(content.pets || {});
     renderSkills(content.skills || {});
     renderTestimonial(content.testimonial || {});
     renderContact(content.contact || {});

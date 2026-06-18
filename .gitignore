@@ -20,6 +20,11 @@ id_*
 # Saved-webpage dumps (browser "Save As" output)
 *_files/
 
+# Full-size original photos — keep these local; the site serves optimized copies
+# (e.g. bev-portrait.jpg). Drop new originals here freely without bloating the repo.
+Bev.png
+cover.png
+
 # Logs / temp
 *.log
 .tmp/
