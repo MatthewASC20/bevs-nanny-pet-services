@@ -170,6 +170,23 @@ set it to `""` to hide the caption entirely.
 
 ---
 
+## Make the contact form email Bev directly (one-time setup)
+
+Until this is set up, the form falls back to opening the visitor's own email app.
+To have messages **sent straight to Bev's inbox from the website** instead (with a
+"Message sent!" confirmation, no email app):
+
+1. Go to **web3forms.com**, enter **bevdejesus@gmail.com**, and copy the **Access
+   Key** they email you. It's free and needs no account.
+2. In `content.json`, find `"accessKey": ""` inside the `"form"` block and paste
+   the key between the quotes, e.g. `"accessKey": "a1b2c3d4-5678-90ab-cdef-..."`.
+3. Save. Submissions now POST to Web3Forms, which emails them to Bev.
+
+The key is safe to keep in the file — it only allows sending to Bev's verified
+address. To switch back to the email-app behaviour, set `"accessKey": ""` again.
+
+---
+
 ## Special symbols you'll see
 
 These are fine to copy and reuse; they're just nicer-looking punctuation:

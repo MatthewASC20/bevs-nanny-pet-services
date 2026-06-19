@@ -343,6 +343,11 @@
   .field textarea{resize:vertical;min-height:104px;}
   .form .btn{width:100%;margin-top:.4rem;}
   .form-note{font-size:.82rem;color:var(--muted);margin:.9rem 0 0;text-align:center;}
+  .hp-field{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden;opacity:0;}
+  .form-sent{text-align:center;padding:clamp(8px,3vw,22px) 0;}
+  .form-sent svg{width:54px;height:54px;color:var(--primary);margin:0 auto .7rem;}
+  .form-sent h3{font-size:1.3rem;margin-bottom:.4rem;}
+  .form-sent p{color:var(--body);margin:0;}
   @media (max-width:820px){.contact-grid{grid-template-columns:1fr;}}
 
   /* ---------- FOOTER ---------- */
@@ -736,7 +741,7 @@
         '<div class="contact-cards">' + cards + '</div>' +
       '</div>';
     var form =
-      '<form class="form reveal d1" id="contactForm" data-email="' + esc(f.emailTo) + '">' +
+      '<form class="form reveal d1" id="contactForm" data-email="' + esc(f.emailTo) + '" data-key="' + esc(f.accessKey || '') + '">' +
         '<h3>' + esc(f.heading) + '</h3>' +
         '<p class="f-sub">' + esc(f.subtext) + '</p>' +
         '<div class="field"><label for="cf-name">' + esc(f.nameLabel) + '</label>' +
@@ -745,6 +750,7 @@
           '<input id="cf-contact" name="contact" type="text" placeholder="' + esc(f.contactPlaceholder) + '" required></div>' +
         '<div class="field"><label for="cf-msg">' + esc(f.messageLabel) + '</label>' +
           '<textarea id="cf-msg" name="message" placeholder="' + esc(f.messagePlaceholder) + '" required></textarea></div>' +
+        '<input type="text" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">' +
         '<button class="btn honey" type="submit">' + esc(f.buttonText) + ' ' + ICONS.arrow + '</button>' +
         (f.note ? '<p class="form-note">' + esc(f.note) + '</p>' : '') +
       '</form>';
@@ -909,15 +915,58 @@
 
     var form = el('contactForm');
     if (form){
+      var fallbackMailto = function (to, subject, name, contact, msg){
+        var body = encodeURIComponent('Hi Beverly,\n\n' + msg + '\n\n— ' + name + '\nReach me at: ' + contact);
+        window.location.href = 'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + body;
+      };
       form.addEventListener('submit', function (e){
         e.preventDefault();
+        var hp = form.elements['botcheck'];
+        if (hp && hp.value) return; // spam honeypot tripped — silently drop
+        var key = (form.getAttribute('data-key') || '').trim();
         var to = form.getAttribute('data-email') || '';
         var name = (form.elements['name'].value || '').trim();
         var contact = (form.elements['contact'].value || '').trim();
         var msg = (form.elements['message'].value || '').trim();
-        var subject = encodeURIComponent('Nanny / pet care inquiry — ' + (name || 'New family'));
-        var body = encodeURIComponent('Hi Beverly,\n\n' + msg + '\n\n— ' + name + '\nReach me at: ' + contact);
-        window.location.href = 'mailto:' + to + '?subject=' + subject + '&body=' + body;
+        var subject = 'Nanny / pet care inquiry — ' + (name || 'New family');
+
+        // No backend key configured yet -> fall back to the email app.
+        if (!key){ fallbackMailto(to, subject, name, contact, msg); return; }
+
+        var btn = form.querySelector('button[type="submit"]');
+        var btnHtml = btn ? btn.innerHTML : '';
+        if (btn){ btn.disabled = true; btn.textContent = 'Sending…'; }
+
+        var payload = {
+          access_key: key,
+          subject: subject,
+          from_name: "Bev's Nanny & Pet — website",
+          name: name,
+          message: msg + '\n\nReach me at: ' + contact,
+          botcheck: ''
+        };
+        if (/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(contact)) payload.email = contact;
+
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        })
+          .then(function (r){ return r.json(); })
+          .then(function (data){
+            if (!data || !data.success) throw new Error((data && data.message) || 'Send failed');
+            form.innerHTML = '<div class="form-sent">' + ICONS.check +
+              '<h3>Message sent!</h3><p>Thanks' + (name ? ', ' + esc(name) : '') +
+              ' — your note is on its way to Bev. She&rsquo;ll be in touch soon.</p></div>';
+          })
+          .catch(function (){
+            if (btn){ btn.disabled = false; btn.innerHTML = btnHtml; }
+            var note = form.querySelector('.form-note');
+            if (note){
+              note.style.color = 'var(--blush)';
+              note.textContent = "Sorry — that didn't go through. Please call or text Bev, or email " + to + ".";
+            }
+          });
       });
     }
   }

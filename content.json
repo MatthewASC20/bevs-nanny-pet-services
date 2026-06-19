@@ -164,6 +164,7 @@
       "heading": "Send a quick message",
       "subtext": "Tell me a little about your family and what you're looking for.",
       "emailTo": "bevdejesus@gmail.com",
+      "accessKey": "",
       "nameLabel": "Your name",
       "namePlaceholder": "e.g. The Carter family",
       "contactLabel": "Email or phone",
@@ -171,7 +172,7 @@
       "messageLabel": "What do you need help with?",
       "messagePlaceholder": "Childcare, newborn care, pet walks, days and hours…",
       "buttonText": "Send message",
-      "note": "This opens your email app, ready to send to Bev."
+      "note": "Your message goes straight to Bev — she’ll get back to you soon."
     }
   },
 
