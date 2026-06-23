@@ -1,0 +1,11 @@
+{
+  "eyebrow": "Little ones",
+  "heading": "Children I’ve cared for",
+  "intro": "Shared without names or photos, out of respect for each family’s privacy — just the ages and the everyday care I provided.",
+  "items": [
+    { "icon": "baby",  "label": "Girl · Newborn", "duties": "Feeding, naps, soothing, and gentle daily routines through the newborn months.", "folder": "child-1", "photoAlt": "", "photos": [] },
+    { "icon": "child", "label": "Boy · Age 2",    "duties": "Play-based learning, mealtimes, naps, and safe outdoor exploration.",            "folder": "child-2", "photoAlt": "", "photos": [] },
+    { "icon": "child", "label": "Boy · Age 9",    "duties": "After-school pickup, homework help, healthy meals, and afternoons at the park.",  "folder": "child-3", "photoAlt": "", "photos": [] },
+    { "icon": "child", "label": "Girl · Age 6",   "duties": "School runs, creative play, nutritious meals, and bedtime stories.",              "folder": "child-4", "photoAlt": "", "photos": [] }
+  ]
+}

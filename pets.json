@@ -1,0 +1,11 @@
+{
+  "eyebrow": "Furry friends",
+  "heading": "Pets I’ve loved & looked after",
+  "intro": "A few of the dogs and cats I’ve had the joy of walking, feeding, and spoiling over the years.",
+  "note": "Caring for children is every bit as central to what I do — I just keep the little ones’ photos private out of respect for their families. So here, it’s the wagging tails and whiskers I get to show off.",
+  "items": [
+    { "name": "Pet's name", "note": "A line about them — breed, a favourite walk, a funny habit.", "folder": "pet-1", "photoAlt": "", "photos": [] },
+    { "name": "Pet's name", "note": "A line about them.", "folder": "pet-2", "photoAlt": "", "photos": [] },
+    { "name": "Pet's name", "note": "A line about them.", "folder": "pet-3", "photoAlt": "", "photos": [] }
+  ]
+}

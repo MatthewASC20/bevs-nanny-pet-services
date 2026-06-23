@@ -211,8 +211,11 @@
   @media (max-width:900px){.svc-grid{grid-template-columns:repeat(2,1fr);}}
   @media (max-width:560px){.svc-grid{grid-template-columns:1fr;}}
 
-  /* ---------- CHILDREN ---------- */
-  .kids-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.2vw,24px);}
+  /* ---------- SHOWCASE CARDS (children + pets) ---------- */
+  .kids-grid,.pets-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.2vw,24px);}
+  .pets{background:var(--bg-deep);border-block:1px solid var(--line);}
+
+  /* children — icon cards (shown when a child has no photo) */
   .kid-card{
     background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
     padding:clamp(22px,2.6vw,30px);transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
@@ -222,34 +225,30 @@
   .kid-ico svg{width:28px;height:28px;stroke-width:1.8;}
   .kid-label{font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:1.18rem;line-height:1.2;}
   .kid-duties{margin:.4rem 0 0;font-size:.98rem;color:var(--body);}
-  @media (max-width:900px){.kids-grid{grid-template-columns:repeat(2,1fr);}}
-  @media (max-width:560px){.kids-grid{grid-template-columns:1fr;}}
 
-  /* ---------- PETS ---------- */
-  .pets{background:var(--bg-deep);border-block:1px solid var(--line);}
-  .pets-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.2vw,24px);}
-  .pet-card{
+  /* photo cards (pets, and any child given a photo) */
+  .show-card{
     background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
     overflow:hidden;transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
   }
-  .pet-card:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:var(--line-strong);}
-  .pet-photo{position:relative;aspect-ratio:4/3;width:100%;overflow:hidden;display:grid;place-items:center;background:linear-gradient(160deg,var(--bg-deep),var(--surface-honey));}
-  .pet-photo img{width:100%;height:100%;object-fit:cover;}
-  .pet-photo svg{width:52px;height:52px;color:var(--primary);opacity:.45;}
-  .pet-body{padding:clamp(14px,2vw,18px) clamp(16px,2.2vw,20px);}
-  .pet-name{font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:1.12rem;line-height:1.2;}
-  .pet-note{margin:.3rem 0 0;font-size:.95rem;color:var(--body);}
+  .show-card:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:var(--line-strong);}
+  .card-photo{position:relative;aspect-ratio:4/3;width:100%;overflow:hidden;display:grid;place-items:center;background:linear-gradient(160deg,var(--bg-deep),var(--surface-honey));}
+  .card-photo img{width:100%;height:100%;object-fit:cover;}
+  .card-photo>svg{width:52px;height:52px;color:var(--primary);opacity:.45;}
+  .card-body{padding:clamp(14px,2vw,18px) clamp(16px,2.2vw,20px);}
+  .card-title{font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:1.12rem;line-height:1.2;}
+  .card-sub{margin:.3rem 0 0;font-size:.95rem;color:var(--body);}
   .pets-note{max-width:62ch;margin:clamp(28px,4vw,40px) auto 0;text-align:center;font-size:.95rem;color:var(--muted);}
   .pets-note:empty{display:none;}
 
-  /* pet card -> photo carousel */
-  .pet-card[data-gallery]{cursor:pointer;}
-  .pet-card[data-gallery]:focus-visible{outline:3px solid var(--primary);outline-offset:3px;}
-  .pet-view{position:absolute;inset:0;display:grid;place-items:center;color:#fff;opacity:0;background:rgba(33,48,42,0);transition:opacity .2s ease, background .2s ease;pointer-events:none;}
-  .pet-card[data-gallery]:hover .pet-view,.pet-card[data-gallery]:focus-visible .pet-view{opacity:1;background:rgba(33,48,42,.28);}
-  .pet-view svg{width:30px;height:30px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.45));}
-  .pet-count{position:absolute;right:10px;bottom:10px;z-index:1;display:inline-flex;align-items:center;gap:.35em;background:rgba(33,48,42,.78);color:#fff;font-size:.78rem;font-weight:700;padding:.3em .6em;border-radius:999px;}
-  .pet-count svg{width:14px;height:14px;}
+  /* photo card -> clickable carousel */
+  .show-card[data-gallery]{cursor:pointer;}
+  .show-card[data-gallery]:focus-visible{outline:3px solid var(--primary);outline-offset:3px;}
+  .card-view{position:absolute;inset:0;display:grid;place-items:center;color:#fff;opacity:0;background:rgba(33,48,42,0);transition:opacity .2s ease, background .2s ease;pointer-events:none;}
+  .show-card[data-gallery]:hover .card-view,.show-card[data-gallery]:focus-visible .card-view{opacity:1;background:rgba(33,48,42,.28);}
+  .card-view svg{width:30px;height:30px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.45));}
+  .card-count{position:absolute;right:10px;bottom:10px;z-index:1;display:inline-flex;align-items:center;gap:.35em;background:rgba(33,48,42,.78);color:#fff;font-size:.78rem;font-weight:700;padding:.3em .6em;border-radius:999px;}
+  .card-count svg{width:14px;height:14px;}
 
   /* lightbox */
   .lightbox{position:fixed;inset:0;z-index:300;display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:rgba(20,30,25,.92);padding:clamp(16px,4vw,48px);}
@@ -267,9 +266,9 @@
   .lb-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.38);border:0;padding:0;cursor:pointer;transition:background .15s ease, transform .15s ease;}
   .lb-dot:hover{background:rgba(255,255,255,.6);}
   .lb-dot.active{background:var(--accent);transform:scale(1.2);}
-  @media (prefers-reduced-motion:reduce){.pet-view,.lb-close,.lb-prev,.lb-next,.lb-dot{transition:none;}}
-  @media (max-width:900px){.pets-grid{grid-template-columns:repeat(2,1fr);}}
-  @media (max-width:560px){.pets-grid{grid-template-columns:1fr;}}
+  @media (prefers-reduced-motion:reduce){.card-view,.lb-close,.lb-prev,.lb-next,.lb-dot{transition:none;}}
+  @media (max-width:900px){.kids-grid,.pets-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.kids-grid,.pets-grid{grid-template-columns:1fr;}}
 
   /* ---------- EXPERIENCE TIMELINE ---------- */
   .experience{background:var(--bg-deep);border-block:1px solid var(--line);}
@@ -557,7 +556,31 @@
   function el(id){ return document.getElementById(id); }
   function set(id, html){ var n = el(id); if (n) n.innerHTML = html; }
   function delay(i){ return ['', ' d1', ' d2'][i % 3]; }
-  var petGalleries = [];
+  var galleries = {};
+  function photoPaths(folder, list){
+    return (list || []).map(function (f){
+      f = String(f);
+      if (/^https?:\/\//.test(f) || f.charAt(0) === '/' || f.indexOf('/') >= 0) return f;
+      return folder ? 'assets/' + folder + '/' + f : f;
+    });
+  }
+  function photoCard(o){
+    var media, attrs = '';
+    if (o.photos.length){
+      galleries[o.gid] = { name: o.caption, alt: o.alt, photos: o.photos };
+      media = '<img src="' + esc(o.photos[0]) + '" alt="' + esc(o.alt) + '">' +
+        '<div class="card-view">' + ICONS.expand + '</div>' +
+        (o.photos.length > 1 ? '<span class="card-count">' + ICONS.camera + ' ' + o.photos.length + '</span>' : '');
+      attrs = ' data-gallery="' + o.gid + '" role="button" tabindex="0" aria-label="View photos of ' + esc(o.caption) + '"';
+    } else {
+      media = o.placeholder || '';
+    }
+    return '<article class="show-card reveal' + o.delayCls + '"' + attrs + '>' +
+      '<div class="card-photo">' + media + '</div>' +
+      '<div class="card-body"><div class="card-title">' + esc(o.title) + '</div>' +
+        (o.sub ? '<p class="card-sub">' + esc(o.sub) + '</p>' : '') +
+      '</div></article>';
+  }
 
   /* ---------- section renderers ---------- */
   function renderMeta(s){
@@ -662,6 +685,14 @@
   function renderChildren(c){
     set('childrenHead', head(c));
     set('childrenGrid', (c.items || []).map(function (it, i){
+      var photos = photoPaths(it.folder, it.photos);
+      if (photos.length){
+        return photoCard({
+          gid: 'kid-' + i, photos: photos,
+          alt: it.photoAlt || it.label, caption: it.label,
+          title: it.label, sub: it.duties, delayCls: delay(i)
+        });
+      }
       return '<article class="kid-card reveal' + delay(i) + '">' +
         '<div class="kid-ico">' + icon(it.icon || 'child') + '</div>' +
         '<div class="kid-label">' + esc(it.label) + '</div>' +
@@ -672,23 +703,13 @@
 
   function renderPets(p){
     set('petsHead', head(p));
-    petGalleries = [];
     set('petsGrid', (p.items || []).map(function (it, i){
-      var photos = (it.photos && it.photos.length) ? it.photos.slice() : (it.photo ? [it.photo] : []);
-      petGalleries[i] = { name: it.name || '', alt: it.photoAlt || it.name || '', photos: photos };
-      var media = photos.length
-        ? '<img src="' + esc(photos[0]) + '" alt="' + esc(it.photoAlt || it.name) + '">'
-        : ICONS.pawfill;
-      var overlay = photos.length ? '<div class="pet-view">' + ICONS.expand + '</div>' : '';
-      var badge = photos.length > 1 ? '<span class="pet-count">' + ICONS.camera + photos.length + '</span>' : '';
-      var attrs = photos.length
-        ? ' data-gallery="' + i + '" role="button" tabindex="0" aria-label="View photos of ' + esc(it.name) + '"'
-        : '';
-      return '<article class="pet-card reveal' + delay(i) + '"' + attrs + '>' +
-        '<div class="pet-photo">' + media + overlay + badge + '</div>' +
-        '<div class="pet-body"><div class="pet-name">' + esc(it.name) + '</div>' +
-          (it.note ? '<p class="pet-note">' + esc(it.note) + '</p>' : '') +
-        '</div></article>';
+      var photos = photoPaths(it.folder, (it.photos && it.photos.length) ? it.photos : (it.photo ? [it.photo] : []));
+      return photoCard({
+        gid: 'pet-' + i, photos: photos,
+        alt: it.photoAlt || it.name, caption: it.name,
+        title: it.name, sub: it.note, placeholder: ICONS.pawfill, delayCls: delay(i)
+      });
     }).join(''));
     set('petsNote', p.note ? esc(p.note) : '');
   }
@@ -785,7 +806,7 @@
     box.id = 'lightbox';
     box.setAttribute('role', 'dialog');
     box.setAttribute('aria-modal', 'true');
-    box.setAttribute('aria-label', 'Pet photos');
+    box.setAttribute('aria-label', 'Photo gallery');
     box.setAttribute('aria-hidden', 'true');
     box.innerHTML =
       '<button class="lb-close" type="button" aria-label="Close photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>' +
@@ -820,7 +841,7 @@
   }
   function lbRender(){
     lb.img.src = lb.photos[lb.idx] || '';
-    lb.img.alt = (lb.alt || lb.name || 'Pet') + ' — photo ' + (lb.idx + 1) + ' of ' + lb.photos.length;
+    lb.img.alt = (lb.alt || lb.name || 'Photo') + ' — photo ' + (lb.idx + 1) + ' of ' + lb.photos.length;
     var multi = lb.photos.length > 1;
     lb.caption.textContent = lb.name + (multi ? '  ·  ' + (lb.idx + 1) + ' / ' + lb.photos.length : '');
     lb.prev.hidden = !multi; lb.next.hidden = !multi;
@@ -901,17 +922,18 @@
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(function (n){ io.observe(n); });
 
-    var pg = el('petsGrid');
-    if (pg){
-      var openFromCard = function (target){
-        var card = target.closest('.pet-card[data-gallery]');
-        if (card) openLightbox(petGalleries[+card.getAttribute('data-gallery')], 0);
-      };
-      pg.addEventListener('click', function (e){ openFromCard(e.target); });
-      pg.addEventListener('keydown', function (e){
+    var openFromCard = function (target){
+      var card = target.closest('.show-card[data-gallery]');
+      if (card) openLightbox(galleries[card.getAttribute('data-gallery')], 0);
+    };
+    ['petsGrid', 'childrenGrid'].forEach(function (gid){
+      var grid = el(gid);
+      if (!grid) return;
+      grid.addEventListener('click', function (e){ openFromCard(e.target); });
+      grid.addEventListener('keydown', function (e){
         if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openFromCard(e.target); }
       });
-    }
+    });
 
     var form = el('contactForm');
     if (form){
@@ -983,6 +1005,7 @@
     renderAbout(content.about || {});
     renderServices(content.services || {});
     renderExperience(content.experience || {});
+    galleries = {};
     renderChildren(content.children || {});
     renderPets(content.pets || {});
     renderSkills(content.skills || {});
@@ -992,17 +1015,24 @@
     initInteractions();
   }
 
-  fetch('content.json', { cache: 'no-cache' })
-    .then(function (r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-    .then(function (content){
+  function fetchJson(path){
+    return fetch(path, { cache: 'no-cache' })
+      .then(function (r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+      .then(function (t){ try { return JSON.parse(t); } catch (e){ throw new Error(path + ': ' + e.message); } });
+  }
+  Promise.all([fetchJson('content.json'), fetchJson('children.json'), fetchJson('pets.json')])
+    .then(function (parts){
+      var content = parts[0] || {};
+      content.children = parts[1] || {};
+      content.pets = parts[2] || {};
       try { render(content); }
-      catch (err){ console.error('Render error:', err); showError('Something in content.json couldn’t be displayed: ' + err.message); }
+      catch (err){ console.error('Render error:', err); showError('Something in the content files couldn’t be displayed: ' + err.message); }
     })
     .catch(function (err){
-      console.error('Could not load content.json:', err);
+      console.error('Could not load content:', err);
       showError(location.protocol === 'file:'
-        ? 'This page reads its text from content.json, which browsers block when a file is opened directly. Run a local server (see README.md) or view the published site — both work fine.'
-        : 'Could not load content.json (' + err.message + '). Make sure the file is alongside index.html and contains valid JSON.');
+        ? 'This page reads its text from JSON files (content.json, children.json, pets.json), which browsers block when a file is opened directly. Run a local server (see README.md) or view the published site — both work fine.'
+        : 'Could not load the content files (' + err.message + '). Make sure content.json, children.json and pets.json are present and valid.');
     });
 })();
 </script>

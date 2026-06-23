@@ -1,8 +1,9 @@
-# Only the static site needs to ship: index.html, content.json, bev-portrait.jpg
+# Only the static site needs to ship: index.html, the .json files, assets/, bev-portrait.jpg
 .git
 .gitignore
 .vercelignore
 .DS_Store
+.gitkeep
 
 # Docs / project notes (not part of the live site)
 *.md

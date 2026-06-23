@@ -1,11 +1,17 @@
 # Editing the website — a simple guide
 
-**You only ever need to edit one file: [`content.json`](content.json).**
+**You only ever edit the website's content files — never `index.html`.**
 
-All of the website's words, services, job history, skills, reviews, and contact
-details live in `content.json`. The page (`index.html`) reads that file and
-builds itself from it — so to change the site, you change `content.json` and the
-website updates. You do **not** need to touch `index.html`.
+All of the website's words live in three plain-text files:
+
+- [`content.json`](content.json) — most of the site (words, services, job history, skills, reviews, contact).
+- [`children.json`](children.json) — the **Children** section.
+- [`pets.json`](pets.json) — the **Pets** section.
+
+Photos live in the [`assets/`](assets) folder, one sub-folder per card. The page
+(`index.html`) reads these files and builds itself from them — so to change the
+site, you change the file and the website updates. You do **not** need to touch
+`index.html`. Everything below works the same in all three JSON files.
 
 ---
 
@@ -121,13 +127,16 @@ set it to something like your name.
 
 ## Showing children (without photos or names)
 
-The **Children** section works like Pets, but the cards show **no photos** — only
-non-identifying details. Each child is one `{ ... }` block in the `"children"`
-list:
+The **Children** section lives in its **own file, `children.json`**. The cards
+show **no photos by default** — only non-identifying details. Each child is one
+`{ ... }` block in the `"items"` list:
 
 - `"label"` — a short, non-identifying line, e.g. `"Boy · Age 9"` or `"Girl · Newborn"`.
 - `"duties"` — the care you provided, e.g. `"After-school pickup, homework help, and park outings."`
 - `"icon"` — `"baby"` for infants or `"child"` for older kids (optional; defaults to `"child"`).
+- `"folder"` / `"photos"` — these make a card carousel-ready (same as Pets below),
+  but **keep `"photos": []`** to leave the child photo-free. Only ever add a child
+  photo if that family has explicitly agreed to it.
 
 Add or remove children the same way as any list (copy a block to add, delete to
 remove; commas between blocks, none after the last). Please keep these free of
@@ -137,36 +146,39 @@ names, schools, or anything that could identify a child or family.
 
 ## Showcasing the pets you've cared for
 
-The **Pets** section is a photo gallery. Each pet is one `{ ... }` block in the
-`"pets"` list — add or remove pets exactly like the other lists (copy a block to
-add, delete a block to remove; commas between blocks, none after the last).
+The **Pets** section lives in its **own file, `pets.json`**. Each pet is one
+`{ ... }` block in the `"items"` list — add or remove pets like any list (copy a
+block to add, delete to remove; commas between blocks, none after the last).
 
 Each pet has:
 
 - `"name"` — the pet's name, shown under the photo.
 - `"note"` — an optional one-line description (breed, a favourite walk, a habit).
   Leave it as `""` to show just the name.
-- `"photos"` — a **list** of image file names. Drop the photos in this folder and
-  list them here, e.g. `"photos": ["rex-1.jpg", "rex-2.jpg", "rex-3.jpg"]`. The
-  first one becomes the card's thumbnail, and **clicking the card opens a photo
-  carousel** of all of them (use the arrows, dots, or your arrow keys; press Esc to
-  close). Leave it empty — `"photos": []` — to show a paw icon and no carousel.
+- `"folder"` — the name of this card's photo folder inside `assets/` (e.g.
+  `"pet-1"`). Every card has its own folder.
+- `"photos"` — a **list** of image file names that live in that folder. Drop the
+  photos into `assets/<folder>/` and list the file names here, e.g.
+  `"photos": ["1.jpg", "2.jpg", "3.jpg"]`. The first becomes the card's thumbnail,
+  and **clicking the card opens a photo carousel** of all of them (arrows, dots, or
+  keyboard arrows; Esc to close). Leave it empty — `"photos": []` — to show a paw
+  icon and no carousel.
 - `"photoAlt"` — a short description of the pet for screen readers (e.g. the pet's
   name and breed).
 
-Example of one finished pet:
+Example — a pet with three photos sitting in `assets/pet-1/`:
 
 ```json
-{ "name": "Rex", "note": "Golden retriever — our daily park buddy.", "photoAlt": "Rex, a golden retriever", "photos": ["rex-1.jpg", "rex-2.jpg", "rex-3.jpg"] }
+{ "name": "Rex", "note": "Golden retriever — our daily park buddy.", "folder": "pet-1", "photoAlt": "Rex, a golden retriever", "photos": ["1.jpg", "2.jpg", "3.jpg"] }
 ```
 
-Square photos look best for the card thumbnail (it's cropped to fit); inside the
-carousel each photo is shown in full.
+Square photos look best for the thumbnail (it's cropped to fit); inside the
+carousel each photo is shown in full. See `assets/README.md` for the folder layout.
 
-There's also a `"note"` line in the `"pets"` block (just under `"intro"`) that
-shows as a caption beneath the whole gallery — that's where it's explained that
-children aren't pictured for privacy. Edit that sentence to change the wording, or
-set it to `""` to hide the caption entirely.
+The `"note"` line near the top of `pets.json` (just under `"intro"`) shows as a
+caption beneath the whole gallery — that's where it's explained that children
+aren't pictured for privacy. Edit that sentence to reword it, or set it to `""` to
+hide the caption.
 
 ---
 

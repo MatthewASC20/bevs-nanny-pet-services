@@ -13,14 +13,17 @@ chat and is being continued here. This file is the hand-off brief.
 
 ## Files in this repo
 - `index.html` — the single-page website (HTML/CSS, inline SVG, Google Fonts via <link>). **Primary deliverable.** The page is now **data-driven**: a small inline script reads `content.json` and renders every section from it.
-- `content.json` — **all editable content** (text, services, experience, skills, testimonial, contact). Edit this, not the HTML.
-- `EDITING.md` — plain-English guide for Beverly to add/remove items in `content.json` (incl. the icon-name list).
+- `content.json` — most editable content (text, services, experience, skills, testimonial, contact). Edit this, not the HTML.
+- `children.json` / `pets.json` — the Children and Pets sections, split into their own files.
+- `assets/<card-folder>/` — photos for each pet/child card (one folder per card; see `assets/README.md`).
+- `EDITING.md` — plain-English guide for Beverly to add/remove items across the JSON files (incl. the icon-name list).
 - `README.md`, `.gitignore` — repo overview and ignore rules.
 
 Other assets from the original package (logo-concepts HTML, LaTeX résumé, reference letter, passport scans) are intentionally **not** in this repo — passports are private PII; the rest can be added later if wanted.
 
 ## Content architecture (how the page is built)
-- `index.html` contains the full design (CSS) plus structural section shells with empty containers (`#heroGrid`, `#servicesGrid`, `#timeline`, `#skillsGrid`, `#testimonialWrap`, `#contactGrid`, `#footerTop`, `#brandText`, …). An IIFE at the bottom `fetch`es `content.json` and fills them.
+- `index.html` contains the full design (CSS) plus structural section shells with empty containers (`#heroGrid`, `#servicesGrid`, `#timeline`, `#childrenGrid`, `#petsGrid`, `#skillsGrid`, `#testimonialWrap`, `#contactGrid`, `#footerTop`, `#brandText`, …). An IIFE at the bottom `fetch`es **content.json + children.json + pets.json** in parallel (`fetchJson`), merges children/pets onto the content object, and fills the containers.
+- **Showcase cards + carousel:** pets and children share one card/lightbox system — `photoCard()` builds `.show-card`s, `photoPaths(folder, photos)` resolves `assets/<folder>/<file>`, and `openLightbox()`/`galleries` (keyed `pet-N`/`kid-N`) drive the carousel (arrows/dots/keys/swipe, focus-trap, Esc). A child with no photos renders as an icon-tile `.kid-card` (privacy default); add a photo and that card becomes a clickable photo card.
 - **Icons** are a named registry in the script (`ICONS`), referenced by name from `content.json` (`"icon": "paw"`); unknown names fall back to a dot. To add an icon, add it to `ICONS` and list it in `EDITING.md`.
 - **Highlights**: `[[text]]` and `((text))` markers in the hero `headline` (→ `leaf-word` / `paw-word`) and testimonial `quote` (`[[text]]` → `hl`) become coloured spans. All other text is HTML-escaped (`esc()`), so apostrophes/`&` are safe to type plainly.
 - **`file://` caveat:** opening `index.html` directly won't load `content.json` (browser blocks `fetch` on `file://`); a friendly banner explains this. Serve over HTTP (`python3 -m http.server`) or host it — both work. If you ever need a no-server single file again, inline the JSON into a `<script type="application/json">` block.

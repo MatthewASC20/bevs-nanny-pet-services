@@ -6,20 +6,23 @@ newborn-to-toddler and pet care across NYC.
 
 ## What's here
 
-- **`content.json`** — **all of the site's editable content** (text, services,
-  experience, skills, reviews, contact info). This is the file to edit.
+- **`content.json`** — most of the site's editable content (text, services,
+  experience, skills, reviews, contact info).
+- **`children.json`** / **`pets.json`** — the Children and Pets sections.
+- **`assets/`** — card photos, one sub-folder per card (see `assets/README.md`).
 - **`index.html`** — the page itself: HTML, CSS, and the small script that reads
-  `content.json` and builds the page from it. No build step, no dependencies.
-- **`EDITING.md`** — a plain-English guide to editing `content.json` (how to add
-  or remove items, the list of available icons). **Start here to make changes.**
+  those JSON files and builds the page from them. No build step, no dependencies.
+- **`EDITING.md`** — a plain-English guide to editing the JSON files (how to add
+  or remove items, add photo carousels, the list of available icons). **Start here.**
 - **`CLAUDE.md`** — project context / hand-off brief (design system, brand
   details, decisions to preserve).
 
 ## Editing the content
 
-Open **`content.json`** and change the words — the website updates to match.
-You don't need to touch `index.html`. See **`EDITING.md`** for the friendly
-step-by-step guide (adding/removing services, choosing icons, etc.).
+Open **`content.json`** (or **`children.json`** / **`pets.json`**) and change the
+words — the website updates to match. You don't need to touch `index.html`. See
+**`EDITING.md`** for the friendly step-by-step guide (adding/removing items,
+choosing icons, adding photo carousels, etc.).
 
 ## Viewing locally
 
