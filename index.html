@@ -295,6 +295,8 @@
   .pill svg{width:1.05em;height:1.05em;color:var(--primary);}
   .pill.star{background:var(--accent);border-color:var(--accent);color:var(--ink);}
   .pill.star svg{color:var(--ink);}
+  a.pill.link{cursor:pointer;}
+  a.pill.link:hover{transform:translateY(-1px);box-shadow:var(--shadow);}
   .edu{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(22px,3vw,30px);box-shadow:var(--shadow-sm);}
   .edu h3{font-size:1.05rem;text-transform:uppercase;letter-spacing:.1em;color:var(--primary-deep);font-family:var(--font-body);font-weight:700;margin-bottom:1rem;font-size:.82rem;}
   .edu-item{padding:.7rem 0;border-top:1px solid var(--line);}
@@ -559,7 +561,8 @@
     camera:    svg(STROKE, '<path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13" r="3.2"/>'),
     expand:    svg(STROKE, '<path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M3 16v3a2 2 0 0 0 2 2h3"/>'),
     lock:      svg(STROKE, '<rect x="5" y="11" width="14" height="10" rx="2.2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>'),
-    card:      svg(STROKE, '<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 10h18"/>')
+    card:      svg(STROKE, '<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 10h18"/>'),
+    external:  svg(STROKE, '<path d="M14 4h6v6M20 4l-8.5 8.5M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/>')
   };
   function icon(name){ return ICONS[name] || ICONS.dot; }
 
@@ -738,7 +741,13 @@
 
   function renderSkills(s){
     var pills = (s.items || []).map(function (it){
-      return '<span class="pill' + (it.star ? ' star' : '') + '">' + icon(it.icon || 'dot') + esc(it.label) + '</span>';
+      var cls = 'pill' + (it.star ? ' star' : '') + (it.href ? ' link' : '');
+      var inner = icon(it.icon || 'dot') + esc(it.label) + (it.href ? ICONS.external : '');
+      if (it.href){
+        var ext = /^https?:\/\//i.test(it.href) || /\.pdf$/i.test(it.href);
+        return '<a class="' + cls + '" href="' + esc(it.href) + '"' + (ext ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' + inner + '</a>';
+      }
+      return '<span class="' + cls + '">' + inner + '</span>';
     }).join('');
     var edu = (s.education || []).map(function (ed){
       return '<div class="edu-item"><strong>' + esc(ed.school) + '</strong><span>' + esc(ed.detail) + '</span></div>';

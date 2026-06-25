@@ -103,7 +103,7 @@
     "heading": "Skills & strengths",
     "intro": "The everyday know-how that keeps children, pets, and homes happy and well looked after.",
     "items": [
-      { "label": "CPR Certified", "icon": "check", "star": true },
+      { "label": "CPR Certified", "icon": "check", "star": true, "href": "assets/cpr-certificate.pdf" },
       { "label": "Menu Planning & Cooking" },
       { "label": "Housekeeping" },
       { "label": "Pet Care" },
