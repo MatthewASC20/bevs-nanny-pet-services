@@ -182,6 +182,26 @@ hide the caption.
 
 ---
 
+## Turn on online payments (Stripe)
+
+The site has a **"Pay securely" section** (just above Contact) that stays **hidden
+until you add a payment link**, so nothing broken ever shows. To switch it on:
+
+1. In your **Stripe dashboard**, create a **Payment Link**
+   (Payments → Payment Links → **+ New**). Since families pay an agreed amount,
+   turn on **"Let customers decide what to pay"** (the customer-chosen-amount
+   option).
+2. Copy the link Stripe gives you — it looks like `https://buy.stripe.com/…`.
+3. In `content.json`, find `"url": ""` inside the `"payment"` block and paste the
+   link between the quotes, e.g. `"url": "https://buy.stripe.com/abc123"`.
+4. Save. The "Pay securely" section appears, and the button opens your Stripe
+   checkout in a new tab. To hide it again later, set `"url": ""`.
+
+You can also reword `"heading"`, `"blurb"`, and `"buttonText"` in that block. No
+card details ever touch this website — Stripe handles all of that securely.
+
+---
+
 ## Make the contact form email Bev directly (one-time setup)
 
 Until this is set up, the form falls back to opening the visitor's own email app.

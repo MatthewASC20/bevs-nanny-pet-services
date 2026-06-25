@@ -127,6 +127,15 @@
     "note": "Written references from past families are available on request."
   },
 
+  "payment": {
+    "eyebrow": "Payments",
+    "heading": "Pay securely online",
+    "blurb": "Already arranged care with me? You can pay your agreed amount safely by card — no account needed. You’ll enter the amount on Stripe’s secure checkout page.",
+    "buttonText": "Pay securely",
+    "url": "",
+    "secureNote": "Powered by Stripe — your card details are handled by Stripe and never stored on this site."
+  },
+
   "contact": {
     "eyebrow": "Get in touch",
     "heading": "Let's talk about your family",
