@@ -132,7 +132,7 @@
     "heading": "Pay securely online",
     "blurb": "Already arranged care with me? You can pay your agreed amount safely by card — no account needed. You’ll enter the amount on Stripe’s secure checkout page.",
     "buttonText": "Pay securely",
-    "url": "",
+    "url": "https://buy.stripe.com/7sYaEY9DrbkL3YbaYt8Vi00",
     "secureNote": "Powered by Stripe — your card details are handled by Stripe and never stored on this site."
   },
 
