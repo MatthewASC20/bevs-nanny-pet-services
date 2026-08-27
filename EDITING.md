@@ -175,6 +175,55 @@ Example — a pet with three photos sitting in `assets/pet-1/`:
 Square photos look best for the thumbnail (it's cropped to fit); inside the
 carousel each photo is shown in full. See `assets/README.md` for the folder layout.
 
+### Using a video as the thumbnail
+
+The `"photos"` list can hold **short video clips as well as photos**. List a clip
+exactly like a photo, and if you put it first it becomes the card's thumbnail — it
+plays quietly on a loop while the card is on screen, and gets a play badge:
+
+```json
+{ "name": "Rex", "note": "Golden retriever.", "folder": "pet-1", "photoAlt": "Rex, a golden retriever", "photos": ["1.mp4", "2.jpg", "3.jpg"] }
+```
+
+Four things to know:
+
+1. **Use `.mp4` files.** That's the format every browser plays. `.webm` also works.
+   **`.mov` files — what an iPhone gives you — will not play** for most visitors,
+   so they have to be converted first (see below).
+2. **Save a matching still beside the clip.** Next to `1.mp4`, save `1.jpg` — the
+   same name, `.jpg` instead of `.mp4`. It's shown while the clip loads, and it's
+   what visitors who've asked their device to reduce motion see instead of a loop.
+   **Don't add that still to the `"photos"` list**, or it'll also appear as its own
+   slide in the carousel.
+3. **Clips have no sound on the card** (browsers require that for anything that
+   plays by itself). Sound does play in the carousel, where there are controls.
+4. **Keep them short and small** — a few seconds, and under about 2 MB. Every clip
+   is stored in the website forever, so a full-length phone video will slow the
+   page down for everyone.
+
+### Turning an iPhone Live Photo or video into an `.mp4`
+
+A Live Photo is really two files — a still and a short `.mov` movie — and neither
+travels well to the web on its own. The easiest route on a Mac:
+
+1. In **Photos**, click the Live Photo, then **File ▸ Export ▸ Export Video** (for a
+   Live Photo) or **Export Unmodified Original** (for a normal video).
+2. If what lands on your desktop is a `.mov`, open it in **QuickTime Player** and
+   choose **File ▸ Export As ▸ 720p**. That produces a `.mp4`.
+3. Drag the `.mp4` into the card's folder, and take a screenshot of a good frame to
+   save alongside it as the matching `.jpg`.
+
+To stop your iPhone making files the web struggles with in the first place, set
+**Settings ▸ Camera ▸ Formats ▸ Most Compatible**.
+
+If you're comfortable at a command line, this does the whole job in one step —
+converts to web-safe video, strips the audio, resizes, and makes the matching still:
+
+```sh
+ffmpeg -i IMG_1234.MOV -vf "scale=720:-2" -c:v libx264 -profile:v baseline -crf 26 -an -movflags +faststart 1.mp4
+ffmpeg -i 1.mp4 -frames:v 1 1.jpg
+```
+
 The `"note"` line near the top of `pets.json` (just under `"intro"`) shows as a
 caption beneath the whole gallery — that's where it's explained that children
 aren't pictured for privacy. Edit that sentence to reword it, or set it to `""` to
