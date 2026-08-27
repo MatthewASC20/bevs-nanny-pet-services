@@ -22,8 +22,14 @@ Photos for the website's cards live here — **one folder per card**:
    "photos": ["1.jpg", "2.jpg"]
    ```
 
-The first photo becomes the card's thumbnail; **clicking the card opens a
+The first photo becomes the card's thumbnail; **clicking the photo opens a
 carousel** of all of them. Square-ish photos look best.
+
+> **File names are case-sensitive once the site is published.** `IMG_2043.JPG` and
+> `IMG_2043.jpg` are the same file on a Mac but different on the live server, so a
+> photo that works locally can come up blank online. Plain lower-case names like
+> `1.jpg` are safest. If a photo ever fails to load, the card quietly falls back to
+> the paw icon instead of showing a broken image.
 
 > Children are intentionally left photo-free for privacy — only add a child photo
 > if that family has agreed to it.

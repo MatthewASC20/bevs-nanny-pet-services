@@ -1,0 +1,6 @@
+# Bev's Nanny & Pet Services
+User-agent: *
+Allow: /
+
+# Once the live domain is settled, add:
+# Sitemap: https://your-domain/sitemap.xml
