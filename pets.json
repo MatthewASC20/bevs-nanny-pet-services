@@ -5,11 +5,10 @@
   "note": "Caring for children is every bit as central to what I do — I just keep the little ones’ photos private out of respect for their families. So here, it’s the wagging tails and whiskers I get to show off.",
   "items": [
     { "name": "The Rottweiler", "note": "A big gentle soul — garden afternoons, snow days, and long neighbourhood walks.", "folder": "pet-1", "photoAlt": "A black-and-tan Rottweiler, out in the garden and in the snow", "photos": ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg"] },
-    { "name": "The brown-and-white springer", "note": "Rarely seen without a bone, and friends with everyone at the park.", "folder": "pet-2", "photoAlt": "A brown-and-white springer spaniel holding a bone", "photos": ["1.jpg", "2.jpg"] },
-    { "name": "The black-and-white springer", "note": "Brings you the ball, then brings it right back again.", "folder": "pet-3", "photoAlt": "A black-and-white springer spaniel carrying a green ball", "photos": ["1.jpg"] },
-    { "name": "The dachshund crew", "note": "A whole houseful of long-haired dachshunds — garden patrol, bench naps, and one very fine cabbage patch.", "folder": "pet-4", "photoAlt": "Long-haired dachshunds in the garden and on a bench", "photos": ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg"] },
-    { "name": "The wire-haired dachshund", "note": "Scruffy, sweet, and a devoted napper in any patch of sun.", "folder": "pet-5", "photoAlt": "A wire-haired dachshund standing on a striped rug", "photos": ["1.jpg", "2.jpg", "3.jpg"] },
-    { "name": "The Dobermans", "note": "A handsome pair — walked side by side, always in step.", "folder": "pet-6", "photoAlt": "Two black-and-tan Dobermans standing side by side on a walk", "photos": ["1.jpg", "2.jpg"] },
-    { "name": "The cockapoo pup", "note": "All fluff and mischief, and very proud of that stick.", "folder": "pet-7", "photoAlt": "A cream-and-white cockapoo puppy carrying a stick", "photos": ["1.jpg", "2.jpg"] }
+    { "name": "The springer spaniel", "note": "Never without a bone or a ball, and friends with everyone at the park.", "folder": "pet-2", "photoAlt": "A springer spaniel carrying a bone, and again with a green ball", "photos": ["1.jpg", "2.jpg", "3.jpg"] },
+    { "name": "The dachshund crew", "note": "A whole houseful of long-haired dachshunds — garden patrol, bench naps, and one very fine cabbage patch.", "folder": "pet-3", "photoAlt": "Long-haired dachshunds in the garden and on a bench", "photos": ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg"] },
+    { "name": "The wire-haired dachshund", "note": "Scruffy, sweet, and a devoted napper in any patch of sun.", "folder": "pet-4", "photoAlt": "A wire-haired dachshund standing on a striped rug", "photos": ["1.jpg", "2.jpg", "3.jpg"] },
+    { "name": "The Dobermans", "note": "A handsome pair — walked side by side, always in step.", "folder": "pet-5", "photoAlt": "Two black-and-tan Dobermans standing side by side on a walk", "photos": ["1.jpg", "2.jpg"] },
+    { "name": "The cockapoo pup", "note": "All fluff and mischief, and very proud of that stick.", "folder": "pet-6", "photoAlt": "A cream-and-white cockapoo puppy carrying a stick", "photos": ["1.jpg", "2.jpg"] }
   ]
 }
