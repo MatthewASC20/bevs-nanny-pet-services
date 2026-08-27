@@ -25,7 +25,7 @@
       { "icon": "baby", "text": "Newborn to toddler" },
       { "icon": "paw",   "text": "Cats & dogs welcome" }
     ],
-    "portrait": { "initials": "Bev", "note": "add your photo here", "photo": "bev-portrait.jpg", "photoAlt": "Beverly de Jesus — Granny Bev" },
+    "portrait": { "initials": "Bev", "note": "add your photo here", "photo": "bev-portrait-with-dog.jpg", "photoAlt": "Beverly de Jesus — Granny Bev — out on the deck with a Rottweiler" },
     "badges": [
       { "icon": "pawfill",   "text": "Loves pets" },
       { "icon": "heartfill", "text": "Treated like family" }
