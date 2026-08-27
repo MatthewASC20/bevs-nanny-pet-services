@@ -2,5 +2,4 @@
 User-agent: *
 Allow: /
 
-# Once the live domain is settled, add:
-# Sitemap: https://your-domain/sitemap.xml
+Sitemap: https://www.grannybev.nyc/sitemap.xml

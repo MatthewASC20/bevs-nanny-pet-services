@@ -4,6 +4,12 @@ This folder is a small personal-brand package for **Beverly de Jesus** ("Granny 
 a nanny and pet-care professional in New York City. The work was started in a Claude.ai
 chat and is being continued here. This file is the hand-off brief.
 
+## Live site
+**https://www.grannybev.nyc/** — deployed from `main` on Vercel (project
+`matt-s-websites/bevs-nanny-pet-services`). The domain is hard-coded in four places in
+`index.html` (`rel="canonical"`, `og:url`, `og:image`, `twitter:image`) plus the JSON-LD
+`url`/`image`, `robots.txt` and `sitemap.xml`. Change all of them together if it ever moves.
+
 ## Beverly's details (used across all assets)
 - Name: Beverly de Jesus  ·  business name: **Bev's Nanny & Pet Services**
 - Phone: +1 (917) 346-2847   ·   tel: `+19173462847`
@@ -20,7 +26,7 @@ chat and is being continued here. This file is the hand-off brief.
 - `og-image.jpg` — the 1200×630 link-preview card. Generated from `tools/og-image.html`
   (open that file at 1200×630 and screenshot it; it links the real brand fonts).
 - `apple-touch-icon.png` — 180×180 iOS home-screen icon.
-- `robots.txt` — crawler rules. Add the `Sitemap:` line once the domain is settled.
+- `robots.txt` / `sitemap.xml` — crawler rules and the single-page sitemap.
 - `README.md`, `.gitignore`, `.vercelignore` — repo overview and ignore rules.
 
 Other assets from the original package (logo-concepts HTML, LaTeX résumé, reference letter, passport scans) are intentionally **not** in this repo — passports are private PII; the rest can be added later if wanted.
@@ -89,9 +95,6 @@ python3 -c "import base64,sys; print('data:image/svg+xml;base64,'+base64.b64enco
 - **Payments**: a live Stripe Payment Link is in `content.json` → `payment.url`.
 
 ## Possible next steps (optional)
-- **Needs the live domain** (the only outstanding SEO work): add `<link rel="canonical">`,
-  an absolute `og:url`, absolute `og:image`/JSON-LD `image` URLs, and a `sitemap.xml`
-  (plus the `Sitemap:` line in `robots.txt`). Everything else is already in `<head>`.
 - Export the logo as a standalone `.svg` / transparent `.png` for business cards and social profiles.
 - Decide on paper size: the résumé is A4, the reference letter is US Letter — optionally unify.
 - **Privacy question for Beverly**: the Experience timeline publishes four past employers' full
