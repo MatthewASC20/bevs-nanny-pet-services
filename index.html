@@ -161,10 +161,9 @@
   .chip svg{width:1.1em;height:1.1em;color:var(--primary);}
 
   /* hero portrait */
-  .hero-art{position:relative;display:grid;place-items:center;min-height:360px;}
-  .blob{position:absolute;inset:0;margin:auto;width:min(420px,92%);height:auto;filter:drop-shadow(0 30px 50px -28px rgba(44,94,67,.5));}
+  .hero-art{position:relative;display:grid;place-items:center;min-height:440px;}
   .portrait{
-    position:relative;width:min(300px,72%);aspect-ratio:1;border-radius:50%;
+    position:relative;width:min(420px,88%);aspect-ratio:3/4;border-radius:28px;
     background:linear-gradient(150deg,#fff,var(--surface-honey));
     border:6px solid #fff;box-shadow:var(--shadow-lift);
     display:grid;place-items:center;overflow:hidden;z-index:2;
@@ -180,13 +179,10 @@
   .float-badge svg{width:1.3em;height:1.3em;}
   .badge-paw{top:8%;left:-2%;color:var(--accent-deep);}
   .badge-heart{bottom:12%;right:-3%;color:var(--blush);}
-  .deco{position:absolute;color:var(--accent);opacity:.9;z-index:1;}
-  .deco.d1{top:4%;right:14%;width:46px;color:var(--accent);}
-  .deco.d2{bottom:2%;left:6%;width:40px;color:var(--primary);opacity:.7;}
 
   @media (max-width:860px){
     .hero-grid{grid-template-columns:1fr;}
-    .hero-art{order:-1;min-height:320px;}
+    .hero-art{order:-1;min-height:380px;}
     .hero-lede{max-width:48ch;}
   }
 
@@ -446,15 +442,6 @@
   </div>
 </noscript>
 
-<!-- reusable SVG defs for the avatar blob -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <linearGradient id="blobgrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#CFE6D2"/>
-      <stop offset="1" stop-color="#F7E3B4"/>
-    </linearGradient>
-  </defs>
-</svg>
 
 <!-- ======================= NAV ======================= -->
 <header class="nav" id="nav">
@@ -705,9 +692,6 @@
 
     var art =
       '<div class="hero-art" aria-hidden="true">' +
-        '<svg class="blob" viewBox="0 0 480 480"><path fill="url(#blobgrad)" d="M412 286c-20 56-58 104-114 130s-128 30-181-4-83-101-72-160 62-101 122-118 122-12 169 28 76 96 56 152Z"/></svg>' +
-        '<svg class="deco d1 float-anim" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="6"/><g><path d="M24 5v6M24 37v6M5 24h6M37 24h6M11 11l4 4M33 33l4 4M37 11l-4 4M15 33l-4 4"/></g></svg>' +
-        '<svg class="deco d2 float-anim slow" viewBox="0 0 40 40" fill="currentColor"><path d="M20 4c2 6 6 8 12 8-6 2-8 6-8 12-2-6-6-8-12-8 6-2 8-6 8-12Z"/></svg>' +
         '<div class="portrait">' + (p.photo
           ? '<img src="' + esc(p.photo) + '" alt="' + esc(p.photoAlt || p.initials) + '">'
           : '<span class="initials">' + esc(p.initials) + '</span>' + (p.note ? '<span class="sub">' + esc(p.note) + '</span>' : '')
