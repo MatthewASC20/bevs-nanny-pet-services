@@ -16,8 +16,8 @@ newborn-to-toddler and pet care across NYC.
   those JSON files and builds the page from them. No build step, no dependencies.
 - **`EDITING.md`** — a plain-English guide to editing the JSON files (how to add
   or remove items, add photo carousels, the list of available icons). **Start here.**
-- **`og-image.jpg`** / **`apple-touch-icon.png`** / **`robots.txt`** — the link-preview
-  card shown when someone shares the site, the iOS home-screen icon, and crawler rules.
+- **`assets/og-cover.jpg`** / **`apple-touch-icon.png`** / **`robots.txt`** / **`sitemap.xml`** —
+  the picture shown when someone shares the site, the iOS home-screen icon, and crawler rules.
 - **`CLAUDE.md`** — project context / hand-off brief (design system, brand
   details, decisions to preserve).
 

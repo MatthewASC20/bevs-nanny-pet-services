@@ -8,9 +8,6 @@
 # Docs / project notes (not part of the live site)
 *.md
 
-# Build-time sources, not part of the live site
-tools
-
 # Full-size original photos (the site serves the optimized bev-portrait.jpg)
 /Bev.png
 /cover.png

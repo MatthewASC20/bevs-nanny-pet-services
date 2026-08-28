@@ -23,9 +23,9 @@ chat and is being continued here. This file is the hand-off brief.
 - `children.json` / `pets.json` — the Children and Pets sections, split into their own files.
 - `assets/<card-folder>/` — photos for each pet/child card (one folder per card; see `assets/README.md`).
 - `EDITING.md` — plain-English guide for Beverly to add/remove items across the JSON files (incl. the icon-name list).
-- `og-image.jpg` — the 1200×630 link-preview card. Generated from `tools/og-image.html`
-  (open that file at 1200×630 and screenshot it; it links the real brand fonts).
-- `apple-touch-icon.png` — 180×180 iOS home-screen icon.
+- `assets/og-cover.jpg` — the 1200×630 link-preview picture (Beverly with Ku-ki), referenced
+  from `index.html`, not from any JSON file.
+- `apple-touch-icon.png` — 180×180 iOS home-screen icon, generated from the same `MARK` vector.
 - `robots.txt` / `sitemap.xml` — crawler rules and the single-page sitemap.
 - `README.md`, `.gitignore`, `.vercelignore` — repo overview and ignore rules.
 
@@ -34,6 +34,22 @@ Other assets from the original package (logo-concepts HTML, LaTeX résumé, refe
 ## Content architecture (how the page is built)
 - `index.html` contains the full design (CSS) plus structural section shells with empty containers (`#heroGrid`, `#servicesGrid`, `#timeline`, `#childrenGrid`, `#petsGrid`, `#skillsGrid`, `#testimonialWrap`, `#contactGrid`, `#footerTop`, `#brandText`, …). An IIFE at the bottom `fetch`es **content.json + children.json + pets.json** in parallel (`fetchJson`), merges children/pets onto the content object, and fills the containers.
 - **Showcase cards + carousel:** pets and children share one card/lightbox system — `photoCard()` builds `.show-card`s, `photoPaths(folder, photos)` resolves `assets/<folder>/<file>`, and `openLightbox()`/`galleries` (keyed `pet-N`/`kid-N`) drive the carousel (arrows/dots/keys/swipe, focus-trap, Esc). A child with no photos renders as an icon-tile `.kid-card` (privacy default); add a photo and that card becomes a clickable photo card.
+- **Video in cards:** a card's `photos` list may name `.mp4`/`.webm` clips as well as stills —
+  type is sniffed by extension (`isVideo()`), so the JSON stays a flat list of file names. A clip
+  first in the list becomes a muted, looping, `pointer-events:none` thumbnail with a `.card-play`
+  badge; `posterFor()` derives its poster from the sibling `1.mp4` → `1.jpg` still (unlisted).
+  Playback is driven by a **second** IntersectionObserver in `initInteractions()` (the reveal one
+  unobserves after firing) and is skipped entirely under `prefers-reduced-motion` — CSS cannot
+  pause a video, so that check has to live in JS. The lightbox holds an `<img class="lb-img">` and
+  a `<video class="lb-img">` side by side; `lbRender()` toggles `hidden` between them and
+  `lbReleaseVideo()` drops the src on close so audio and buffering actually stop.
+  **Gotcha:** any author `display` rule beats the `hidden` attribute — hence
+  `video.lb-img:not([hidden])` and the explicit `.lb-prev[hidden]{display:none}`.
+- **Share preview:** the Open Graph / Twitter tags in `<head>` are deliberately **hard-coded** —
+  link crawlers read raw HTML and never run the renderer, so a runtime value would be invisible
+  to them. `og:image` is a **relative** path (`assets/og-cover.jpg`) so it stays correct on preview
+  URLs, the `.vercel.app` address, and any future custom domain. `renderMeta()` mirrors
+  title/description onto those tags at runtime for anything that does render the page first.
 - **Payments:** the `"payment"` block in content.json holds a Stripe **Payment Link** URL; `renderPayment()` shows the `#pay` "Pay securely" section (before Contact) only when `url` is a valid `http(s)` link, otherwise hides the section. No secret keys, no backend — Stripe hosts the checkout. Bev makes a "customer chooses amount" Payment Link and pastes the URL.
 - **Icons** are a named registry in the script (`ICONS`), referenced by name from `content.json` (`"icon": "paw"`); unknown names fall back to a dot. To add an icon, add it to `ICONS` and list it in `EDITING.md`.
 - **Highlights**: `[[text]]` and `((text))` markers in the hero `headline` (→ `leaf-word` / `paw-word`) and testimonial `quote` (`[[text]]` → `hl`) become coloured spans. All other text is HTML-escaped (`esc()`), so apostrophes/`&` are safe to type plainly.
@@ -41,8 +57,8 @@ Other assets from the original package (logo-concepts HTML, LaTeX résumé, refe
   renders inside its own `try`. A typo in `pets.json` costs *that section only* — the hero,
   phone number and contact form still render, and `#loadError` names what broke. Never
   reintroduce a single `Promise.all` rejection path or a single `try` around all of `render()`.
-- **Empty sections hide themselves** (`hideIfEmpty`), like `renderPayment` already did. `pets.json`
-  ships `"items": []` with the old placeholders parked under `"exampleItems"` (ignored by the renderer).
+- **Empty sections hide themselves** (`hideIfEmpty`), like `renderPayment` already did — emptying
+  a section's `"items"` list removes it from the page instead of leaving a bare heading.
 - **`file://` caveat:** opening `index.html` directly won't load `content.json` (browser blocks `fetch` on `file://`); a friendly banner explains this. Serve over HTTP (`python3 -m http.server`) or host it — both work. If you ever need a no-server single file again, inline the JSON into a `<script type="application/json">` block.
 - If the design markup changes, keep the renderer's output in sync with the CSS (e.g. `.svc:nth-child(...)` icon tints rely on card order; service/contact icons get `stroke-width:1.8` via CSS while chips/timeline stay at `2`).
 
@@ -89,7 +105,8 @@ python3 -c "import base64,sys; print('data:image/svg+xml;base64,'+base64.b64enco
 (the favicon's root `<svg>` needs `xmlns="http://www.w3.org/2000/svg"`, which the inline one omits).
 
 ## Already done (do not redo)
-- **Hero portrait**: `bev-portrait.jpg` (600×600) is wired up via `content.json` → `hero.portrait.photo`.
+- **Hero portrait**: `bev-portrait-with-dog.jpg` (900×1200, a 3:4 rounded rectangle) is wired up via
+  `content.json` → `hero.portrait.photo`. `bev-portrait.jpg` is the older square crop, now unused.
 - **Contact form**: delivers live through **Web3Forms** (`contact.form.accessKey` in content.json).
   Do *not* swap this for Formspree — it works.
 - **Payments**: a live Stripe Payment Link is in `content.json` → `payment.url`.
@@ -107,4 +124,10 @@ python3 -c "import base64,sys; print('data:image/svg+xml;base64,'+base64.b64enco
 ## Decisions to preserve
 - Do NOT publish other references' phone numbers on the public website (privacy). The site
   features the Venkatesan testimonial (written to be shared) + "references available on request".
+- **Pet photos: Beverly's own, yes; clients' faces, no.** Photos showing Beverly are published
+  (she is the subject of the site). Uploads showing a client's face are held back unless that
+  family has agreed — two such frames are deliberately not on the site. Children stay photo-free
+  by default; see `assets/README.md`.
+- The Pets cards carry the animals' real names: Ku-ki, Casper & Chestnut, Tootsie, Wally & Birdie,
+  Hazel, Bo.
 - Résumé stays to a single page.
