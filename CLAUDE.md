@@ -90,6 +90,6 @@ three spots to keep them in sync.
   (she is the subject of the site). Uploads showing a client's face are held back unless that
   family has agreed — two such frames are deliberately not on the site. Children stay photo-free
   by default; see `assets/README.md`.
-- The Pets cards carry the animals' real names (Ku-ki, Casper & Chestnut, Tootsie, Wally & Birdie,
-  Bo). One card is still the descriptive "The wire-haired dachshund" — its name is outstanding.
+- The Pets cards carry the animals' real names: Ku-ki, Casper & Chestnut, Tootsie, Wally & Birdie,
+  Hazel, Bo.
 - Résumé stays to a single page.
