@@ -25,6 +25,23 @@ Photos for the website's cards live here — **one folder per card**:
 The first photo becomes the card's thumbnail; **clicking the card opens a
 carousel** of all of them. Square-ish photos look best.
 
+## Video clips
+
+The same list can hold short `.mp4` clips (`.webm` works too). Put one first and it
+becomes a quietly looping thumbnail:
+
+```
+assets/pet-1/1.mp4      <- the clip, listed in "photos"
+assets/pet-1/1.jpg      <- matching still, NOT listed — used as the poster
+```
+
+`.mov` files straight off an iPhone won't play for most visitors — convert them
+first. `EDITING.md` has the step-by-step. Keep clips a few seconds and under ~2 MB;
+they live in this repo permanently.
+
+This folder also holds `og-cover.jpg` — the picture shown when the site's link is
+texted or posted. It is referenced from `index.html`, not from any JSON file.
+
 > Children are intentionally left photo-free for privacy — only add a child photo
 > if that family has agreed to it.
 
