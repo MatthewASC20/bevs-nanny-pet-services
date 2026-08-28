@@ -1,5 +1,7 @@
 # Bev's Nanny & Pet Services
 
+**Live at [www.grannybev.nyc](https://www.grannybev.nyc/)**
+
 Personal-brand website for **Beverly de Jesus** ("Granny Bev"), a nanny and
 pet-care professional in New York City — 30+ years of experience, CPR certified,
 newborn-to-toddler and pet care across NYC.
@@ -7,13 +9,15 @@ newborn-to-toddler and pet care across NYC.
 ## What's here
 
 - **`content.json`** — most of the site's editable content (text, services,
-  experience, skills, reviews, contact info).
+  experience, skills, testimonial, contact info).
 - **`children.json`** / **`pets.json`** — the Children and Pets sections.
 - **`assets/`** — card photos, one sub-folder per card (see `assets/README.md`).
 - **`index.html`** — the page itself: HTML, CSS, and the small script that reads
   those JSON files and builds the page from them. No build step, no dependencies.
 - **`EDITING.md`** — a plain-English guide to editing the JSON files (how to add
   or remove items, add photo carousels, the list of available icons). **Start here.**
+- **`assets/og-cover.jpg`** / **`apple-touch-icon.png`** / **`robots.txt`** / **`sitemap.xml`** —
+  the picture shown when someone shares the site, the iOS home-screen icon, and crawler rules.
 - **`CLAUDE.md`** — project context / hand-off brief (design system, brand
   details, decisions to preserve).
 

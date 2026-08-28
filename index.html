@@ -11,9 +11,13 @@
      These must stay hard-coded here: link crawlers read the raw HTML and never run the script
      that builds the page from content.json, so a value set at runtime would be invisible to them.
      The image path is relative on purpose — it resolves correctly on every deployment
-     (preview links, the .vercel.app address, and any custom domain later) with nothing to update.
+     (preview links, the .vercel.app address, and the live grannybev.nyc domain) with
+     nothing to update. og:url and rel=canonical are absolute because those two cannot
+     do their job any other way: they exist to name one preferred address for the page.
      If you change the site title or description in content.json, change them here too. -->
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://www.grannybev.nyc/">
+<meta property="og:site_name" content="Bev&#39;s Nanny &amp; Pet Services">
 <meta property="og:title" content="Bev's Nanny &amp; Pet Services — Caring nanny &amp; pet care in NYC">
 <meta property="og:description" content="Beverly de Jesus — 'Granny Bev' — offers warm, reliable nanny, newborn, and pet care across New York City, with over 30 years of experience and CPR certification.">
 <meta property="og:image" content="assets/og-cover.jpg">
@@ -28,6 +32,31 @@
 <meta name="twitter:image:alt" content="Beverly de Jesus out on the deck with Ku-ki, her Rottweiler, tongue out and grinning.">
 
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3QgeD0iMiIgeT0iMiIgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiByeD0iMTciIGZpbGw9IiMzQzdENUEiLz48cGF0aCBkPSJNMjIgMThWNDZNMjIgMThIMzRhNyA3IDAgMCAxIDAgMTRIMjJNMjIgMzJIMzVhNyA3IDAgMCAxIDAgMTRIMjIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZCRjRFNCIgc3Ryb2tlLXdpZHRoPSI1LjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQxLDEwKSBzY2FsZSgwLjMyKSIgZmlsbD0iI0YyQjMzRCI+PHBhdGggZD0iTTE2IDI5QzE2IDI5IDMgMjAgMyAxMUMzIDYgNyAzIDExIDNDMTQgMyAxNiA2IDE2IDdDMTYgNiAxOCAzIDIxIDNDMjUgMyAyOSA2IDI5IDExQzI5IDIwIDE2IDI5IDE2IDI5WiIvPjwvZz48L3N2Zz4=">
+<link rel="canonical" href="https://www.grannybev.nyc/">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" as="image" href="bev-portrait-with-dog.jpg" fetchpriority="high">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ChildCare",
+  "name": "Bev's Nanny & Pet Services",
+  "alternateName": "Granny Bev",
+  "description": "Beverly de Jesus offers warm, reliable nanny, newborn, and pet care across New York City, with over 30 years of experience and CPR certification.",
+  "url": "https://www.grannybev.nyc/",
+  "image": "https://www.grannybev.nyc/assets/og-cover.jpg",
+  "telephone": "+1-917-346-2847",
+  "email": "grannybev.nyc@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Bronx",
+    "addressRegion": "NY",
+    "addressCountry": "US"
+  },
+  "areaServed": { "@type": "City", "name": "New York City" },
+  "knowsLanguage": "en",
+  "founder": { "@type": "Person", "name": "Beverly de Jesus" }
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;1,6..12,400&display=swap" rel="stylesheet">
@@ -42,9 +71,10 @@
     --accent:#F2B33D;
     --accent-deep:#CF8E12;
     --blush:#E08A84;
+    --danger:#B3453E;
     --ink:#21302A;
     --body:#4C544C;
-    --muted:#7E867C;
+    --muted:#646E63;
     --line:#E0E6D7;
     --line-strong:#CdD6C5;
     --font-display:'Baloo 2','Trebuchet MS',system-ui,sans-serif;
@@ -92,22 +122,24 @@
 
   /* buttons */
   .btn{
-    --bg:var(--primary-deep);--fg:#fff;
+    --btn-bg:var(--primary-deep);--fg:#fff;
     display:inline-flex;align-items:center;gap:.5em;justify-content:center;
     font-family:var(--font-display);font-weight:600;font-size:1rem;letter-spacing:.01em;
-    background:var(--bg);color:var(--fg);border:2px solid var(--bg);
+    background:var(--btn-bg);color:var(--fg);border:2px solid var(--btn-bg);
     padding:.72em 1.4em;border-radius:999px;cursor:pointer;
     transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
     box-shadow:0 8px 20px -12px rgba(33,48,42,.5);
   }
   .btn:hover{transform:translateY(-2px);box-shadow:0 14px 26px -12px rgba(33,48,42,.5);}
   .btn:active{transform:translateY(0);}
-  .btn.honey{--bg:var(--accent);--fg:var(--ink);border-color:var(--accent);box-shadow:0 10px 22px -10px rgba(207,142,18,.6);}
-  .btn.ghost{--bg:transparent;--fg:var(--primary-deep);border-color:var(--line-strong);box-shadow:none;}
+  .btn.honey{--btn-bg:var(--accent);--fg:var(--ink);border-color:var(--accent);box-shadow:0 10px 22px -10px rgba(207,142,18,.6);}
+  .btn.ghost{--btn-bg:transparent;--fg:var(--primary-deep);border-color:var(--line-strong);box-shadow:none;}
   .btn.ghost:hover{background:var(--surface);border-color:var(--primary);}
   .btn svg{width:1.15em;height:1.15em;}
 
-  :focus-visible{outline:3px solid var(--primary);outline-offset:3px;border-radius:6px;}
+  :focus-visible{outline:3px solid var(--primary);outline-offset:3px;}
+  .footer :focus-visible{outline-color:var(--accent);}
+  [hidden]{display:none!important;}
 
   /* ---------- NAV ---------- */
   .nav{
@@ -125,8 +157,8 @@
     font-family:var(--font-body);font-weight:600;color:var(--ink);font-size:.96rem;
     padding:.5em .8em;border-radius:999px;transition:background .15s,color .15s;
   }
-  .nav-links a:hover{background:var(--bg-deep);color:var(--primary-deep);}
-  .nav-cta{margin-left:.4rem;padding:.55em 1.1em;font-size:.95rem;}
+  .nav-links a:not(.btn):hover{background:var(--bg-deep);color:var(--primary-deep);}
+  .nav-links a.nav-cta{margin-left:.4rem;padding:.55em 1.1em;font-size:.95rem;}
   .nav-toggle{display:none;border:1px solid var(--line-strong);background:var(--surface);border-radius:12px;width:46px;height:44px;cursor:pointer;align-items:center;justify-content:center;}
   .nav-toggle svg{width:24px;height:24px;color:var(--ink);}
 
@@ -262,10 +294,10 @@
   .pets-note:empty{display:none;}
 
   /* photo card -> clickable carousel */
-  .show-card[data-gallery]{cursor:pointer;}
-  .show-card[data-gallery]:focus-visible{outline:3px solid var(--primary);outline-offset:3px;}
+  .card-photo[data-gallery]{cursor:pointer;}
+  .card-photo[data-gallery]:focus-visible{outline:3px solid var(--primary);outline-offset:-4px;}
   .card-view{position:absolute;inset:0;z-index:1;display:grid;place-items:center;color:#fff;opacity:0;background:rgba(33,48,42,0);transition:opacity .2s ease, background .2s ease;pointer-events:none;}
-  .show-card[data-gallery]:hover .card-view,.show-card[data-gallery]:focus-visible .card-view{opacity:1;background:rgba(33,48,42,.28);}
+  .card-photo[data-gallery]:hover .card-view,.card-photo[data-gallery]:focus-visible .card-view{opacity:1;background:rgba(33,48,42,.28);}
   .card-view svg{width:30px;height:30px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.45));}
   .card-count{position:absolute;right:10px;bottom:10px;z-index:1;display:inline-flex;align-items:center;gap:.35em;background:rgba(33,48,42,.78);color:#fff;font-size:.78rem;font-weight:700;padding:.3em .6em;border-radius:999px;}
   .card-count svg{width:14px;height:14px;}
@@ -330,7 +362,7 @@
   a.pill.link{cursor:pointer;}
   a.pill.link:hover{transform:translateY(-1px);box-shadow:var(--shadow);}
   .edu{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(22px,3vw,30px);box-shadow:var(--shadow-sm);}
-  .edu h3{font-size:1.05rem;text-transform:uppercase;letter-spacing:.1em;color:var(--primary-deep);font-family:var(--font-body);font-weight:700;margin-bottom:1rem;font-size:.82rem;}
+  .edu h3{text-transform:uppercase;letter-spacing:.1em;color:var(--primary-deep);font-family:var(--font-body);font-weight:700;margin-bottom:1rem;font-size:.82rem;}
   .edu-item{padding:.7rem 0;border-top:1px solid var(--line);}
   .edu-item:first-of-type{border-top:0;padding-top:0;}
   .edu-item strong{display:block;color:var(--ink);font-family:var(--font-display);font-size:1.02rem;}
@@ -344,15 +376,15 @@
   .testimonial::after{width:200px;height:200px;bottom:-90px;left:-40px;background:rgba(255,255,255,.06);}
   .testimonial .wrap{position:relative;z-index:1;max-width:880px;text-align:center;}
   .testimonial .eyebrow{color:var(--accent);justify-content:center;}
+  .section h2.eyebrow{font-size:.74rem;line-height:1.65;}
   .testimonial .eyebrow::before{background:var(--accent);}
-  .t-quote{font-family:var(--font-display);font-weight:600;font-size:clamp(1.3rem,2.8vw,2rem);line-height:1.35;color:#fff;margin:0 auto;max-width:24ch;}
+  .t-quote{font-family:var(--font-display);font-weight:500;font-size:clamp(1.15rem,2vw,1.45rem);line-height:1.45;color:#fff;margin:0 auto;max-width:46ch;}
   .t-quote .hl{color:var(--accent);}
-  .t-quote.full{font-size:clamp(1.15rem,2vw,1.45rem);max-width:46ch;font-weight:500;line-height:1.45;}
   .t-author{margin-top:1.6rem;font-weight:700;color:#EAF1E7;}
-  .t-author span{display:block;font-weight:600;color:rgba(234,241,231,.7);font-size:.9rem;margin-top:.2rem;}
+  .t-author span{display:block;font-weight:600;color:rgba(234,241,231,.88);font-size:.9rem;margin-top:.2rem;}
   .t-stars{display:flex;gap:.25rem;justify-content:center;margin-bottom:1.4rem;color:var(--accent);}
   .t-stars svg{width:22px;height:22px;}
-  .t-note{margin-top:1.8rem;font-size:.92rem;color:rgba(234,241,231,.72);}
+  .t-note{margin-top:1.8rem;font-size:.92rem;color:rgba(234,241,231,.88);}
 
   /* ---------- CONTACT ---------- */
   .contact-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(28px,4vw,56px);align-items:start;}
@@ -376,7 +408,12 @@
   .field textarea{resize:vertical;min-height:104px;}
   .form .btn{width:100%;margin-top:.4rem;}
   .form-note{font-size:.82rem;color:var(--muted);margin:.9rem 0 0;text-align:center;}
-  .hp-field{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden;opacity:0;}
+  .form-status{font-size:.88rem;font-weight:700;color:var(--danger);margin:.9rem 0 0;text-align:center;}
+  .form-status:empty{display:none;}
+  .skip-link{position:absolute;left:-9999px;top:0;z-index:100;background:var(--surface);color:var(--primary-deep);
+    font-weight:700;padding:.7em 1.2em;border-radius:0 0 12px 0;box-shadow:var(--shadow);}
+  .skip-link:focus{left:0;}
+  .hp-field{display:none!important;}
   .form-sent{text-align:center;padding:clamp(8px,3vw,22px) 0;}
   .form-sent svg{width:54px;height:54px;color:var(--primary);margin:0 auto .7rem;}
   .form-sent h3{font-size:1.3rem;margin-bottom:.4rem;}
@@ -415,19 +452,29 @@
   .reveal.in{opacity:1;transform:none;}
   .reveal.d1{transition-delay:.08s;}
   .reveal.d2{transition-delay:.16s;}
-  .reveal.d3{transition-delay:.24s;}
 
   @media (prefers-reduced-motion:reduce){
-    *{animation:none!important;scroll-behavior:auto!important;}
-    .reveal{opacity:1;transform:none;transition:none;}
+    *{animation:none!important;scroll-behavior:auto!important;transition:none!important;}
+    .reveal{opacity:1;transform:none;}
     .float-anim{animation:none!important;}
+    .svc:hover,.kid-card:hover,.show-card:hover,.btn:hover,a.pill.link:hover{transform:none;}
+    .ccard:hover{transform:none;}
   }
+  @media print{
+    .reveal{opacity:1!important;transform:none!important;}
+    .nav,.skip-link,#loadError,.lightbox{display:none!important;}
+    .section{padding-block:24px;}
+    body{background:#fff;}
+  }
+
   @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
   .float-anim{animation:bob 5s ease-in-out infinite;}
   .float-anim.slow{animation-duration:6.5s;}
 </style>
 </head>
 <body>
+
+<a class="skip-link" href="#top">Skip to content</a>
 
 <!-- Shown only if content.json fails to load (e.g. when opening this file
      directly with file:// instead of through a web server). -->
@@ -462,6 +509,7 @@
       <a href="#pets">Pets</a>
       <a href="#skills">Skills</a>
       <a href="#kind-words">Kind words</a>
+      <a href="#pay" id="navPay">Pay</a>
       <a class="btn honey nav-cta" href="#contact">Get in touch</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navlinks">
@@ -538,7 +586,7 @@
 </main>
 
 <!-- ======================= FOOTER ======================= -->
-<footer class="footer">
+<footer class="footer" id="siteFooter">
   <div class="wrap">
     <div class="footer-top" id="footerTop"></div>
     <div class="footer-bottom">
@@ -561,6 +609,13 @@
   var STROKE = 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
   var FILL = 'fill="currentColor"';
   function svg(attrs, inner){ return '<svg viewBox="0 0 24 24" ' + attrs + '>' + inner + '</svg>'; }
+
+  var MARK = '<svg class="mark" viewBox="0 0 64 64" aria-hidden="true">' +
+    '<rect x="2" y="2" width="60" height="60" rx="17" fill="#3C7D5A"/>' +
+    '<path d="M22 18V46M22 18H34a7 7 0 0 1 0 14H22M22 32H35a7 7 0 0 1 0 14H22" fill="none" stroke="#FBF4E4" ' +
+    'stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '<g transform="translate(41,10) scale(0.32)" fill="#F2B33D"><path d="M16 29C16 29 3 20 3 11C3 6 7 3 11 3C14 ' +
+    '3 16 6 16 7C16 6 18 3 21 3C25 3 29 6 29 11C29 20 16 29 16 29Z"/></g></svg>';
 
   var ICONS = {
     arrow:     svg('fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"', '<path d="M5 12h14M13 6l6 6-6 6"/>'),
@@ -627,21 +682,22 @@
       galleries[o.gid] = { name: o.caption, alt: o.alt, photos: o.photos };
       var lead = o.photos[0], leadIsVideo = isVideo(lead);
       /* No controls and pointer-events:none — the thumbnail is decoration, and every click
-         belongs to the card, which opens the lightbox. Playback is started by the observer
-         in initInteractions() only when the card scrolls into view and motion is welcome. */
+         belongs to the photo, which is the button that opens the lightbox. Playback is started
+         by the observer in initInteractions() only when the card scrolls into view and motion
+         is welcome. */
       media = leadIsVideo
         ? '<video src="' + esc(lead) + '" poster="' + esc(posterFor(lead)) + '" muted loop playsinline preload="none" tabindex="-1" aria-label="' + esc(o.alt) + '"></video>' +
           '<span class="card-play">' + ICONS.play + '</span>'
-        : '<img src="' + esc(lead) + '" alt="' + esc(o.alt) + '">';
+        : '<img src="' + esc(lead) + '" alt="' + esc(o.alt) + '" loading="lazy" decoding="async">';
       media += '<div class="card-view">' + ICONS.expand + '</div>' +
         (o.photos.length > 1 ? '<span class="card-count">' + ICONS.camera + ' ' + o.photos.length + '</span>' : '');
       attrs = ' data-gallery="' + o.gid + '" role="button" tabindex="0" aria-label="View photos of ' + esc(o.caption) + '"';
     } else {
       media = o.placeholder || '';
     }
-    return '<article class="show-card reveal' + o.delayCls + '"' + attrs + '>' +
-      '<div class="card-photo">' + media + '</div>' +
-      '<div class="card-body"><div class="card-title">' + esc(o.title) + '</div>' +
+    return '<article class="show-card reveal' + o.delayCls + '">' +
+      '<div class="card-photo"' + attrs + '>' + media + '</div>' +
+      '<div class="card-body"><h3 class="card-title">' + esc(o.title) + '</h3>' +
         (o.sub ? '<p class="card-sub">' + esc(o.sub) + '</p>' : '') +
       '</div></article>';
   }
@@ -665,7 +721,7 @@
   }
 
   function brandSpan(b){
-    return esc(b.name) + '<small>' + esc(b.tagline) + '</small>';
+    return esc(b.name || b.businessName) + '<small>' + esc(b.tagline) + '</small>';
   }
 
   function renderHero(h){
@@ -691,9 +747,9 @@
       '</div>';
 
     var art =
-      '<div class="hero-art" aria-hidden="true">' +
+      '<div class="hero-art">' +
         '<div class="portrait">' + (p.photo
-          ? '<img src="' + esc(p.photo) + '" alt="' + esc(p.photoAlt || p.initials) + '">'
+          ? '<img src="' + esc(p.photo) + '" alt="' + esc(p.photoAlt || p.initials) + '" width="900" height="1200" fetchpriority="high" decoding="async">'
           : '<span class="initials">' + esc(p.initials) + '</span>' + (p.note ? '<span class="sub">' + esc(p.note) + '</span>' : '')
         ) + '</div>' +
         '<div class="float-badge badge-paw float-anim">' + icon(b0.icon) + ' ' + esc(b0.text) + '</div>' +
@@ -720,6 +776,14 @@
         '<div class="leaf-strip" aria-hidden="true">' + ICONS.leaf + '<span></span></div>' +
       '</div>';
     set('aboutGrid', card + body);
+  }
+
+  // A section with nothing in it is hidden rather than shown as an empty band.
+  function hideIfEmpty(id, data){
+    var sec = el(id);
+    var empty = !data || !data.items || !data.items.length;
+    if (sec) sec.style.display = empty ? 'none' : '';
+    return empty;
   }
 
   function head(d){
@@ -753,6 +817,7 @@
   }
 
   function renderChildren(c){
+    if (hideIfEmpty('children', c)) return;
     set('childrenHead', head(c));
     set('childrenGrid', (c.items || []).map(function (it, i){
       var photos = photoPaths(it.folder, it.photos);
@@ -765,16 +830,17 @@
       }
       return '<article class="kid-card reveal' + delay(i) + '">' +
         '<div class="kid-ico">' + icon(it.icon || 'child') + '</div>' +
-        '<div class="kid-label">' + esc(it.label) + '</div>' +
+        '<h3 class="kid-label">' + esc(it.label) + '</h3>' +
         (it.duties ? '<p class="kid-duties">' + esc(it.duties) + '</p>' : '') +
       '</article>';
     }).join(''));
   }
 
   function renderPets(p){
+    if (hideIfEmpty('pets', p)) return;
     set('petsHead', head(p));
     set('petsGrid', (p.items || []).map(function (it, i){
-      var photos = photoPaths(it.folder, (it.photos && it.photos.length) ? it.photos : (it.photo ? [it.photo] : []));
+      var photos = photoPaths(it.folder, it.photos);
       return photoCard({
         gid: 'pet-' + i, photos: photos,
         alt: it.photoAlt || it.name, caption: it.name,
@@ -814,9 +880,9 @@
     var stars = '';
     for (var i = 0; i < n; i++) stars += ICONS.star;
     set('testimonialWrap',
-      '<span class="eyebrow">' + esc(t.eyebrow) + '</span>' +
+      '<h2 class="eyebrow">' + esc(t.eyebrow) + '</h2>' +
       '<div class="t-stars" aria-label="' + n + ' star reference">' + stars + '</div>' +
-      '<p class="t-quote full">“' + rich(t.quote, 'hl') + '”</p>' +
+      '<p class="t-quote">“' + rich(t.quote, 'hl') + '”</p>' +
       '<div class="t-author">' + esc(t.author) + '<span>' + esc(t.authorDetail) + '</span></div>' +
       (t.note ? '<p class="t-note">' + esc(t.note) + '</p>' : ''));
   }
@@ -824,8 +890,14 @@
   function renderPayment(p){
     var sec = el('pay');
     var url = ((p && p.url) || '').trim();
-    if (!/^https?:\/\//i.test(url)){ if (sec) sec.style.display = 'none'; set('payWrap', ''); return; }
+    var navPay = el('navPay');
+    if (!/^https?:\/\//i.test(url)){
+      if (sec) sec.style.display = 'none';
+      if (navPay) navPay.hidden = true;
+      set('payWrap', ''); return;
+    }
     if (sec) sec.style.display = '';
+    if (navPay) navPay.hidden = false;
     set('payWrap',
       '<div class="pay-card reveal">' +
         (p.eyebrow ? '<span class="eyebrow">' + esc(p.eyebrow) + '</span>' : '') +
@@ -863,18 +935,18 @@
           '<input id="cf-contact" name="contact" type="text" placeholder="' + esc(f.contactPlaceholder) + '" required></div>' +
         '<div class="field"><label for="cf-msg">' + esc(f.messageLabel) + '</label>' +
           '<textarea id="cf-msg" name="message" placeholder="' + esc(f.messagePlaceholder) + '" required></textarea></div>' +
-        '<input type="text" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">' +
+        '<input type="text" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" hidden>' +
         '<button class="btn honey" type="submit">' + esc(f.buttonText) + ' ' + ICONS.arrow + '</button>' +
+        '<p class="form-status" role="alert" tabindex="-1"></p>' +
         (f.note ? '<p class="form-note">' + esc(f.note) + '</p>' : '') +
       '</form>';
     set('contactGrid', left + form);
   }
 
   function renderFooter(f, brand){
-    var mark = '<svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="17" fill="#3C7D5A"/><path d="M22 18V46M22 18H34a7 7 0 0 1 0 14H22M22 32H35a7 7 0 0 1 0 14H22" fill="none" stroke="#FBF4E4" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><g transform="translate(41,10) scale(0.32)" fill="#F2B33D"><path d="M16 29C16 29 3 20 3 11C3 6 7 3 11 3C14 3 16 6 16 7C16 6 18 3 21 3C25 3 29 6 29 11C29 20 16 29 16 29Z"/></g></svg>';
     set('footerTop',
       '<div>' +
-        '<a class="brand" href="#top">' + mark + '<span>' + brandSpan(brand) + '</span></a>' +
+        '<a class="brand" href="#top">' + MARK + '<span>' + brandSpan(brand) + '</span></a>' +
         '<p class="footer-tag">' + esc(f.tagline) + '</p>' +
       '</div>' +
       '<div class="footer-contact">' +
@@ -882,12 +954,21 @@
         '<a href="mailto:' + esc(f.email) + '">' + esc(f.email) + '</a>' +
         '<span style="color:#A7B2A6">' + esc(f.location) + '</span>' +
       '</div>');
-    set('footerCopyright', '© ' + new Date().getFullYear() + ' ' + esc(f.copyrightName));
+    set('footerCopyright', '© ' + new Date().getFullYear() + ' ' + esc(f.copyrightName || brand.businessName || brand.name));
     set('footerMade', esc(f.madeWith).replace('♥', '<span class="heart">♥</span>'));
   }
 
   /* ---------- pet photo lightbox / carousel ---------- */
   var lb = null;
+  // Everything outside the dialog is inert while it is open.
+  function bgInert(on){
+    ['nav', 'top', 'siteFooter'].forEach(function (id){
+      var node = el(id);
+      if (!node) return;
+      if (on){ node.setAttribute('inert', ''); node.setAttribute('aria-hidden', 'true'); }
+      else { node.removeAttribute('inert'); node.removeAttribute('aria-hidden'); }
+    });
+  }
   function lbChevron(left){
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="' + (left ? 'M15 5l-7 7 7 7' : 'M9 5l7 7-7 7') + '"/></svg>';
   }
@@ -908,7 +989,7 @@
         '<video class="lb-img" controls playsinline preload="metadata" hidden></video>' +
         '<button class="lb-next" type="button" aria-label="Next photo">' + lbChevron(false) + '</button>' +
       '</div>' +
-      '<div class="lb-caption"></div>' +
+      '<div class="lb-caption" role="status" aria-live="polite"></div>' +
       '<div class="lb-dots"></div>';
     document.body.appendChild(box);
     lb = {
@@ -948,11 +1029,18 @@
     lb.caption.textContent = lb.name + (multi ? '  ·  ' + (lb.idx + 1) + ' / ' + lb.photos.length : '');
     lb.prev.hidden = !multi; lb.next.hidden = !multi;
     if (multi){
-      var dotsHtml = '';
-      for (var k = 0; k < lb.photos.length; k++){
-        dotsHtml += '<button type="button" class="lb-dot' + (k === lb.idx ? ' active' : '') + '" data-i="' + k + '" aria-label="Go to photo ' + (k + 1) + '"></button>';
+      if (lb.dots.children.length !== lb.photos.length){
+        var dotsHtml = '';
+        for (var k = 0; k < lb.photos.length; k++){
+          dotsHtml += '<button type="button" class="lb-dot" data-i="' + k + '" aria-label="Go to photo ' + (k + 1) + '"></button>';
+        }
+        lb.dots.innerHTML = dotsHtml;
       }
-      lb.dots.innerHTML = dotsHtml;
+      // Toggle in place — rebuilding would destroy the dot the user just pressed.
+      Array.prototype.forEach.call(lb.dots.children, function (d, i){
+        d.classList.toggle('active', i === lb.idx);
+        d.setAttribute('aria-current', i === lb.idx ? 'true' : 'false');
+      });
     } else { lb.dots.innerHTML = ''; }
   }
   function openLightbox(g, start){
@@ -964,6 +1052,7 @@
     lb.el.classList.add('open');
     lb.el.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    bgInert(true);
     document.addEventListener('keydown', lbKey, true);
     lb.closeBtn.focus();
   }
@@ -972,6 +1061,7 @@
     lb.el.classList.remove('open');
     lb.el.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    bgInert(false);
     document.removeEventListener('keydown', lbKey, true);
     lb.img.removeAttribute('src');
     lbReleaseVideo();
@@ -1002,6 +1092,8 @@
          wander out of them; if it has escaped the dialog, pull it back to the first stop. */
       if (!lb.el.contains(document.activeElement)){ e.preventDefault(); f[0].focus(); return; }
       var first = f[0], last = f[f.length - 1];
+      // Focus can sit on <body> (clicking the photo, or a re-rendered control) — pull it back in.
+      if (!lb.el.contains(document.activeElement)){ e.preventDefault(); (e.shiftKey ? last : first).focus(); return; }
       if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
       else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
     }
@@ -1017,11 +1109,21 @@
         toggle.setAttribute('aria-expanded', open);
         toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
       });
+      var closeMenu = function (refocus){
+        if (!links.classList.contains('open')) return;
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Open menu');
+        if (refocus) toggle.focus();
+      };
       links.querySelectorAll('a').forEach(function (a){
-        a.addEventListener('click', function (){
-          links.classList.remove('open');
-          toggle.setAttribute('aria-expanded', 'false');
-        });
+        a.addEventListener('click', function (){ closeMenu(false); });
+      });
+      document.addEventListener('keydown', function (e){
+        if (e.key === 'Escape') closeMenu(true);
+      });
+      document.addEventListener('click', function (e){
+        if (!links.contains(e.target) && !toggle.contains(e.target)) closeMenu(false);
       });
     }
 
@@ -1031,6 +1133,23 @@
       onScroll();
       window.addEventListener('scroll', onScroll, { passive: true });
     }
+
+    // Filenames are case-sensitive once published, so a photo that works locally can 404 live.
+    document.addEventListener('error', function (e){
+      var img = e.target;
+      if (!img || img.tagName !== 'IMG') return;
+      var holder = img.parentNode && img.parentNode.closest ? img.parentNode.closest('.card-photo') : null;
+      if (holder){
+        holder.removeAttribute('data-gallery');
+        holder.removeAttribute('role');
+        holder.removeAttribute('tabindex');
+        holder.removeAttribute('aria-label');
+        holder.innerHTML = ICONS.pawfill;
+        return;
+      }
+      var portrait = img.parentNode && img.parentNode.classList && img.parentNode.classList.contains('portrait');
+      if (portrait) img.parentNode.innerHTML = '<span class="initials">Bev</span>';
+    }, true);
 
     var io = new IntersectionObserver(function (entries){
       entries.forEach(function (e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
@@ -1054,15 +1173,18 @@
     }
 
     var openFromCard = function (target){
-      var card = target.closest('.show-card[data-gallery]');
+      var card = target.closest ? target.closest('.card-photo[data-gallery]') : null;
       if (card) openLightbox(galleries[card.getAttribute('data-gallery')], 0);
+      return !!card;
     };
     ['petsGrid', 'childrenGrid'].forEach(function (gid){
       var grid = el(gid);
       if (!grid) return;
       grid.addEventListener('click', function (e){ openFromCard(e.target); });
       grid.addEventListener('keydown', function (e){
-        if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openFromCard(e.target); }
+        // Only swallow the key if it actually opened a gallery, so Space still scrolls.
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        if (openFromCard(e.target)) e.preventDefault();
       });
     });
 
@@ -1074,8 +1196,17 @@
       };
       form.addEventListener('submit', function (e){
         e.preventDefault();
+        var status = form.querySelector('.form-status');
+        var fail = function (msg){ if (status) status.textContent = msg; };
+        fail('');
         var hp = form.elements['botcheck'];
-        if (hp && hp.value) return; // spam honeypot tripped — silently drop
+        if (hp && hp.value){
+          // Almost certainly a bot, but an autofill extension can trip this too —
+          // never drop a real message silently.
+          fail("That didn't look like it came from a person. Please call or text Bev, or email " +
+               (form.getAttribute('data-email') || '') + '.');
+          return;
+        }
         var key = (form.getAttribute('data-key') || '').trim();
         var to = form.getAttribute('data-email') || '';
         var name = (form.elements['name'].value || '').trim();
@@ -1108,17 +1239,16 @@
           .then(function (r){ return r.json(); })
           .then(function (data){
             if (!data || !data.success) throw new Error((data && data.message) || 'Send failed');
-            form.innerHTML = '<div class="form-sent">' + ICONS.check +
+            form.innerHTML = '<div class="form-sent" role="status" tabindex="-1">' + ICONS.check +
               '<h3>Message sent!</h3><p>Thanks' + (name ? ', ' + esc(name) : '') +
               ' — your note is on its way to Bev. She&rsquo;ll be in touch soon.</p></div>';
+            var sent = form.querySelector('.form-sent');
+            if (sent) sent.focus();
           })
           .catch(function (){
             if (btn){ btn.disabled = false; btn.innerHTML = btnHtml; }
-            var note = form.querySelector('.form-note');
-            if (note){
-              note.style.color = 'var(--blush)';
-              note.textContent = "Sorry — that didn't go through. Please call or text Bev, or email " + to + ".";
-            }
+            fail("Sorry — that didn't go through. Please call or text Bev, or email " + to + ".");
+            if (status) status.focus();
           });
       });
     }
@@ -1130,41 +1260,77 @@
   }
 
   function render(content){
-    renderMeta(content.site || {});
-    set('brandText', brandSpan(content.brand || {}));
-    renderHero(content.hero || {});
-    renderAbout(content.about || {});
-    renderServices(content.services || {});
-    renderExperience(content.experience || {});
+    var brand = content.brand || {};
+    if (!brand.name && content.site) brand.name = content.site.businessName;
     galleries = {};
-    renderChildren(content.children || {});
-    renderPets(content.pets || {});
-    renderSkills(content.skills || {});
-    renderTestimonial(content.testimonial || {});
-    renderPayment(content.payment || {});
-    renderContact(content.contact || {});
-    renderFooter(content.footer || {}, content.brand || {});
-    initInteractions();
+
+    // Each section renders on its own. One bad entry costs that section only —
+    // it must never take the contact details or the rest of the page down with it.
+    var sections = [
+      ['page details', function (){ renderMeta(content.site || {}); }],
+      ['brand',        function (){ set('brandText', brandSpan(brand)); }],
+      ['hero',         function (){ renderHero(content.hero || {}); }],
+      ['About',        function (){ renderAbout(content.about || {}); }],
+      ['Services',     function (){ renderServices(content.services || {}); }],
+      ['Experience',   function (){ renderExperience(content.experience || {}); }],
+      ['Children',     function (){ renderChildren(content.children || {}); }],
+      ['Pets',         function (){ renderPets(content.pets || {}); }],
+      ['Skills',       function (){ renderSkills(content.skills || {}); }],
+      ['Kind words',   function (){ renderTestimonial(content.testimonial || {}); }],
+      ['Payments',     function (){ renderPayment(content.payment || {}); }],
+      ['Contact',      function (){ renderContact(content.contact || {}); }],
+      ['footer',       function (){ renderFooter(content.footer || {}, brand); }]
+    ];
+    sections.forEach(function (pair){
+      try { pair[1](); }
+      catch (err){
+        console.error('Could not render the ' + pair[0] + ' section:', err);
+        broken.push('the ' + pair[0] + ' section (' + err.message + ')');
+      }
+    });
   }
 
   function fetchJson(path){
-    return fetch(path, { cache: 'no-cache' })
-      .then(function (r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+    return fetch(path)
+      .then(function (r){ if (!r.ok) throw new Error(path + ': HTTP ' + r.status); return r.text(); })
       .then(function (t){ try { return JSON.parse(t); } catch (e){ throw new Error(path + ': ' + e.message); } });
   }
-  Promise.all([fetchJson('content.json'), fetchJson('children.json'), fetchJson('pets.json')])
+  // Each file fails on its own. A typo in pets.json must never take the phone number
+  // and the contact form down with it.
+  var broken = [];
+  function loadJson(path){
+    return fetchJson(path).catch(function (err){
+      console.error('Could not load ' + path + ':', err);
+      broken.push(err.message);
+      return null;
+    });
+  }
+
+  Promise.all([loadJson('content.json'), loadJson('children.json'), loadJson('pets.json')])
     .then(function (parts){
+      if (!parts[0] && !parts[1] && !parts[2]){
+        showError(location.protocol === 'file:'
+          ? 'This page reads its text from JSON files (content.json, children.json, pets.json), which browsers block when a file is opened directly. Run a local server (see README.md) or view the published site — both work fine.'
+          : 'Could not load the content files. Make sure content.json, children.json and pets.json are present and valid. (' + broken.join('; ') + ')');
+        return;
+      }
       var content = parts[0] || {};
       content.children = parts[1] || {};
       content.pets = parts[2] || {};
-      try { render(content); }
-      catch (err){ console.error('Render error:', err); showError('Something in the content files couldn’t be displayed: ' + err.message); }
-    })
-    .catch(function (err){
-      console.error('Could not load content:', err);
-      showError(location.protocol === 'file:'
-        ? 'This page reads its text from JSON files (content.json, children.json, pets.json), which browsers block when a file is opened directly. Run a local server (see README.md) or view the published site — both work fine.'
-        : 'Could not load the content files (' + err.message + '). Make sure content.json, children.json and pets.json are present and valid.');
+      render(content);
+      // Runs even if a renderer threw — otherwise every .reveal stays at opacity 0
+      // and the whole page is invisible behind the toast.
+      try { initInteractions(); }
+      catch (err){
+        console.error('Interaction setup failed:', err);
+        broken.push(err.message);
+        // No IntersectionObserver means nothing would ever become visible.
+        document.querySelectorAll('.reveal').forEach(function (node){ node.classList.add('in'); });
+      }
+      if (broken.length){
+        showError('Couldn’t display ' + broken.join(', ') +
+          '. The rest of the page is fine — check those entries in the JSON files.');
+      }
     });
 })();
 </script>

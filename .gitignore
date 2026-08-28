@@ -14,6 +14,7 @@ Icon
 # Sensitive personal documents — never commit these
 *Passport*
 *passport*
+*PASSPORT*
 *.id
 id_*
 
@@ -22,8 +23,9 @@ id_*
 
 # Full-size original photos — keep these local; the site serves optimized copies
 # (e.g. bev-portrait.jpg). Drop new originals here freely without bloating the repo.
-Bev.png
-cover.png
+# Leading slash = repo root only, so a card photo named cover.png still commits.
+/Bev.png
+/cover.png
 
 # Logs / temp
 *.log

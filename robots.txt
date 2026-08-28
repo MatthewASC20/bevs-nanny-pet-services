@@ -1,0 +1,5 @@
+# Bev's Nanny & Pet Services
+User-agent: *
+Allow: /
+
+Sitemap: https://www.grannybev.nyc/sitemap.xml

@@ -9,5 +9,5 @@
 *.md
 
 # Full-size original photos (the site serves the optimized bev-portrait.jpg)
-Bev.png
-cover.png
+/Bev.png
+/cover.png

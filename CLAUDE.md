@@ -4,6 +4,20 @@ This folder is a small personal-brand package for **Beverly de Jesus** ("Granny 
 a nanny and pet-care professional in New York City. The work was started in a Claude.ai
 chat and is being continued here. This file is the hand-off brief.
 
+## Live site
+**https://www.grannybev.nyc/** — deployed from `main` on Vercel (project
+`matt-s-websites/bevs-nanny-pet-services`).
+
+The domain is written out in exactly four places, all of which must move together if the
+site ever changes address: `rel="canonical"` and `og:url` in `index.html`, the JSON-LD
+`url`/`image` just below them, the `Sitemap:` line in `robots.txt`, and the `<loc>` in
+`sitemap.xml`. Those have to be absolute — a canonical or a sitemap entry exists precisely
+to name one preferred address, and structured-data URLs are expected to be absolute too.
+
+Everything else stays **relative** on purpose (`og:image`, `twitter:image`, the portrait,
+the card photos) so preview deployments and the `.vercel.app` address keep working with
+nothing to update.
+
 ## Beverly's details (used across all assets)
 - Name: Beverly de Jesus  ·  business name: **Bev's Nanny & Pet Services**
 - Phone: +1 (917) 346-2847   ·   tel: `+19173462847`
@@ -18,7 +32,11 @@ chat and is being continued here. This file is the hand-off brief.
 - `children.json` / `pets.json` — the Children and Pets sections, split into their own files.
 - `assets/<card-folder>/` — photos for each pet/child card (one folder per card; see `assets/README.md`).
 - `EDITING.md` — plain-English guide for Beverly to add/remove items across the JSON files (incl. the icon-name list).
-- `README.md`, `.gitignore` — repo overview and ignore rules.
+- `assets/og-cover.jpg` — the 1200×630 link-preview picture (Beverly with Ku-ki), referenced
+  from `index.html`, not from any JSON file.
+- `apple-touch-icon.png` — 180×180 iOS home-screen icon, generated from the same `MARK` vector.
+- `robots.txt` / `sitemap.xml` — crawler rules and the single-page sitemap.
+- `README.md`, `.gitignore`, `.vercelignore` — repo overview and ignore rules.
 
 Other assets from the original package (logo-concepts HTML, LaTeX résumé, reference letter, passport scans) are intentionally **not** in this repo — passports are private PII; the rest can be added later if wanted.
 
@@ -44,6 +62,12 @@ Other assets from the original package (logo-concepts HTML, LaTeX résumé, refe
 - **Payments:** the `"payment"` block in content.json holds a Stripe **Payment Link** URL; `renderPayment()` shows the `#pay` "Pay securely" section (before Contact) only when `url` is a valid `http(s)` link, otherwise hides the section. No secret keys, no backend — Stripe hosts the checkout. Bev makes a "customer chooses amount" Payment Link and pastes the URL.
 - **Icons** are a named registry in the script (`ICONS`), referenced by name from `content.json` (`"icon": "paw"`); unknown names fall back to a dot. To add an icon, add it to `ICONS` and list it in `EDITING.md`.
 - **Highlights**: `[[text]]` and `((text))` markers in the hero `headline` (→ `leaf-word` / `paw-word`) and testimonial `quote` (`[[text]]` → `hl`) become coloured spans. All other text is HTML-escaped (`esc()`), so apostrophes/`&` are safe to type plainly.
+- **Failure isolation:** each JSON file is fetched with its own `.catch()`, and each section
+  renders inside its own `try`. A typo in `pets.json` costs *that section only* — the hero,
+  phone number and contact form still render, and `#loadError` names what broke. Never
+  reintroduce a single `Promise.all` rejection path or a single `try` around all of `render()`.
+- **Empty sections hide themselves** (`hideIfEmpty`), like `renderPayment` already did — emptying
+  a section's `"items"` list removes it from the page instead of leaving a bare heading.
 - **`file://` caveat:** opening `index.html` directly won't load `content.json` (browser blocks `fetch` on `file://`); a friendly banner explains this. Serve over HTTP (`python3 -m http.server`) or host it — both work. If you ever need a no-server single file again, inline the JSON into a `<script type="application/json">` block.
 - If the design markup changes, keep the renderer's output in sync with the CSS (e.g. `.svc:nth-child(...)` icon tints rely on card order; service/contact icons get `stroke-width:1.8` via CSS while chips/timeline stay at `2`).
 
@@ -79,10 +103,32 @@ The favicon is the same mark embedded in `<head>` as an inline SVG data URI
 `xmlns="http://www.w3.org/2000/svg"` on the root `<svg>`). If you change the logo, update all
 three spots to keep them in sync.
 
+The nav and footer copies now come from a single `MARK` constant in the script. The **favicon is
+still a separate static copy** (a data URI in `<head>`) because it must exist before JavaScript
+runs — so if the logo ever changes, regenerate it from `MARK`:
+
+```sh
+python3 -c "import base64,sys; print('data:image/svg+xml;base64,'+base64.b64encode(open('mark.svg','rb').read()).decode())"
+```
+
+(the favicon's root `<svg>` needs `xmlns="http://www.w3.org/2000/svg"`, which the inline one omits).
+
+## Already done (do not redo)
+- **Hero portrait**: `bev-portrait-with-dog.jpg` (900×1200, a 3:4 rounded rectangle) is wired up via
+  `content.json` → `hero.portrait.photo`. `bev-portrait.jpg` is the older square crop, now unused.
+- **Contact form**: delivers live through **Web3Forms** (`contact.form.accessKey` in content.json).
+  Do *not* swap this for Formspree — it works.
+- **Payments**: a live Stripe Payment Link is in `content.json` → `payment.url`.
+
 ## Possible next steps (optional)
-- Export the chosen logo as a standalone `.svg` and a transparent `.png` (e.g. 512px) for
-  business cards / social profiles.
+- Export the logo as a standalone `.svg` / transparent `.png` for business cards and social profiles.
 - Decide on paper size: the résumé is A4, the reference letter is US Letter — optionally unify.
+- **Privacy question for Beverly**: the Experience timeline publishes four past employers' full
+  names. Only the Venkatesan entry has consent (their testimonial was written to be shared).
+  Either record consent for the others in this file, or de-identify them the way
+  `children.json` already does ("a family on the Upper West Side").
+- Consider splitting the inline `<style>`/`<script>` into `styles.css` / `site.js` so they
+  cache independently of the content. Deliberately not done yet — it keeps the no-build setup.
 
 ## Decisions to preserve
 - Do NOT publish other references' phone numbers on the public website (privacy). The site

@@ -53,6 +53,28 @@ lists you can grow or shrink.
 
 ---
 
+## Skills & strengths
+
+Each skill in the `"skills"` list is one `{ ... }` block. Most only need one line:
+
+```json
+{ "label": "Bilingual" }
+```
+
+The extra settings, which only some skills use:
+
+- `"label"` — the words on the pill. **This is the only one you need.**
+- `"icon"` — an icon name from the list below (optional).
+- `"star": true` — makes the pill gold, to highlight it. Used for the CPR badge.
+- `"href"` — turns the pill into a link, e.g. to a certificate PDF.
+
+> **Careful when copying:** the first skill in the list is the CPR one, and it
+> carries `"star"` **and** `"href"` pointing at the CPR certificate. If you copy
+> *that* block to add a new skill, your new skill will also be gold and will open
+> the CPR certificate. Copy a plain one like `{ "label": "Housekeeping" }` instead.
+
+---
+
 ## Choosing an icon
 
 Some items have an `"icon"` value. Use any name from this list:
@@ -76,9 +98,13 @@ Some items have an `"icon"` value. Use any name from this list:
 | `mail`      | envelope              |
 | `dot`       | small filled dot      |
 | `leaf`      | leaf                  |
+| `arrow`     | right arrow           |
 
 If you type an icon name that isn't on this list, a small dot is shown instead
 (nothing breaks).
+
+(The page also uses `camera`, `expand`, `lock` and `external` on its own — for the
+photo carousel, the payment button and links out. You never need to type those.)
 
 ---
 
@@ -102,16 +128,17 @@ Everywhere else, just write normal text — no markers needed.
 
 ## Adding your photo
 
-Right now the round photo spot shows the letters **“Bev”** as a placeholder. To
-use a real photo instead:
+Your photo is **already set up** — the round spot in the hero shows
+`bev-portrait-with-dog.jpg`, which lives in this folder next to `index.html`.
 
-1. Put your image file in **this same folder** (the one with `index.html`). A
-   **square** photo looks best — for example `bev.jpg` or `bev.png`.
-2. In `content.json`, find the `"portrait"` line and set `"photo"` to your file
-   name:
+To swap in a different picture:
+
+1. Put the new image file in **this same folder**. A **square** photo looks best.
+2. In `content.json`, find the `"portrait"` line and change `"photo"` to the new
+   file name:
 
    ```json
-   "portrait": { "initials": "Bev", "note": "add your photo here", "photo": "bev.jpg", "photoAlt": "Beverly de Jesus" }
+   "portrait": { "initials": "Bev", "note": "add your photo here", "photo": "bev-portrait-with-dog.jpg", "photoAlt": "Beverly de Jesus — Granny Bev — out on the deck with a Rottweiler" }
    ```
 
 3. Save and reload. The photo fills the circle automatically (it's cropped to a
@@ -175,6 +202,16 @@ Example — a pet with three photos sitting in `assets/pet-1/`:
 Square photos look best for the thumbnail (it's cropped to fit); inside the
 carousel each photo is shown in full. See `assets/README.md` for the folder layout.
 
+> **File names are case-sensitive on the live website.** If the file is called
+> `IMG_2043.JPG`, write it exactly that way — `IMG_2043.jpg` will work on your own
+> computer but show nothing once the site is published. Simple lower-case names
+> like `1.jpg` avoid the problem entirely.
+
+### Hiding a section
+
+If you empty a `"items": []` list, that whole section disappears from the page rather
+than showing an empty heading. That works for Pets and for Children.
+
 ### Using a video as the thumbnail
 
 The `"photos"` list can hold **short video clips as well as photos**. List a clip
@@ -233,18 +270,18 @@ hide the caption.
 
 ## Turn on online payments (Stripe)
 
-The site has a **"Pay securely" section** (just above Contact) that stays **hidden
-until you add a payment link**, so nothing broken ever shows. To switch it on:
+**This is already switched on.** The **"Pay securely" section** (just above
+Contact) is live, and its button opens your Stripe checkout in a new tab. The link
+it uses is the `"url"` line inside the `"payment"` block of `content.json`.
 
-1. In your **Stripe dashboard**, create a **Payment Link**
-   (Payments → Payment Links → **+ New**). Since families pay an agreed amount,
-   turn on **"Let customers decide what to pay"** (the customer-chosen-amount
-   option).
-2. Copy the link Stripe gives you — it looks like `https://buy.stripe.com/…`.
-3. In `content.json`, find `"url": ""` inside the `"payment"` block and paste the
-   link between the quotes, e.g. `"url": "https://buy.stripe.com/abc123"`.
-4. Save. The "Pay securely" section appears, and the button opens your Stripe
-   checkout in a new tab. To hide it again later, set `"url": ""`.
+- **To use a different Stripe link:** replace what's between the quotes on that
+  `"url"` line with the new one (it looks like `https://buy.stripe.com/…`).
+- **To turn the section off:** set it to `"url": ""`. The whole section disappears
+  from the page and from the menu — nothing broken is ever shown.
+
+If you ever need to make a fresh link: in your **Stripe dashboard**, go to
+Payments → Payment Links → **+ New**, and because families pay an agreed amount,
+turn on **"Let customers decide what to pay"**.
 
 You can also reword `"heading"`, `"blurb"`, and `"buttonText"` in that block. No
 card details ever touch this website — Stripe handles all of that securely.
@@ -253,25 +290,38 @@ card details ever touch this website — Stripe handles all of that securely.
 
 ## Make the contact form email Bev directly (one-time setup)
 
-Until this is set up, the form falls back to opening the visitor's own email app.
-To have messages **sent straight to Bev's inbox from the website** instead (with a
-"Message sent!" confirmation, no email app):
+**This is already set up, and pointing at the right inbox.** Messages sent through
+the form arrive at **grannybev.nyc@gmail.com**, and the visitor sees a "Message sent!"
+confirmation. The setting is the `"accessKey"` line inside the `"form"` block of
+`content.json`.
 
-1. Go to **web3forms.com**, enter **grannybev.nyc@gmail.com**, and copy the **Access
-   Key** they email you. It's free and needs no account.
-2. In `content.json`, find `"accessKey": ""` inside the `"form"` block and paste
-   the key between the quotes, e.g. `"accessKey": "a1b2c3d4-5678-90ab-cdef-..."`.
-3. Save. Submissions now POST to Web3Forms, which emails them to Bev.
+> **The key is what decides where the mail goes — not `"emailTo"`.** Web3Forms ties
+> each key to the one address it was verified against, and the form never sends a
+> recipient with the request. So if the business email ever changes again, a new key
+> has to be issued for it: go to **web3forms.com**, enter the new address, and paste
+> the key they email you over the old one. Editing `"emailTo"` on its own only
+> changes the fallback that opens the visitor's email app.
 
-The key is safe to keep in the file — it only allows sending to Bev's verified
-address. To switch back to the email-app behaviour, set `"accessKey": ""` again.
+Also worth knowing:
 
-> **Note — the key decides where the mail goes, not `"emailTo"`.** Web3Forms ties
-> a key to the one address it was verified against, and the form never sends a
-> recipient in its request. So if you ever change the business email again, a new
-> key has to be issued for it; editing `"emailTo"` alone changes only the
-> fallback that opens the visitor's email app. The key in the file now belongs to
-> **grannybev.nyc@gmail.com**.
+- **To turn the website delivery off**, set `"accessKey": ""`. The form then falls
+  back to opening the visitor's own email app instead.
+
+The key is safe to keep in the file — it only ever delivers to Bev's verified
+address.
+
+---
+
+## The one thing that isn't in these files
+
+The **menu across the top** (About, Services, Experience, …) lives in `index.html`,
+not in the JSON files. It's kept there on purpose: it's the only part of the page
+that search engines can read without running the website's code, so moving it would
+make the site harder to find.
+
+If you add or remove a whole section and want the menu to match, that's the one
+edit worth asking for help with. (The **Pay** link is the exception — it appears and
+disappears on its own, following the payment setting above.)
 
 ---
 
@@ -295,8 +345,13 @@ so it doesn't end the value early.
 - All labels and values are wrapped in `"quotes"`.
 
 If something is off, the website shows a small note at the bottom of the page
-telling you what to fix (for example, a missing comma), and nothing is lost —
-just fix `content.json` and reload.
+naming the file or the section that has the problem (for example, a missing
+comma in `pets.json`).
+
+**The rest of the page keeps working.** Only the part with the mistake is
+affected — your phone number, the contact form and everything else still show
+normally, so a typo can never take the whole site down. Fix the file it names,
+save, and reload.
 
 ---
 
