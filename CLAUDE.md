@@ -7,7 +7,7 @@ chat and is being continued here. This file is the hand-off brief.
 ## Beverly's details (used across all assets)
 - Name: Beverly de Jesus  ·  business name: **Bev's Nanny & Pet Services**
 - Phone: +1 (917) 346-2847   ·   tel: `+19173462847`
-- Email: bevdejesus@gmail.com
+- Email: **grannybev.nyc@gmail.com** (business address — this is the one to publish)
 - Location: Bronx, NY — available across NYC (has also traveled, NY & London)
 - 30+ years of experience, CPR certified, newborn-to-toddler + pets
 
@@ -92,4 +92,9 @@ three spots to keep them in sync.
   by default; see `assets/README.md`.
 - The Pets cards carry the animals' real names (Ku-ki, Casper & Chestnut, Tootsie, Wally & Birdie,
   Bo). One card is still the descriptive "The wire-haired dachshund" — its name is outstanding.
+- **Public email is the business address `grannybev.nyc@gmail.com`.** Beverly's older personal
+  gmail is no longer published anywhere in this repo; use the business address on every new
+  asset (résumé, cards, listings) so the brand is consistent. Outstanding: the Web3Forms access
+  key in `content.json` is still registered to the old personal address, so contact-form
+  submissions land there until a new key is issued for the business address — see `EDITING.md`.
 - Résumé stays to a single page.

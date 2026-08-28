@@ -55,4 +55,4 @@ See `CLAUDE.md` for the full design system and project notes.
 ## Contact
 
 Beverly de Jesus · Bronx, NY (serving all of NYC)
-[bevdejesus@gmail.com](mailto:bevdejesus@gmail.com) · +1 (917) 346-2847
+[grannybev.nyc@gmail.com](mailto:grannybev.nyc@gmail.com) · +1 (917) 346-2847
