@@ -325,14 +325,12 @@ If you add or remove a whole section and want the menu to match, that's the one
 edit worth asking for help with. (The **Pay** link is the exception — it appears and
 disappears on its own, following the payment setting above.)
 
-> **Still to do — the key already in the file belongs to the old address.** The
-> website now shows **grannybev.nyc@gmail.com** everywhere, but the Access Key
-> sitting in `content.json` was issued for the old personal gmail, so messages
-> sent through the form still arrive *there*. Web3Forms ties a key to one
-> verified address, so changing `"emailTo"` does not move it. To finish the
-> switch, repeat steps 1–2 above with the new address and paste the new key over
-> the old one. Until then the form still works — the mail just lands in the old
-> inbox.
+> **Note — the key decides where the mail goes, not `"emailTo"`.** Web3Forms ties
+> a key to the one address it was verified against, and the form never sends a
+> recipient in its request. So if you ever change the business email again, a new
+> key has to be issued for it; editing `"emailTo"` alone changes only the
+> fallback that opens the visitor's email app. The key in the file now belongs to
+> **grannybev.nyc@gmail.com**.
 
 ---
 
