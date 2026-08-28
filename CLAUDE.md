@@ -81,11 +81,15 @@ three spots to keep them in sync.
 ## Possible next steps (optional)
 - Export the chosen logo as a standalone `.svg` and a transparent `.png` (e.g. 512px) for
   business cards / social profiles.
-- Swap the hero avatar placeholder ("add your photo here") for a real photo of Beverly.
-- Make the contact form actually deliver messages (e.g. Formspree) instead of opening mailto.
 - Decide on paper size: the résumé is A4, the reference letter is US Letter — optionally unify.
 
 ## Decisions to preserve
 - Do NOT publish other references' phone numbers on the public website (privacy). The site
   features the Venkatesan testimonial (written to be shared) + "references available on request".
+- **Pet photos: Beverly's own, yes; clients' faces, no.** Photos showing Beverly are published
+  (she is the subject of the site). Uploads showing a client's face are held back unless that
+  family has agreed — two such frames are deliberately not on the site. Children stay photo-free
+  by default; see `assets/README.md`.
+- The Pets cards carry the animals' real names (Ku-ki, Casper & Chestnut, Tootsie, Wally & Birdie,
+  Bo). One card is still the descriptive "The wire-haired dachshund" — its name is outstanding.
 - Résumé stays to a single page.
