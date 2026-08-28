@@ -290,19 +290,17 @@ card details ever touch this website — Stripe handles all of that securely.
 
 ## Make the contact form email Bev directly (one-time setup)
 
-**The form already works** — messages sent through the website reach Bev, and the
-visitor sees a "Message sent!" confirmation. The setting is the `"accessKey"` line
-inside the `"form"` block of `content.json`.
+**This is already set up, and pointing at the right inbox.** Messages sent through
+the form arrive at **grannybev.nyc@gmail.com**, and the visitor sees a "Message sent!"
+confirmation. The setting is the `"accessKey"` line inside the `"form"` block of
+`content.json`.
 
-**One thing is still outstanding.** That key was registered to Beverly's older
-personal gmail, so submissions currently arrive *there* rather than at the business
-address `grannybev.nyc@gmail.com`. To move them across:
-
-1. Go to **web3forms.com**, enter **grannybev.nyc@gmail.com**, and copy the **Access
-   Key** they email you. It's free and needs no account.
-2. In `content.json`, find the `"accessKey"` line inside the `"form"` block and
-   replace the key between the quotes with the new one.
-3. Save. Submissions now arrive at the business address.
+> **The key is what decides where the mail goes — not `"emailTo"`.** Web3Forms ties
+> each key to the one address it was verified against, and the form never sends a
+> recipient with the request. So if the business email ever changes again, a new key
+> has to be issued for it: go to **web3forms.com**, enter the new address, and paste
+> the key they email you over the old one. Editing `"emailTo"` on its own only
+> changes the fallback that opens the visitor's email app.
 
 Also worth knowing:
 
@@ -324,13 +322,6 @@ make the site harder to find.
 If you add or remove a whole section and want the menu to match, that's the one
 edit worth asking for help with. (The **Pay** link is the exception — it appears and
 disappears on its own, following the payment setting above.)
-
-> **Note — the key decides where the mail goes, not `"emailTo"`.** Web3Forms ties
-> a key to the one address it was verified against, and the form never sends a
-> recipient in its request. So if you ever change the business email again, a new
-> key has to be issued for it; editing `"emailTo"` alone changes only the
-> fallback that opens the visitor's email app. The key in the file now belongs to
-> **grannybev.nyc@gmail.com**.
 
 ---
 
