@@ -290,15 +290,22 @@ card details ever touch this website — Stripe handles all of that securely.
 
 ## Make the contact form email Bev directly (one-time setup)
 
-**This is already set up.** Messages sent through the form on the website go
-**straight to bevdejesus@gmail.com**, and the visitor sees a "Message sent!"
-confirmation. The setting is the `"accessKey"` line inside the `"form"` block of
-`content.json`.
+**The form already works** — messages sent through the website reach Bev, and the
+visitor sees a "Message sent!" confirmation. The setting is the `"accessKey"` line
+inside the `"form"` block of `content.json`.
 
-You don't need to do anything here. Two things worth knowing:
+**One thing is still outstanding.** That key was registered to Beverly's older
+personal gmail, so submissions currently arrive *there* rather than at the business
+address `grannybev.nyc@gmail.com`. To move them across:
 
-- **Don't sign up at web3forms.com again** — a key is already in place. A second
-  key pasted over it would just be extra work.
+1. Go to **web3forms.com**, enter **grannybev.nyc@gmail.com**, and copy the **Access
+   Key** they email you. It's free and needs no account.
+2. In `content.json`, find the `"accessKey"` line inside the `"form"` block and
+   replace the key between the quotes with the new one.
+3. Save. Submissions now arrive at the business address.
+
+Also worth knowing:
+
 - **To turn the website delivery off**, set `"accessKey": ""`. The form then falls
   back to opening the visitor's own email app instead.
 
@@ -317,6 +324,15 @@ make the site harder to find.
 If you add or remove a whole section and want the menu to match, that's the one
 edit worth asking for help with. (The **Pay** link is the exception — it appears and
 disappears on its own, following the payment setting above.)
+
+> **Still to do — the key already in the file belongs to the old address.** The
+> website now shows **grannybev.nyc@gmail.com** everywhere, but the Access Key
+> sitting in `content.json` was issued for the old personal gmail, so messages
+> sent through the form still arrive *there*. Web3Forms ties a key to one
+> verified address, so changing `"emailTo"` does not move it. To finish the
+> switch, repeat steps 1–2 above with the new address and paste the new key over
+> the old one. Until then the form still works — the mail just lands in the old
+> inbox.
 
 ---
 

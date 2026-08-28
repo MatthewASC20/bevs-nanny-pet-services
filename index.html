@@ -10,17 +10,17 @@
 <!-- Link preview (the picture and text shown when this page is texted, posted, or shared).
      These must stay hard-coded here: link crawlers read the raw HTML and never run the script
      that builds the page from content.json, so a value set at runtime would be invisible to them.
-     The image and page URLs are absolute against the live domain, which is what the
-     Open Graph spec asks for and what the fussier scrapers need — several fetch the tags
-     without keeping the page URL around to resolve a relative path against. If the site
-     ever moves, CLAUDE.md lists every place the domain appears.
+     The image path is relative on purpose — it resolves correctly on every deployment
+     (preview links, the .vercel.app address, and the live grannybev.nyc domain) with
+     nothing to update. og:url and rel=canonical are absolute because those two cannot
+     do their job any other way: they exist to name one preferred address for the page.
      If you change the site title or description in content.json, change them here too. -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.grannybev.nyc/">
 <meta property="og:site_name" content="Bev&#39;s Nanny &amp; Pet Services">
 <meta property="og:title" content="Bev's Nanny &amp; Pet Services — Caring nanny &amp; pet care in NYC">
 <meta property="og:description" content="Beverly de Jesus — 'Granny Bev' — offers warm, reliable nanny, newborn, and pet care across New York City, with over 30 years of experience and CPR certification.">
-<meta property="og:image" content="https://www.grannybev.nyc/assets/og-cover.jpg">
+<meta property="og:image" content="assets/og-cover.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Beverly de Jesus out on the deck with Ku-ki, her Rottweiler, tongue out and grinning.">
@@ -28,7 +28,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Bev's Nanny &amp; Pet Services — Caring nanny &amp; pet care in NYC">
 <meta name="twitter:description" content="Beverly de Jesus — 'Granny Bev' — offers warm, reliable nanny, newborn, and pet care across New York City, with over 30 years of experience and CPR certification.">
-<meta name="twitter:image" content="https://www.grannybev.nyc/assets/og-cover.jpg">
+<meta name="twitter:image" content="assets/og-cover.jpg">
 <meta name="twitter:image:alt" content="Beverly de Jesus out on the deck with Ku-ki, her Rottweiler, tongue out and grinning.">
 
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3QgeD0iMiIgeT0iMiIgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiByeD0iMTciIGZpbGw9IiMzQzdENUEiLz48cGF0aCBkPSJNMjIgMThWNDZNMjIgMThIMzRhNyA3IDAgMCAxIDAgMTRIMjJNMjIgMzJIMzVhNyA3IDAgMCAxIDAgMTRIMjIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZCRjRFNCIgc3Ryb2tlLXdpZHRoPSI1LjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQxLDEwKSBzY2FsZSgwLjMyKSIgZmlsbD0iI0YyQjMzRCI+PHBhdGggZD0iTTE2IDI5QzE2IDI5IDMgMjAgMyAxMUMzIDYgNyAzIDExIDNDMTQgMyAxNiA2IDE2IDdDMTYgNiAxOCAzIDIxIDNDMjUgMyAyOSA2IDI5IDExQzI5IDIwIDE2IDI5IDE2IDI5WiIvPjwvZz48L3N2Zz4=">
@@ -45,7 +45,7 @@
   "url": "https://www.grannybev.nyc/",
   "image": "https://www.grannybev.nyc/assets/og-cover.jpg",
   "telephone": "+1-917-346-2847",
-  "email": "bevdejesus@gmail.com",
+  "email": "grannybev.nyc@gmail.com",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Bronx",
@@ -485,7 +485,7 @@
 <noscript>
   <div style="max-width:680px;margin:40px auto;padding:0 20px;font-family:system-ui,sans-serif;color:#21302A;">
     This site needs JavaScript enabled to display its content. Please enable JavaScript, or contact
-    Beverly de Jesus directly at <a href="mailto:bevdejesus@gmail.com">bevdejesus@gmail.com</a> · +1 (917) 346-2847.
+    Beverly de Jesus directly at <a href="mailto:grannybev.nyc@gmail.com">grannybev.nyc@gmail.com</a> · +1 (917) 346-2847.
   </div>
 </noscript>
 

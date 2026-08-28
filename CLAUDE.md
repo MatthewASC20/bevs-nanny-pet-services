@@ -6,14 +6,23 @@ chat and is being continued here. This file is the hand-off brief.
 
 ## Live site
 **https://www.grannybev.nyc/** — deployed from `main` on Vercel (project
-`matt-s-websites/bevs-nanny-pet-services`). The domain is hard-coded in four places in
-`index.html` (`rel="canonical"`, `og:url`, `og:image`, `twitter:image`) plus the JSON-LD
-`url`/`image`, `robots.txt` and `sitemap.xml`. Change all of them together if it ever moves.
+`matt-s-websites/bevs-nanny-pet-services`).
+
+The domain is written out in exactly four places, all of which must move together if the
+site ever changes address: `rel="canonical"` and `og:url` in `index.html`, the JSON-LD
+`url`/`image` just below them, the `Sitemap:` line in `robots.txt`, and the `<loc>` in
+`sitemap.xml`. Those have to be absolute — a canonical or a sitemap entry exists precisely
+to name one preferred address, and structured-data URLs are expected to be absolute too.
+
+Everything else stays **relative** on purpose (`og:image`, `twitter:image`, the portrait,
+the card photos) so preview deployments and the `.vercel.app` address keep working with
+nothing to update.
 
 ## Beverly's details (used across all assets)
 - Name: Beverly de Jesus  ·  business name: **Bev's Nanny & Pet Services**
 - Phone: +1 (917) 346-2847   ·   tel: `+19173462847`
-- Email: bevdejesus@gmail.com
+- Email: **grannybev.nyc@gmail.com** (business address — this is the one to publish)
+- Website: **grannybev.nyc** — the live custom domain; use it on every asset alongside the email
 - Location: Bronx, NY — available across NYC (has also traveled, NY & London)
 - 30+ years of experience, CPR certified, newborn-to-toddler + pets
 
@@ -48,7 +57,7 @@ Other assets from the original package (logo-concepts HTML, LaTeX résumé, refe
 - **Share preview:** the Open Graph / Twitter tags in `<head>` are deliberately **hard-coded** —
   link crawlers read raw HTML and never run the renderer, so a runtime value would be invisible
   to them. `og:image` is a **relative** path (`assets/og-cover.jpg`) so it stays correct on preview
-  URLs, the `.vercel.app` address, and any future custom domain. `renderMeta()` mirrors
+  URLs, the `.vercel.app` address, and the live custom domain **grannybev.nyc**. `renderMeta()` mirrors
   title/description onto those tags at runtime for anything that does render the page first.
 - **Payments:** the `"payment"` block in content.json holds a Stripe **Payment Link** URL; `renderPayment()` shows the `#pay` "Pay securely" section (before Contact) only when `url` is a valid `http(s)` link, otherwise hides the section. No secret keys, no backend — Stripe hosts the checkout. Bev makes a "customer chooses amount" Payment Link and pastes the URL.
 - **Icons** are a named registry in the script (`ICONS`), referenced by name from `content.json` (`"icon": "paw"`); unknown names fall back to a dot. To add an icon, add it to `ICONS` and list it in `EDITING.md`.
@@ -130,4 +139,9 @@ python3 -c "import base64,sys; print('data:image/svg+xml;base64,'+base64.b64enco
   by default; see `assets/README.md`.
 - The Pets cards carry the animals' real names: Ku-ki, Casper & Chestnut, Tootsie, Wally & Birdie,
   Hazel, Bo.
+- **Public email is the business address `grannybev.nyc@gmail.com`.** Beverly's older personal
+  gmail is no longer published anywhere in this repo; use the business address on every new
+  asset (résumé, cards, listings) so the brand is consistent. Outstanding: the Web3Forms access
+  key in `content.json` is still registered to the old personal address, so contact-form
+  submissions land there until a new key is issued for the business address — see `EDITING.md`.
 - Résumé stays to a single page.
