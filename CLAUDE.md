@@ -95,7 +95,7 @@ three spots to keep them in sync.
   Hazel, Bo.
 - **Public email is the business address `grannybev.nyc@gmail.com`.** Beverly's older personal
   gmail is no longer published anywhere in this repo; use the business address on every new
-  asset (résumé, cards, listings) so the brand is consistent. Outstanding: the Web3Forms access
-  key in `content.json` is still registered to the old personal address, so contact-form
-  submissions land there until a new key is issued for the business address — see `EDITING.md`.
+  asset (résumé, cards, listings) so the brand is consistent. The Web3Forms access key in
+  `content.json` is registered to the business address, so contact-form submissions arrive
+  there too — that key, not `"emailTo"`, is what decides delivery (see `EDITING.md`).
 - Résumé stays to a single page.
