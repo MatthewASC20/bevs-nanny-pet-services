@@ -40,6 +40,7 @@ export interface LightboxProps {
  */
 export function Lightbox({ open, onClose, items, name = '', alt, startIndex = 0 }: LightboxProps) {
   const [idx, setIdx] = React.useState(startIndex);
+  const rootRef = React.useRef<HTMLDivElement | null>(null);
   const closeRef = React.useRef<HTMLButtonElement | null>(null);
   const videoRef = React.useRef<HTMLVideoElement | null>(null);
   const touchX = React.useRef<number | null>(null);
@@ -53,8 +54,26 @@ export function Lightbox({ open, onClose, items, name = '', alt, startIndex = 0 
     setIdx((i) => (i + d + n) % n);
   }, [n]);
 
-  // Esc / arrows, document-level while open. Arrow keys are ignored when the
-  // focused element is the video, so they don't seek the clip AND change slide.
+  // Scroll lock + focus management, once per open: remember the opener
+  // (usually the clicked ShowCard), move focus to the close button, and hand
+  // focus back on close.
+  React.useEffect(() => {
+    if (!open) return;
+    const lastFocus = document.activeElement as HTMLElement | null;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    closeRef.current?.focus();
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      lastFocus?.focus?.();
+    };
+  }, [open]);
+
+  // Esc / arrows / Tab, document-level (capture) while open. Arrow keys are
+  // ignored when the focused element is the video, so they don't seek the clip
+  // AND change slide. Tab is trapped inside the dialog; a video's native
+  // controls live in a shadow root the query can't see, so focus that has
+  // escaped the dialog entirely is pulled back to the first stop.
   React.useEffect(() => {
     if (!open) return;
     const onKeyDown = (e: KeyboardEvent) => {
@@ -62,15 +81,21 @@ export function Lightbox({ open, onClose, items, name = '', alt, startIndex = 0 
       if (e.key === 'Escape') { e.preventDefault(); onClose(); }
       else if (!inMedia && e.key === 'ArrowLeft' && multi) go(-1);
       else if (!inMedia && e.key === 'ArrowRight' && multi) go(1);
+      else if (e.key === 'Tab') {
+        const root = rootRef.current;
+        if (!root) return;
+        const stops = Array.from(root.querySelectorAll<HTMLElement>('button, video, [tabindex]'))
+          .filter((el) => !el.hidden && el.offsetParent !== null);
+        if (!stops.length) return;
+        const first = stops[0];
+        const last = stops[stops.length - 1];
+        if (!root.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+        else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
     };
     document.addEventListener('keydown', onKeyDown, true);
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    closeRef.current?.focus();
-    return () => {
-      document.removeEventListener('keydown', onKeyDown, true);
-      document.body.style.overflow = prevOverflow;
-    };
+    return () => document.removeEventListener('keydown', onKeyDown, true);
   }, [open, multi, go, onClose]);
 
   if (!open || n === 0) return null;
@@ -80,7 +105,7 @@ export function Lightbox({ open, onClose, items, name = '', alt, startIndex = 0 
   const label = `${alt || name || 'Photo'} — ${vid ? 'video' : 'photo'} ${idx + 1} of ${n}`;
 
   return (
-    <div className="lightbox open" role="dialog" aria-modal="true" aria-label="Photo gallery"
+    <div ref={rootRef} className="lightbox open" role="dialog" aria-modal="true" aria-label="Photo gallery"
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
       <button className="lb-close" type="button" aria-label="Close photos" ref={closeRef} onClick={onClose}>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round">
