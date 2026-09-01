@@ -13,6 +13,7 @@ import { PetsSection } from './sections/PetsSection';
 import { SkillsSection } from './sections/SkillsSection';
 import { TestimonialSection } from './sections/TestimonialSection';
 import { PaymentSection } from './sections/PaymentSection';
+import { ContactSection } from './sections/ContactSection';
 import type { GalleryState } from './gallery';
 
 const NAV_LINKS = [
@@ -56,6 +57,7 @@ export function App() {
             <SkillsSection data={content.skills ?? {}} />
             <TestimonialSection data={content.testimonial ?? {}} />
             <PaymentSection data={content.payment ?? {}} />
+            <ContactSection data={content.contact ?? {}} />
           </RenderErrorBoundary>
         ) : null}
       </main>
