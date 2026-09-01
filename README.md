@@ -6,12 +6,19 @@ newborn-to-toddler and pet care across NYC.
 
 ## What's here
 
-- **`content.json`** — most of the site's editable content (text, services,
-  experience, skills, reviews, contact info).
-- **`children.json`** / **`pets.json`** — the Children and Pets sections.
-- **`assets/`** — card photos, one sub-folder per card (see `assets/README.md`).
-- **`index.html`** — the page itself: HTML, CSS, and the small script that reads
-  those JSON files and builds the page from them. No build step, no dependencies.
+- **`public/content.json`** — most of the site's editable content (text,
+  services, experience, skills, reviews, contact info).
+- **`public/children.json`** / **`public/pets.json`** — the Children and Pets
+  sections.
+- **`public/assets/`** — card photos, one sub-folder per card (see
+  `public/assets/README.md`).
+- **`src/`** — the site itself: a small React app (built with Vite) that reads
+  those JSON files at load time and renders the page from them.
+- **`design-system/`** — `@bevs/design-system`, the React component library the
+  site is built from (cards, lightbox, nav, footer, …) together with the site's
+  stylesheet (`design-system/src/styles.css`, the single source of truth).
+- **`index.html`** — the page shell: the share-preview (Open Graph) tags, the
+  favicon, and the font links stay hard-coded here so link crawlers see them.
 - **`EDITING.md`** — a plain-English guide to editing the JSON files (how to add
   or remove items, add photo carousels, the list of available icons). **Start here.**
 - **`CLAUDE.md`** — project context / hand-off brief (design system, brand
@@ -19,29 +26,32 @@ newborn-to-toddler and pet care across NYC.
 
 ## Editing the content
 
-Open **`content.json`** (or **`children.json`** / **`pets.json`**) and change the
-words — the website updates to match. You don't need to touch `index.html`. See
-**`EDITING.md`** for the friendly step-by-step guide (adding/removing items,
-choosing icons, adding photo carousels, etc.).
+Open **`public/content.json`** (or **`public/children.json`** /
+**`public/pets.json`**) and change the words — the website updates to match on
+the next deploy. You don't need to touch any code. See **`EDITING.md`** for the
+friendly step-by-step guide (adding/removing items, choosing icons, adding
+photo carousels, etc.).
 
 ## Viewing locally
 
-The page loads `content.json` over the network, which browsers **block for files
-opened directly** (`file://`). So serve the folder instead of double-clicking:
+With [Node.js](https://nodejs.org) installed:
 
 ```sh
-python3 -m http.server 8000
-# then visit http://localhost:8000
+npm install
+npm run dev
+# then visit the address it prints (usually http://localhost:5173)
 ```
 
-(When the site is hosted, this is a non-issue — it just works.)
+`npm run build` produces the deployable static site in `dist/`
+(`npm run preview` serves that build).
 
 ## Hosting
 
-The site is plain static files, so it can be published as-is on GitHub Pages,
-Netlify, Vercel, or any static host. For GitHub Pages: enable Pages in the
-repository settings and point it at the default branch root — `index.html` and
-`content.json` are served together automatically.
+The site is hosted on **Vercel**, which detects the Vite app automatically:
+every push to `main` builds the design-system package, runs `vite build`, and
+publishes `dist/`. Pull requests get their own preview deployments. The build
+output is still plain static files, so any static host that can run
+`npm run build` works too.
 
 ## Brand quick reference
 

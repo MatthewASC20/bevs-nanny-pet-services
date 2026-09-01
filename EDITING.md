@@ -1,17 +1,18 @@
 # Editing the website — a simple guide
 
-**You only ever edit the website's content files — never `index.html`.**
+**You only ever edit the website's content files — never any code.**
 
-All of the website's words live in three plain-text files:
+All of the website's words live in three plain-text files, inside the `public`
+folder:
 
-- [`content.json`](content.json) — most of the site (words, services, job history, skills, reviews, contact).
-- [`children.json`](children.json) — the **Children** section.
-- [`pets.json`](pets.json) — the **Pets** section.
+- [`public/content.json`](public/content.json) — most of the site (words, services, job history, skills, reviews, contact).
+- [`public/children.json`](public/children.json) — the **Children** section.
+- [`public/pets.json`](public/pets.json) — the **Pets** section.
 
-Photos live in the [`assets/`](assets) folder, one sub-folder per card. The page
-(`index.html`) reads these files and builds itself from them — so to change the
+Photos live in the [`public/assets/`](public/assets) folder, one sub-folder per
+card. The page reads these files and builds itself from them — so to change the
 site, you change the file and the website updates. You do **not** need to touch
-`index.html`. Everything below works the same in all three JSON files.
+anything else. Everything below works the same in all three JSON files.
 
 ---
 
@@ -105,7 +106,7 @@ Everywhere else, just write normal text — no markers needed.
 Right now the round photo spot shows the letters **“Bev”** as a placeholder. To
 use a real photo instead:
 
-1. Put your image file in **this same folder** (the one with `index.html`). A
+1. Put your image file in the **`public` folder** (next to `content.json`). A
    **square** photo looks best — for example `bev.jpg` or `bev.png`.
 2. In `content.json`, find the `"portrait"` line and set `"photo"` to your file
    name:
@@ -155,10 +156,10 @@ Each pet has:
 - `"name"` — the pet's name, shown under the photo.
 - `"note"` — an optional one-line description (breed, a favourite walk, a habit).
   Leave it as `""` to show just the name.
-- `"folder"` — the name of this card's photo folder inside `assets/` (e.g.
+- `"folder"` — the name of this card's photo folder inside `public/assets/` (e.g.
   `"pet-1"`). Every card has its own folder.
 - `"photos"` — a **list** of image file names that live in that folder. Drop the
-  photos into `assets/<folder>/` and list the file names here, e.g.
+  photos into `public/assets/<folder>/` and list the file names here, e.g.
   `"photos": ["1.jpg", "2.jpg", "3.jpg"]`. The first becomes the card's thumbnail,
   and **clicking the card opens a photo carousel** of all of them (arrows, dots, or
   keyboard arrows; Esc to close). Leave it empty — `"photos": []` — to show a paw
@@ -166,14 +167,14 @@ Each pet has:
 - `"photoAlt"` — a short description of the pet for screen readers (e.g. the pet's
   name and breed).
 
-Example — a pet with three photos sitting in `assets/pet-1/`:
+Example — a pet with three photos sitting in `public/assets/pet-1/`:
 
 ```json
 { "name": "Rex", "note": "Golden retriever — our daily park buddy.", "folder": "pet-1", "photoAlt": "Rex, a golden retriever", "photos": ["1.jpg", "2.jpg", "3.jpg"] }
 ```
 
 Square photos look best for the thumbnail (it's cropped to fit); inside the
-carousel each photo is shown in full. See `assets/README.md` for the folder layout.
+carousel each photo is shown in full. See `public/assets/README.md` for the folder layout.
 
 ### Using a video as the thumbnail
 
@@ -295,14 +296,16 @@ just fix `content.json` and reload.
 
 ## Seeing your changes
 
-- **Published site (recommended):** once this site is hosted (e.g. GitHub
-  Pages), your saved `content.json` changes show up automatically.
-- **On your own computer:** opening `index.html` by double-clicking won't load
-  `content.json` (browsers block that for local files). To preview locally,
-  open a terminal in this folder and run:
+- **Published site (recommended):** save your change on GitHub and the site
+  rebuilds and republishes itself automatically — it takes a minute or two,
+  then your edit is live.
+- **On your own computer:** the site now has a small build step, so previewing
+  locally needs Node.js installed once. Open a terminal in this folder and run:
 
   ```sh
-  python3 -m http.server 8000
+  npm install
+  npm run dev
   ```
 
-  then visit `http://localhost:8000` in your browser.
+  then visit the address it prints (usually `http://localhost:5173`) in your
+  browser. Your JSON edits show up the moment you reload.
