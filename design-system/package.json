@@ -2,7 +2,7 @@
   "name": "@bevs/design-system",
   "version": "0.1.0",
   "private": true,
-  "description": "Bev's Nanny & Pet Services design system \u2014 React components extracted from the live site, with the site's own stylesheet as the single source of truth.",
+  "description": "Bev's Nanny & Pet Services design system — React components extracted from the live site, with the site's own stylesheet as the single source of truth.",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -18,8 +18,7 @@
     "dist"
   ],
   "scripts": {
-    "extract-css": "node scripts/extract-css.mjs",
-    "build": "tsup && npm run extract-css",
+    "build": "tsup && node scripts/copy-styles.mjs",
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
