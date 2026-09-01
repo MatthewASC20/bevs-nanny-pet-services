@@ -13,39 +13,77 @@ chat and is being continued here. This file is the hand-off brief.
 - 30+ years of experience, CPR certified, newborn-to-toddler + pets
 
 ## Files in this repo
-- `index.html` — the single-page website (HTML/CSS, inline SVG, Google Fonts via <link>). **Primary deliverable.** The page is now **data-driven**: a small inline script reads `content.json` and renders every section from it.
-- `content.json` — most editable content (text, services, experience, skills, testimonial, contact). Edit this, not the HTML.
-- `children.json` / `pets.json` — the Children and Pets sections, split into their own files.
-- `assets/<card-folder>/` — photos for each pet/child card (one folder per card; see `assets/README.md`).
-- `EDITING.md` — plain-English guide for Beverly to add/remove items across the JSON files (incl. the icon-name list).
-- `README.md`, `.gitignore` — repo overview and ignore rules.
+- `index.html` — the **Vite entry shell only**: hard-coded share-preview (Open Graph/Twitter)
+  tags, the SVG data-URI favicon, the Google Fonts links, and the `#root` mount. The page
+  itself is the React app in `src/`.
+- `src/` — the site: `App.tsx` (composition, gallery state, reveal observer), `sections/`
+  (one component per page band), `content/` (fetch/merge/types/photoPaths/meta), and the
+  error toast + boundary in `components/`.
+- `design-system/` — **`@bevs/design-system`**, the React component library the site is
+  built from (tsup, ESM + d.ts). Its `src/styles.css` is the **single source of truth for
+  all CSS** — the build byte-copies it to `dist/styles.css`, and the app imports
+  `@bevs/design-system/styles.css`.
+- `public/content.json` — most editable content. **Beverly edits these JSON files, never code.**
+- `public/children.json` / `public/pets.json` — the Children and Pets sections.
+- `public/assets/<card-folder>/` — photos for each pet/child card (one folder per card; see
+  `public/assets/README.md`). `public/bev-portrait-with-dog.jpg` is the hero portrait
+  (referenced by bare filename from content.json).
+- `EDITING.md` — plain-English guide for Beverly (paths now under `public/`).
+- `package.json` — npm-workspaces root (`design-system` is the one workspace) **and** the
+  Vite app manifest. `pre{dev,build}` build the library first (its `dist/` is gitignored).
+- `.design-sync/config.json` — config for the claude.ai/design sync of the library.
 
-Other assets from the original package (logo-concepts HTML, LaTeX résumé, reference letter, passport scans) are intentionally **not** in this repo — passports are private PII; the rest can be added later if wanted.
+The original single-file implementation (one static `index.html` holding the CSS and a
+vanilla-JS renderer) was retired when the site moved to React; it is preserved in git
+history — last carried by commit `329cc67`.
+
+Other assets from the original package (logo-concepts HTML, LaTeX résumé, reference
+letter, passport scans) are intentionally **not** in this repo — passports are private
+PII; the rest can be added later if wanted.
 
 ## Content architecture (how the page is built)
-- `index.html` contains the full design (CSS) plus structural section shells with empty containers (`#heroGrid`, `#servicesGrid`, `#timeline`, `#childrenGrid`, `#petsGrid`, `#skillsGrid`, `#testimonialWrap`, `#contactGrid`, `#footerTop`, `#brandText`, …). An IIFE at the bottom `fetch`es **content.json + children.json + pets.json** in parallel (`fetchJson`), merges children/pets onto the content object, and fills the containers.
-- **Showcase cards + carousel:** pets and children share one card/lightbox system — `photoCard()` builds `.show-card`s, `photoPaths(folder, photos)` resolves `assets/<folder>/<file>`, and `openLightbox()`/`galleries` (keyed `pet-N`/`kid-N`) drive the carousel (arrows/dots/keys/swipe, focus-trap, Esc). A child with no photos renders as an icon-tile `.kid-card` (privacy default); add a photo and that card becomes a clickable photo card.
-- **Video in cards:** a card's `photos` list may name `.mp4`/`.webm` clips as well as stills —
-  type is sniffed by extension (`isVideo()`), so the JSON stays a flat list of file names. A clip
-  first in the list becomes a muted, looping, `pointer-events:none` thumbnail with a `.card-play`
-  badge; `posterFor()` derives its poster from the sibling `1.mp4` → `1.jpg` still (unlisted).
-  Playback is driven by a **second** IntersectionObserver in `initInteractions()` (the reveal one
-  unobserves after firing) and is skipped entirely under `prefers-reduced-motion` — CSS cannot
-  pause a video, so that check has to live in JS. The lightbox holds an `<img class="lb-img">` and
-  a `<video class="lb-img">` side by side; `lbRender()` toggles `hidden` between them and
-  `lbReleaseVideo()` drops the src on close so audio and buffering actually stop.
-  **Gotcha:** any author `display` rule beats the `hidden` attribute — hence
-  `video.lb-img:not([hidden])` and the explicit `.lb-prev[hidden]{display:none}`.
-- **Share preview:** the Open Graph / Twitter tags in `<head>` are deliberately **hard-coded** —
-  link crawlers read raw HTML and never run the renderer, so a runtime value would be invisible
-  to them. `og:image` is a **relative** path (`assets/og-cover.jpg`) so it stays correct on preview
-  URLs, the `.vercel.app` address, and the live custom domain **grannybev.nyc**. `renderMeta()` mirrors
-  title/description onto those tags at runtime for anything that does render the page first.
-- **Payments:** the `"payment"` block in content.json holds a Stripe **Payment Link** URL; `renderPayment()` shows the `#pay` "Pay securely" section (before Contact) only when `url` is a valid `http(s)` link, otherwise hides the section. No secret keys, no backend — Stripe hosts the checkout. Bev makes a "customer chooses amount" Payment Link and pastes the URL.
-- **Icons** are a named registry in the script (`ICONS`), referenced by name from `content.json` (`"icon": "paw"`); unknown names fall back to a dot. To add an icon, add it to `ICONS` and list it in `EDITING.md`.
-- **Highlights**: `[[text]]` and `((text))` markers in the hero `headline` (→ `leaf-word` / `paw-word`) and testimonial `quote` (`[[text]]` → `hl`) become coloured spans. All other text is HTML-escaped (`esc()`), so apostrophes/`&` are safe to type plainly.
-- **`file://` caveat:** opening `index.html` directly won't load `content.json` (browser blocks `fetch` on `file://`); a friendly banner explains this. Serve over HTTP (`python3 -m http.server`) or host it — both work. If you ever need a no-server single file again, inline the JSON into a `<script type="application/json">` block.
-- If the design markup changes, keep the renderer's output in sync with the CSS (e.g. `.svc:nth-child(...)` icon tints rely on card order; service/contact icons get `stroke-width:1.8` via CSS while chips/timeline stay at `2`).
+- **Vite + React 18 + TypeScript SPA**, static output. Vercel auto-detects the Vite app
+  at the repo root and serves `dist/`; the bundle emits to `dist/app/` so it never mixes
+  with the site's own `/assets/` content. PRs get preview deployments; production deploys
+  from `main`.
+- **Data flow:** `useContent()` fetches content.json + children.json + pets.json in
+  parallel (`cache:'no-cache'`), grafts children/pets onto the content object, and renders
+  every section from it. Parse errors are prefixed with the file name and surface in the
+  friendly `LoadErrorToast` (the EDITING.md promise); render-time throws are caught by
+  `RenderErrorBoundary` with the chrome kept alive. There is no `file://` caveat any more —
+  local preview is `npm run dev`.
+- **Composition:** `App.tsx` renders `Nav` and `Footer` immediately (chrome-first paint)
+  and the ten sections once content is ready. Sections compose library components and pass
+  `className="reveal"`/`revealDelay(i)` for the scroll choreography —
+  **no library component ever emits `class="reveal"` itself**; `useRevealObserver()` (in
+  the library) arms the one-shot IntersectionObserver at page level.
+- **Galleries:** each `ShowCard`'s `onOpen` lifts `{name, alt, photos}` into App state,
+  feeding the single `Lightbox` (focus trap, focus restore, capture-phase keys, video
+  release on close — all ported from the vanilla site). `photoPaths()` resolves
+  `assets/<folder>/<file>`; positional identity is by construction (each card closes over
+  its own item — note pets item order ≠ folder numbering, e.g. Casper & Chestnut use
+  `pet-6`).
+- **Video in cards:** unchanged conventions — a clip first in `photos` becomes the muted
+  looping thumbnail with a `.card-play` badge; its poster is the sibling same-name `.jpg`
+  (unlisted). `ShowCard` owns the play/pause IntersectionObserver and skips autoplay under
+  `prefers-reduced-motion`.
+- **Share preview:** the Open Graph / Twitter tags stay **hard-coded** in `index.html` —
+  crawlers read raw HTML and never run the app. `og:image` stays a **relative** path
+  (`assets/og-cover.jpg`) so it works on preview URLs, the `.vercel.app` address, and the
+  live custom domain **grannybev.nyc**. `useDocumentMeta()` mirrors title/description at runtime for
+  anything that does render the page. If `site.title`/`description` change in content.json,
+  mirror them in `index.html` by hand.
+- **Payments:** `PaymentSection` renders only when `payment.url` is a real `http(s)` link
+  (Stripe Payment Link, live in content.json); otherwise the section is absent.
+- **Contact form:** exact port — honeypot silently drops; no `accessKey` → `mailto:`
+  fallback; otherwise Web3Forms POST (the `email` field only when the contact value is
+  email-shaped), success swaps in the Message-sent card. The live access key is in
+  content.json (safe to commit, per Web3Forms).
+- **Icons** are the library's `ICON_NAMES` registry (24 names); `iconName()` maps free-form
+  JSON values onto it with the dot fallback EDITING.md promises.
+- **CSS:** authored at `design-system/src/styles.css` (zero id selectors; `.svc:nth-child`
+  icon tints require `ServiceCard`s to be **direct children** of the svc grid — keep cards
+  unwrapped). If markup conventions change, change the stylesheet and components together.
 
 ## Design system (keep consistent everywhere)
 - Colors: green `#3C7D5A`, deep green `#2C5E43`, honey `#F2B33D`, deep honey `#CF8E12`,
@@ -96,6 +134,6 @@ three spots to keep them in sync.
 - **Public email is the business address `grannybev.nyc@gmail.com`.** Beverly's older personal
   gmail is no longer published anywhere in this repo; use the business address on every new
   asset (résumé, cards, listings) so the brand is consistent. The Web3Forms access key in
-  `content.json` is registered to the business address, so contact-form submissions arrive
+  `public/content.json` is registered to the business address, so contact-form submissions arrive
   there too — that key, not `"emailTo"`, is what decides delivery (see `EDITING.md`).
 - Résumé stays to a single page.

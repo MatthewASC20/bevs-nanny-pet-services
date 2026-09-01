@@ -1,0 +1,30 @@
+{
+  "name": "bevs-site",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Bev's Nanny & Pet Services — single-page site built with Vite + React on @bevs/design-system.",
+  "type": "module",
+  "workspaces": [
+    "design-system"
+  ],
+  "scripts": {
+    "predev": "npm run build --workspace design-system",
+    "dev": "vite",
+    "prebuild": "npm run build --workspace design-system",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit && npm run typecheck --workspace design-system"
+  },
+  "dependencies": {
+    "@bevs/design-system": "*",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.6.3",
+    "vite": "^6.0.0"
+  }
+}
