@@ -28,3 +28,12 @@ cover.png
 # Logs / temp
 *.log
 .tmp/
+
+# Design-system package (design-system/) build + sync machinery
+node_modules/
+design-system/dist/
+.ds-sync/
+ds-bundle/
+.design-sync/.cache/
+.design-sync/learnings/
+.design-sync/node_modules

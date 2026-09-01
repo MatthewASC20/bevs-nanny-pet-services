@@ -11,3 +11,9 @@
 # Full-size original photos (the site serves the optimized bev-portrait.jpg)
 Bev.png
 cover.png
+
+# The design-system package and its sync machinery are not part of the live site
+design-system
+.ds-sync
+ds-bundle
+.design-sync
