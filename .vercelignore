@@ -1,19 +1,25 @@
-# Only the static site needs to ship: index.html, the .json files, assets/, bev-portrait.jpg
+# The site is now a Vite + React app: Vercel needs the app sources (index.html,
+# src/, public/, package.json, vite.config.ts, tsconfig.json) AND the
+# design-system workspace package — its dist/ is built on Vercel by the app's
+# prebuild hook. Everything below is not part of that build.
+
 .git
 .gitignore
 .vercelignore
 .DS_Store
 .gitkeep
+node_modules
 
-# Docs / project notes (not part of the live site)
+# Docs / project notes (not build input)
 *.md
 
-# Full-size original photos (the site serves the optimized bev-portrait.jpg)
+# Full-size original photos (the site serves the optimized copies in public/)
 Bev.png
 cover.png
 
-# The design-system package and its sync machinery are not part of the live site
-design-system
-.ds-sync
+# Local build output + the claude.ai/design sync machinery
+dist
 ds-bundle
+.ds-sync
 .design-sync
+design-system/dist
