@@ -1,0 +1,8 @@
+{
+  "pkg": "@bevs/design-system",
+  "globalName": "BevsDS",
+  "shape": "package",
+  "buildCmd": "npm --prefix design-system run build",
+  "cssEntry": "dist/styles.css",
+  "extraFonts": ["fonts/fonts.css"]
+}
