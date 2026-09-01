@@ -7,7 +7,8 @@ chat and is being continued here. This file is the hand-off brief.
 ## Beverly's details (used across all assets)
 - Name: Beverly de Jesus  ·  business name: **Bev's Nanny & Pet Services**
 - Phone: +1 (917) 346-2847   ·   tel: `+19173462847`
-- Email: bevdejesus@gmail.com
+- Email: **grannybev.nyc@gmail.com** (business address — this is the one to publish)
+- Website: **grannybev.nyc** — the live custom domain; use it on every asset alongside the email
 - Location: Bronx, NY — available across NYC (has also traveled, NY & London)
 - 30+ years of experience, CPR certified, newborn-to-toddler + pets
 
@@ -68,7 +69,8 @@ PII; the rest can be added later if wanted.
   `prefers-reduced-motion`.
 - **Share preview:** the Open Graph / Twitter tags stay **hard-coded** in `index.html` —
   crawlers read raw HTML and never run the app. `og:image` stays a **relative** path
-  (`assets/og-cover.jpg`). `useDocumentMeta()` mirrors title/description at runtime for
+  (`assets/og-cover.jpg`) so it works on preview URLs, the `.vercel.app` address, and the
+  live custom domain **grannybev.nyc**. `useDocumentMeta()` mirrors title/description at runtime for
   anything that does render the page. If `site.title`/`description` change in content.json,
   mirror them in `index.html` by hand.
 - **Payments:** `PaymentSection` renders only when `payment.url` is a real `http(s)` link
@@ -129,4 +131,9 @@ three spots to keep them in sync.
   by default; see `assets/README.md`.
 - The Pets cards carry the animals' real names: Ku-ki, Casper & Chestnut, Tootsie, Wally & Birdie,
   Hazel, Bo.
+- **Public email is the business address `grannybev.nyc@gmail.com`.** Beverly's older personal
+  gmail is no longer published anywhere in this repo; use the business address on every new
+  asset (résumé, cards, listings) so the brand is consistent. The Web3Forms access key in
+  `public/content.json` is registered to the business address, so contact-form submissions arrive
+  there too — that key, not `"emailTo"`, is what decides delivery (see `EDITING.md`).
 - Résumé stays to a single page.

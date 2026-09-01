@@ -258,7 +258,7 @@ Until this is set up, the form falls back to opening the visitor's own email app
 To have messages **sent straight to Bev's inbox from the website** instead (with a
 "Message sent!" confirmation, no email app):
 
-1. Go to **web3forms.com**, enter **bevdejesus@gmail.com**, and copy the **Access
+1. Go to **web3forms.com**, enter **grannybev.nyc@gmail.com**, and copy the **Access
    Key** they email you. It's free and needs no account.
 2. In `content.json`, find `"accessKey": ""` inside the `"form"` block and paste
    the key between the quotes, e.g. `"accessKey": "a1b2c3d4-5678-90ab-cdef-..."`.
@@ -266,6 +266,13 @@ To have messages **sent straight to Bev's inbox from the website** instead (with
 
 The key is safe to keep in the file — it only allows sending to Bev's verified
 address. To switch back to the email-app behaviour, set `"accessKey": ""` again.
+
+> **Note — the key decides where the mail goes, not `"emailTo"`.** Web3Forms ties
+> a key to the one address it was verified against, and the form never sends a
+> recipient in its request. So if you ever change the business email again, a new
+> key has to be issued for it; editing `"emailTo"` alone changes only the
+> fallback that opens the visitor's email app. The key in the file now belongs to
+> **grannybev.nyc@gmail.com**.
 
 ---
 

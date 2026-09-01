@@ -142,14 +142,14 @@
     "intro": "Looking for caring, dependable help with your children or pets? I'd love to hear what your family needs and how I can help. Based in the Bronx and available across New York City.",
     "cards": [
       { "icon": "phone", "label": "Call or text", "value": "+1 (917) 346-2847",            "href": "tel:+19173462847" },
-      { "icon": "mail",  "label": "Email",        "value": "bevdejesus@gmail.com",          "href": "mailto:bevdejesus@gmail.com" },
+      { "icon": "mail",  "label": "Email",        "value": "grannybev.nyc@gmail.com",      "href": "mailto:grannybev.nyc@gmail.com" },
       { "icon": "pin",   "label": "Based in",     "value": "Bronx, NY · serving all of NYC" }
     ],
     "form": {
       "heading": "Send a quick message",
       "subtext": "Tell me a little about your family and what you're looking for.",
-      "emailTo": "bevdejesus@gmail.com",
-      "accessKey": "bb3507c2-0440-4a11-94cd-98a6a4fb9eaa",
+      "emailTo": "grannybev.nyc@gmail.com",
+      "accessKey": "898e4329-966a-440f-8a23-41dc85c62e03",
       "nameLabel": "Your name",
       "namePlaceholder": "e.g. The Carter family",
       "contactLabel": "Email or phone",
@@ -165,7 +165,7 @@
     "tagline": "Warm, dependable nanny and pet care from a caregiver who treats your family like her own.",
     "phone": "+1 (917) 346-2847",
     "phoneHref": "tel:+19173462847",
-    "email": "bevdejesus@gmail.com",
+    "email": "grannybev.nyc@gmail.com",
     "location": "Bronx, NY · serving all of New York City",
     "copyrightName": "Beverly de Jesus — Bev's Nanny & Pet Services",
     "madeWith": "Made with ♥ for happy homes"
